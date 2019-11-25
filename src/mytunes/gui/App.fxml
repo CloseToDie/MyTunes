@@ -1,14 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.AppController">
-    <children>
-        <Button layoutX="126" layoutY="90" text="Click Me!" onAction="#handleButtonAction" fx:id="button" />
-        <Label layoutX="126" layoutY="120" minHeight="16" minWidth="69" fx:id="label" />
-    </children>
+<AnchorPane id="AnchorPane" prefHeight="636.0" prefWidth="848.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="mytunes.gui.AppController">
+   <children>
+      <ListView fx:id="playlist" layoutX="24.0" layoutY="177.0" prefHeight="394.0" prefWidth="150.0" />
+      <ListView fx:id="Songs" layoutX="424.0" layoutY="177.0" prefHeight="394.0" prefWidth="368.0" />
+      <ListView fx:id="SongsInPlaylist" layoutX="214.0" layoutY="177.0" prefHeight="394.0" prefWidth="134.0" />
+      <TextField fx:id="Search" layoutX="628.0" layoutY="22.0" onKeyPressed="#Search" promptText="Search" />
+      <Label layoutX="424.0" layoutY="149.0" text="Songs">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="35.0" layoutY="149.0" text="Playlists">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="217.0" layoutY="149.0" text="Songs in playlist">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="ToPlaylist" layoutX="369.0" layoutY="189.0" mnemonicParsing="false" onAction="#ToPlaylist" text="&lt;-">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="NewPlaylist" layoutX="24.0" layoutY="581.0" mnemonicParsing="false" onAction="#NewPlaylist" text="New..." />
+      <Button fx:id="EditPlaylist" layoutX="77.0" layoutY="581.0" mnemonicParsing="false" onAction="#EditPlaylist" text="Edit..." />
+      <Button fx:id="deletePlaylist" layoutX="123.0" layoutY="581.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
+      <Button fx:id="Up" layoutX="225.0" layoutY="579.0" mnemonicParsing="false" onAction="#goUp" text="^">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="Down" layoutX="268.0" layoutY="579.0" mnemonicParsing="false" onAction="#GoDown" text="v">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="RemoveSongFromPlaylist" layoutX="301.0" layoutY="581.0" mnemonicParsing="false" onAction="#RemoveSongFromPlaylist" text="Remove" />
+      <Button fx:id="newSong" layoutX="424.0" layoutY="582.0" mnemonicParsing="false" onAction="#newSon" text="New..." />
+      <Button fx:id="EditSong" layoutX="481.0" layoutY="582.0" mnemonicParsing="false" onAction="#EditSong" text="Edit..." />
+      <Button fx:id="DeleteSong" layoutX="549.0" layoutY="582.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
+      <Button fx:id="Exit" layoutX="732.0" layoutY="582.0" mnemonicParsing="false" onAction="#Exit" text="Exit" />
+      <Label layoutX="308.0" layoutY="48.0" text="(none) ... is playing">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button fx:id="previous" layoutX="32.0" layoutY="35.0" mnemonicParsing="false" onAction="#previous" text="&lt;&lt;" />
+      <Button fx:id="Play" layoutX="72.0" layoutY="28.0" mnemonicParsing="false" onAction="#Play" text="&gt;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="Skip" layoutX="122.0" layoutY="35.0" mnemonicParsing="false" onAction="#Skip" text="&gt;&gt;" />
+      <Slider fx:id="volume" layoutX="20.0" layoutY="76.0" onDragDetected="#changeVolume" />
+   </children>
 </AnchorPane>
