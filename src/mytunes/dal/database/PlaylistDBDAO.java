@@ -13,27 +13,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import mytunes.be.Song;
-import mytunes.dal.SongFacade;
+import mytunes.be.Playlist;
 
 /**
  *
  * @author andreasvillumsen
  */
-public class SongDBDAO {
+public class PlaylistDBDAO {
     private final DatabaseConnector dbCon;
     
-    public SongDBDAO() throws Exception {
+    public PlaylistDBDAO() throws Exception {
         dbCon = new DatabaseConnector();
     }
     
     public boolean createTable() throws SQLServerException, SQLException {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("CREATE TABLE IF NOT "
-                    + "EXISTS songs (id int NOT NULL, title varchar(255) NOT "
-                    + "NULL, album varchar(255) NOT NULL, artist varchar(255) "
-                    + "NOT NULL, category varchar(255) NOT NULL, time varchar(255) "
-                    + "NOT NULL, path varchar(255) NOT NULL, PRIMARY KEY (id))");
+                    + "EXISTS playlists (id int NOT NULL, title varchar(255) NOT "
+                    + "NULL, PRIMARY KEY (id))");
             ResultSet rs = ps.executeQuery();
             return true;
         } catch(SQLServerException ex) {
@@ -44,25 +41,20 @@ public class SongDBDAO {
         return false;
     }
     
-    public List<Song> getAllSongs() {
-        ArrayList<Song> songs = new ArrayList<>();
+    public List<Playlist> getAllPlaylists() {
+        ArrayList<Playlist> playlists = new ArrayList<>();
         
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM songs");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM playlists");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next())
             {
                 int id = rs.getInt("id");
-                String title = rs.getString("title");
-                String album = rs.getString("album");
-                String artist = rs.getString("artist");
-                String category = rs.getString("category");
-                String time = rs.getString("time");
-                String path = rs.getString("path");
-                songs.add(new Song(id, title, album, artist, category, time, path));
+                String name = rs.getString("name");
+                playlists.add(new Playlist(id, name));
             }
-            return songs;
+            return playlists;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
@@ -73,26 +65,22 @@ public class SongDBDAO {
         return null;
     }
     
-    public Song createSong(Song song) {
+    public Playlist createPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO songs (title, album, artist, category, time, path) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, song.getTitle());
-            ps.setString(2, song.getAlbum());
-            ps.setString(3, song.getArtist());
-            ps.setString(4, song.getCategory());
-            ps.setString(5, song.getTime());
-            ps.setString(6, song.getPath());
+            PreparedStatement ps = con.prepareStatement("INSERT INTO playlists "
+                    + "(name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, playlist.getName());
             
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             
             if(rs.next()) {
-                song.setId((int) rs.getLong(1));
+                playlist.setId((int) rs.getLong(1));
             } else {
                 return null;
             }
             
-            return song;
+            return playlist;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
@@ -103,15 +91,11 @@ public class SongDBDAO {
         return null;
     }
     
-    public boolean updateSong(Song song) {
+    public boolean updatePlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE songs SET title = ?, album = ?, artist = ?, category = ?, time = ?, path = ? WHERE id = ?");
-            ps.setString(1, song.getTitle());
-            ps.setString(2, song.getAlbum());
-            ps.setString(3, song.getArtist());
-            ps.setString(4, song.getCategory());
-            ps.setString(5, song.getTime());
-            ps.setInt(6, song.getId());
+            PreparedStatement ps = con.prepareStatement("UPDATE playlists SET name = ? WHERE id = ?");
+            ps.setString(1, playlist.getName());
+            ps.setInt(2, playlist.getId());
             ResultSet rs = ps.executeQuery();
             return ps.executeUpdate() > 0;
             
@@ -124,11 +108,11 @@ public class SongDBDAO {
         return false;
     }
     
-    public boolean deleteSong(Song song) {
+    public boolean deletePlaylist(Playlist playlist) {
         
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM songs WHERE id = ?");
-            ps.setInt(1, song.getId());
+            PreparedStatement ps = con.prepareStatement("DELETE FROM playlists WHERE id = ?");
+            ps.setInt(1, playlist.getId());
             ResultSet rs = ps.executeQuery();
             return ps.executeUpdate() > 0;
             
@@ -140,6 +124,4 @@ public class SongDBDAO {
         
         return false;
     }
-    
-    
 }
