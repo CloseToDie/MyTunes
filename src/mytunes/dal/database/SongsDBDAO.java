@@ -3,12 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytunes.dal;
+package mytunes.dal.database;
 
 /**
  *
  * @author andreasvillumsen
  */
-public class Database {
+public class SongsDBDAO {
+    private DatabaseConnector dbCon;
+    
+    public SongsDBDAO() throws Exception {
+        dbCon = new DatabaseConnector();
+    }
+    
     
 }
