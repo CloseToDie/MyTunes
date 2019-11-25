@@ -16,15 +16,15 @@ import java.util.logging.Logger;
  *
  * @author andreasvillumsen
  */
-public class SongMSSQLDAO implements SongDalFacade {
+public class SongDAO implements SongDalFacade {
     
     public static void main(String[] args) {
-    
+        
     }
     
     private SQLServerDataSource ds = new SQLServerDataSource();
 
-    public SongMSSQLDAO() {
+    public SongDAO() {
         ds.setUser("CSe19A_2");
         ds.setPassword("CSe19A_2");
         ds.setPortNumber(1433);
