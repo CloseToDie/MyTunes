@@ -16,14 +16,16 @@ public class Song {
     private String artist;
     private String category;
     private String time;
+    private String path;
 
-    public Song(int id, String title, String album, String artist, String category, String time) {
+    public Song(int id, String title, String album, String artist, String category, String time, String path) {
         this.id = id;
         this.title = title;
         this.album = album;
         this.artist = artist;
         this.category = category;
         this.time = time;
+        this.path = path;
     }
 
     /**
@@ -120,6 +122,22 @@ public class Song {
      */
     public void setTime(String time) {
         this.time = time;
+    }
+    
+    /**
+     * Get the path of the song
+     * @return path
+     */
+    public String getPath() {
+        return path;
+    }
+
+    /**
+     * Set the path of the song
+     * @param path 
+     */
+    public void setPath(String path) {
+        this.path = path;
     }
     
 }
