@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -26,9 +27,9 @@ public class AppController implements Initializable {
     
     private Label label;
     @FXML
-    private ListView<?> playlist;
+    private TableView<?> playlist;
     @FXML
-    private ListView<?> Songs;
+    private TableView<?> Songs;
     @FXML
     private ListView<?> SongsInPlaylist;
     @FXML
