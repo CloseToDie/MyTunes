@@ -5,6 +5,7 @@
  */
 package mytunes.gui;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mytunes.be.Song;
 import mytunes.bll.SongManager;
@@ -16,9 +17,32 @@ import mytunes.bll.SongManager;
 public class AppModel {
     
     private ObservableList<Song> allSongs;
-    
     private SongManager songManager; 
-    
+
+    public AppModel() {
+        
+        songManager = new SongManager();
+        allSongs = FXCollections.observableArrayList();
+        allSongs.addAll(songManager.getAllSongs());
+    }
+     public ObservableList<Song> getAllSongs()
+    {
+        return allSongs;
+    }
+     
+     
+      /**
+     * calls the search function of the songmanager.
+     *
+     * @param query
+     * 
+     */
+     public void search(String query){
+     //TO-DO implement the search
+     
+     
+     
+     }
     
     
     
