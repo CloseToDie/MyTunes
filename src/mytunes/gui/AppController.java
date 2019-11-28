@@ -34,6 +34,9 @@ import mytunes.bll.MusicPlayer;
 public class AppController implements Initializable
 {
 
+    private boolean tock = false;
+    private boolean tick = false;
+    private MusicPlayer d;
     private Label label;
     @FXML
     private TableView<?> playlist;
@@ -143,7 +146,24 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-        MusicPlayer.playSound("music/3amWestEnd.mp3");
+        if (tock == false)
+        {
+             d = new MusicPlayer("music/3amWestEnd.mp3");
+            tock = true;
+        } 
+       
+    
+        if (tick == false)
+        {
+            tick = true;
+            d.playSound();
+        }
+        else if(tick == true)
+        {
+            tick = false;
+            d.PauseSound();
+        }
+       
     }
 
     @FXML
