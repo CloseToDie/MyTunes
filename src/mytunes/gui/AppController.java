@@ -5,11 +5,11 @@
  */
 package mytunes.gui;
 
-import java.io.IOException;
+import java.io.File;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,8 +24,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import mytunes.bll.MusicPlayer;
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 
 /**
  *
@@ -143,7 +145,12 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-        MusicPlayer.playSound("music/mudkip.mp3");
+        File filestring = new File("music/test.mp3");
+        Media file = new Media(filestring.toURI().toString());  
+
+        MediaPlayer mediaPlayer = new MediaPlayer(file);
+
+        mediaPlayer.play();
     }
 
     @FXML
