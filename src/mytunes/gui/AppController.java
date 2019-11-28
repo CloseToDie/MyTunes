@@ -9,7 +9,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -18,13 +21,15 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 /**
  *
  * @author andreasvillumsen
  */
-public class AppController implements Initializable {
-    
+public class AppController implements Initializable
+{
+
     private Label label;
     @FXML
     private TableView<?> playlist;
@@ -64,16 +69,12 @@ public class AppController implements Initializable {
     private Button Skip;
     @FXML
     private Slider volume;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         // TODO
-    }    
+    }
 
     @FXML
     private void Search(KeyEvent event)
@@ -116,11 +117,6 @@ public class AppController implements Initializable {
     }
 
     @FXML
-    private void newSon(ActionEvent event)
-    {
-    }
-
-    @FXML
     private void EditSong(ActionEvent event)
     {
     }
@@ -154,5 +150,25 @@ public class AppController implements Initializable {
     private void changeVolume(MouseEvent event)
     {
     }
-    
+
+    /**
+     * Opens the menu to add a new song,
+     * when the button "new" under the song list is pressed.
+     * @param event 
+     */
+    @FXML
+    private void newSong(ActionEvent event)
+    {
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("gui/NewSong.fxml"));
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (Exception e)
+        {
+            System.out.println("Cant load new song");
+        }
+    }
+
 }
