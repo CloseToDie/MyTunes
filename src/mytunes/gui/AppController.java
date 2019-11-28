@@ -73,6 +73,8 @@ public class AppController implements Initializable
     private Button Skip;
     @FXML
     private Slider volume;
+    @FXML
+    private Button pause;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -143,7 +145,8 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-        MusicPlayer.playSound("music/3amWestEnd.mp3");
+        
+        MusicPlayer.playSound("3amWestEnd.mp3");
     }
 
     @FXML
@@ -172,6 +175,11 @@ public class AppController implements Initializable
             stage.setScene(new Scene(root));
             stage.show();
           
+    }
+
+    @FXML
+    private void Pause(ActionEvent event)
+    {
     }
 
 }

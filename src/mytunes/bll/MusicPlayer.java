@@ -8,20 +8,24 @@ package mytunes.bll;
 import java.nio.file.Paths;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 
 /**
  *
  * @author kacpe
  */
-
 public class MusicPlayer
 {
-    static Media m; 
-    static MediaPlayer player;
-    public static void playSound(String filename){
-           m = new Media(Paths.get(filename).toUri().toString());
-         player = new MediaPlayer(m);
+
+    private static Media m;
+    private static MediaPlayer player;
+
+    public static void playSound(String filename)
+    {
+        m = new Media(Paths.get(filename).toUri().toString());
+        player = new MediaPlayer(m);
+        player.setStartTime(new Duration(0));
         player.play();
     }
-    
+
 }
