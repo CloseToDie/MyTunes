@@ -21,7 +21,7 @@ public class DatabaseConnector {
     
     public DatabaseConnector() throws IOException {
         Properties props = new Properties();
-        props.load(new FileReader("DBSettings.dat"));
+        props.load(new FileReader("DBSettings.txt"));
         dataSource = new SQLServerDataSource();
         dataSource.setDatabaseName(props.getProperty("database"));
         dataSource.setUser(props.getProperty("user"));

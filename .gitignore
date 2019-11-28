@@ -38,4 +38,7 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
-DBSettings.txt
+
+.txt
+*.txt
+

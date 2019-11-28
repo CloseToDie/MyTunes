@@ -21,34 +21,23 @@ import mytunes.dal.SongFacade;
  * @author andreasvillumsen
  */
 public class SongDBDAO {
+    public static void main(String[] args) throws Exception {
+        SongDBDAO songDBDAO = new SongDBDAO();
+        //Song song = new Song(3, "Køb Bananer 2", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
+        //songDBDAO.updateSong(song);
+    }
+    
     private final DatabaseConnector dbCon;
     
     public SongDBDAO() throws Exception {
         dbCon = new DatabaseConnector();
     }
     
-    public boolean createTable() throws SQLServerException, SQLException {
-        try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("CREATE TABLE IF NOT "
-                    + "EXISTS songs (id int NOT NULL, title varchar(255) NOT "
-                    + "NULL, album varchar(255) NOT NULL, artist varchar(255) "
-                    + "NOT NULL, category varchar(255) NOT NULL, time varchar(255) "
-                    + "NOT NULL, path varchar(255) NOT NULL, PRIMARY KEY (id))");
-            ResultSet rs = ps.executeQuery();
-            return true;
-        } catch(SQLServerException ex) {
-            ex.printStackTrace();
-        } catch(SQLException ex) {
-            ex.printStackTrace();
-        }
-        return false;
-    }
-    
     public List<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<>();
         
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM songs");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM song");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next())
@@ -58,7 +47,7 @@ public class SongDBDAO {
                 String album = rs.getString("album");
                 String artist = rs.getString("artist");
                 String category = rs.getString("category");
-                String time = rs.getString("time");
+                int time = rs.getInt("time");
                 String path = rs.getString("path");
                 songs.add(new Song(id, title, album, artist, category, time, path));
             }
@@ -75,12 +64,15 @@ public class SongDBDAO {
     
     public Song createSong(Song song) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO songs (title, album, artist, category, time, path) VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement("INSERT INTO song "
+                    + "(title, album, artist, category, time, path) "
+                    + "VALUES (?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            
             ps.setString(1, song.getTitle());
             ps.setString(2, song.getAlbum());
             ps.setString(3, song.getArtist());
             ps.setString(4, song.getCategory());
-            ps.setString(5, song.getTime());
+            ps.setInt(5, song.getTime());
             ps.setString(6, song.getPath());
             
             ps.executeUpdate();
@@ -105,15 +97,16 @@ public class SongDBDAO {
     
     public boolean updateSong(Song song) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE songs SET title = ?, album = ?, artist = ?, category = ?, time = ?, path = ? WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE song SET title = ?, album = ?, artist = ?, category = ?, time = ?, path = ? WHERE id = ?");
             ps.setString(1, song.getTitle());
             ps.setString(2, song.getAlbum());
             ps.setString(3, song.getArtist());
             ps.setString(4, song.getCategory());
-            ps.setString(5, song.getTime());
-            ps.setInt(6, song.getId());
-            ResultSet rs = ps.executeQuery();
-            return ps.executeUpdate() > 0;
+            ps.setInt(5, song.getTime());
+            ps.setString(6, song.getPath());
+            ps.setInt(7, song.getId());
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
@@ -127,10 +120,11 @@ public class SongDBDAO {
     public boolean deleteSong(Song song) {
         
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM songs WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM song WHERE id = ?");
             ps.setInt(1, song.getId());
-            ResultSet rs = ps.executeQuery();
-            return ps.executeUpdate() > 0;
+            
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();

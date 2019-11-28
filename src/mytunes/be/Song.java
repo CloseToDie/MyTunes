@@ -15,10 +15,10 @@ public class Song {
     private String album;
     private String artist;
     private String category;
-    private String time;
+    private int time;
     private String path;
 
-    public Song(int id, String title, String album, String artist, String category, String time, String path) {
+    public Song(int id, String title, String album, String artist, String category, int time, String path) {
         this.id = id;
         this.title = title;
         this.album = album;
@@ -112,7 +112,7 @@ public class Song {
      * Get the time length of the song
      * @return time
      */
-    public String getTime() {
+    public int getTime() {
         return time;
     }
 
@@ -120,7 +120,7 @@ public class Song {
      * Set the time length of the song
      * @param time 
      */
-    public void setTime(String time) {
+    public void setTime(int time) {
         this.time = time;
     }
     

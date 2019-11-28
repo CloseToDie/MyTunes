@@ -20,25 +20,17 @@ import mytunes.be.Playlist;
  * @author andreasvillumsen
  */
 public class PlaylistDBDAO {
+    
+    public static void main(String[] args) throws Exception {
+        
+        PlaylistDBDAO dao;
+        dao = new PlaylistDBDAO();
+    }
+    
     private final DatabaseConnector dbCon;
     
     public PlaylistDBDAO() throws Exception {
         dbCon = new DatabaseConnector();
-    }
-    
-    public boolean createTable() throws SQLServerException, SQLException {
-        try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("CREATE TABLE IF NOT "
-                    + "EXISTS playlists (id int NOT NULL, title varchar(255) NOT "
-                    + "NULL, PRIMARY KEY (id))");
-            ResultSet rs = ps.executeQuery();
-            return true;
-        } catch(SQLServerException ex) {
-            ex.printStackTrace();
-        } catch(SQLException ex) {
-            ex.printStackTrace();
-        }
-        return false;
     }
     
     public List<Playlist> getAllPlaylists() {
@@ -96,8 +88,8 @@ public class PlaylistDBDAO {
             PreparedStatement ps = con.prepareStatement("UPDATE playlists SET name = ? WHERE id = ?");
             ps.setString(1, playlist.getName());
             ps.setInt(2, playlist.getId());
-            ResultSet rs = ps.executeQuery();
-            return ps.executeUpdate() > 0;
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
@@ -113,8 +105,8 @@ public class PlaylistDBDAO {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM playlists WHERE id = ?");
             ps.setInt(1, playlist.getId());
-            ResultSet rs = ps.executeQuery();
-            return ps.executeUpdate() > 0;
+            int updatedRows = ps.executeUpdate();
+            return updatedRows > 0;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
