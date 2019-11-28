@@ -62,9 +62,9 @@ public class NewSongController implements Initializable
         
         list = FXCollections.observableArrayList(categories);
         
-        list.add("lol");
-         list.add("lol");
-          list.add("lol");
+        list.add("rock");
+         list.add("punk");
+          list.add("jazz");
         
          for (String string : list) {
             

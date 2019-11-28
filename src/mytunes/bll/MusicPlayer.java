@@ -8,6 +8,7 @@ package mytunes.bll;
 import java.nio.file.Paths;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
 
 /**
  *
@@ -18,6 +19,7 @@ public class MusicPlayer
 {
     static Media m; 
     static MediaPlayer player;
+    static Boolean isdone;
     
     public MusicPlayer(String filename)
     {
@@ -35,5 +37,32 @@ public class MusicPlayer
     {
         player.pause();
     }
+    
+    public static boolean isPlaying(){
+    
+    boolean playing = player.getStatus().equals(Status.PLAYING);
+    return playing;
+    
+    
+    
+    }
+    
+    public static boolean isDone(){
+    
+    boolean done = false; 
+    
+   player.setOnEndOfMedia(new Runnable() {
+        @Override
+        public void run() {
+            isdone = true;
+        }
+    });  
+    
+    return isdone;
+    
+    
+    
+    }
+    
     
 }

@@ -150,10 +150,13 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
+         
+        
         if (tock == false)
         {
-             d = new MusicPlayer("music/3amWestEnd.mp3");
+             d = new MusicPlayer("music/test.mp3");
             tock = true;
+            
         } 
        
     
@@ -161,6 +164,7 @@ public class AppController implements Initializable
         {
             tick = true;
             d.playSound();
+            
         }
         else if(tick == true)
         {
@@ -168,6 +172,7 @@ public class AppController implements Initializable
             d.PauseSound();
         }
        
+        
     }
 
     @FXML
@@ -203,5 +208,7 @@ public class AppController implements Initializable
             stage.show();
 
     }
+    
+    
 
 }
