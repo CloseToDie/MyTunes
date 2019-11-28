@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import mytunes.bll.MusicPlayer;
 
 /**
  *
@@ -142,6 +143,7 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
+        MusicPlayer.playSound("music/3amWestEnd.mp3");
     }
 
     @FXML
