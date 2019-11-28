@@ -27,6 +27,8 @@ public class MusicPlayer
     
     public static void playSound(){
         player.play();
+        
+        
     }
     
     public static void PauseSound()

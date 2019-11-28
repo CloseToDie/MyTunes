@@ -6,6 +6,7 @@
 package mytunes.dal.database;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+import java.io.IOException;
 import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,27 +21,20 @@ import mytunes.dal.SongFacade;
  *
  * @author andreasvillumsen
  */
-public class SongDBDAO {
+public class SongDBDAO  {
     public static void main(String[] args) throws Exception {
         SongDBDAO songDBDAO = new SongDBDAO();
-        //Song song = new Song(3, "Køb Bananer 2", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
+        //Song song = new Song(3, "Køb Bananer", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
         //songDBDAO.updateSong(song);
         
-       
         ArrayList<Song> songs = new ArrayList<>();
-        
         songs.addAll(songDBDAO.getAllSongs());
-       
-        for (Song song : songs ) {
-            
-            System.out.println(song); 
-        }
-
+        System.out.println(songs.get(0).getTitle());
     }
     
     private final DatabaseConnector dbCon;
     
-    public SongDBDAO() throws Exception {
+    public SongDBDAO() {
         dbCon = new DatabaseConnector();
     }
     
