@@ -18,12 +18,22 @@ public class MusicPlayer
 {
     static Media m; 
     static MediaPlayer player;
-    public static void playSound(String filename){
-           m = new Media(Paths.get(filename).toUri().toString());
-         player = new MediaPlayer(m);
+    
+    public MusicPlayer(String filename)
+    {
+        m = new Media(Paths.get(filename).toUri().toString());
+        player = new MediaPlayer(m);
+    }
+    
+    public static void playSound(){
         player.play();
         
         
+    }
+    
+    public static void PauseSound()
+    {
+        player.pause();
     }
     
 }

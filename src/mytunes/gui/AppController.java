@@ -29,6 +29,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import mytunes.bll.MusicPlayer;
 
 /**
  *
@@ -37,6 +38,9 @@ import javafx.stage.Stage;
 public class AppController implements Initializable
 {
 
+    private boolean tock = false;
+    private boolean tick = false;
+    private MusicPlayer d;
     private Label label;
     @FXML
     private TableView<?> playlist;
@@ -146,12 +150,24 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-        File filestring = new File("music/test.mp3");
-        Media file = new Media(filestring.toURI().toString());  
-
-        MediaPlayer mediaPlayer = new MediaPlayer(file);
-
-        mediaPlayer.play();
+        if (tock == false)
+        {
+             d = new MusicPlayer("music/3amWestEnd.mp3");
+            tock = true;
+        } 
+       
+    
+        if (tick == false)
+        {
+            tick = true;
+            d.playSound();
+        }
+        else if(tick == true)
+        {
+            tick = false;
+            d.PauseSound();
+        }
+       
     }
 
     @FXML
