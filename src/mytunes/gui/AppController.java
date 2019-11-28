@@ -5,8 +5,11 @@
  */
 package mytunes.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -154,21 +157,19 @@ public class AppController implements Initializable
     /**
      * Opens the menu to add a new song,
      * when the button "new" under the song list is pressed.
+     * (shit dont work yet)
      * @param event 
      */
     @FXML
-    private void newSong(ActionEvent event)
-    {
-        try
-        {
+    private void newSong(ActionEvent event) throws Exception
+    {       
+       
             Parent root = FXMLLoader.load(getClass().getResource("gui/NewSong.fxml"));
             Stage stage = new Stage();
+            stage.setTitle("add/edit song");
             stage.setScene(new Scene(root));
             stage.show();
-        } catch (Exception e)
-        {
-            System.out.println("Cant load new song");
-        }
+          
     }
 
 }
