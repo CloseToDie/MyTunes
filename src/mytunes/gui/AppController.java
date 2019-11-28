@@ -189,13 +189,19 @@ public class AppController implements Initializable
     @FXML
     private void newSong(ActionEvent event) throws Exception
     {       
-       
+       /*
             Parent root = FXMLLoader.load(getClass().getResource("gui/NewSong.fxml"));
             Stage stage = new Stage();
             stage.setTitle("add/edit song");
             stage.setScene(new Scene(root));
             stage.show();
-          
+            */
+          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewSong.fxml"));
+          Parent root1 = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));  
+            stage.show();
+
     }
 
 }

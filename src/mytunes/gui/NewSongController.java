@@ -11,6 +11,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -23,12 +24,6 @@ public class NewSongController implements Initializable
 {
 
     @FXML
-    private Label Category;
-    @FXML
-    private Label Time;
-    @FXML
-    private Label File;
-    @FXML
     private TextField Title;
     @FXML
     private TextField Artist;
@@ -38,6 +33,18 @@ public class NewSongController implements Initializable
     private Button Cancel;
     @FXML
     private Button Save;
+    @FXML
+    private Label CategoryLabel;
+    @FXML
+    private Label TimeLabel;
+    @FXML
+    private Label fileLabel;
+    @FXML
+    private TextField Time_textField;
+    @FXML
+    private TextField FileTextField;
+    @FXML
+    private ChoiceBox<?> CategoryChoiceBox;
 
     /**
      * Initializes the controller class.
