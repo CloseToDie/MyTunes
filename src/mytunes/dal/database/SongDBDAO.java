@@ -25,6 +25,17 @@ public class SongDBDAO {
         SongDBDAO songDBDAO = new SongDBDAO();
         //Song song = new Song(3, "Køb Bananer 2", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
         //songDBDAO.updateSong(song);
+        
+       
+        ArrayList<Song> songs = new ArrayList<>();
+        
+        songs.addAll(songDBDAO.getAllSongs());
+       
+        for (Song song : songs ) {
+            
+            System.out.println(song); 
+        }
+
     }
     
     private final DatabaseConnector dbCon;
