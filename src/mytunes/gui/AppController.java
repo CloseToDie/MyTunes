@@ -143,7 +143,7 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-        MusicPlayer.playSound("music/3amWestEnd.mp3");
+        MusicPlayer.playSound("music/mudkip.mp3");
     }
 
     @FXML

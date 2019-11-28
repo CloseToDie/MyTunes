@@ -3,24 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mytunes.gui;
+package mytunes.bll;
 
+import java.io.IOException;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mytunes.be.Song;
-import mytunes.bll.SongManager;
+import mytunes.dal.database.SongDBDAO;
 
 /**
  *
- * @author andreasvillumsen
+ * @author anton
  */
-public class AppModel {
+
+public class SongManager {
+        
     
-    private ObservableList<Song> allSongs;
-    
-    private SongManager songManager; 
-    
-    
+
+
+public void fetchData() {
     
     
     
+    
+    }
 }

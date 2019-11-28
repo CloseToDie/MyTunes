@@ -22,6 +22,8 @@ public class MusicPlayer
            m = new Media(Paths.get(filename).toUri().toString());
          player = new MediaPlayer(m);
         player.play();
+        
+        
     }
     
 }
