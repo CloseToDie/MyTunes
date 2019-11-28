@@ -8,6 +8,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="636.0" prefWidth="848.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.AppController">
@@ -29,7 +30,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="ToPlaylist" layoutX="406.0" layoutY="191.0" mnemonicParsing="false" onAction="#ToPlaylist" prefHeight="35.0" prefWidth="35.0" text="&lt;-" />
+      <Button fx:id="ToPlaylist" layoutX="414.0" layoutY="186.0" mnemonicParsing="false" onAction="#ToPlaylist" prefHeight="35.0" prefWidth="35.0" text="&lt;-" />
       <Button fx:id="NewPlaylist" layoutX="24.0" layoutY="581.0" mnemonicParsing="false" onAction="#NewPlaylist" text="New..." />
       <Button fx:id="EditPlaylist" layoutX="77.0" layoutY="581.0" mnemonicParsing="false" onAction="#EditPlaylist" text="Edit..." />
       <Button fx:id="deletePlaylist" layoutX="123.0" layoutY="581.0" mnemonicParsing="false" onAction="#deletePlaylist" text="Delete" />
@@ -38,13 +39,13 @@
             <Font size="14.0" />
          </font>
       </Button>
-      <Button fx:id="Down" layoutX="286.0" layoutY="579.0" mnemonicParsing="false" onAction="#GoDown" text="v">
+      <Button fx:id="Down" layoutX="286.0" layoutY="578.0" mnemonicParsing="false" onAction="#GoDown" text="v">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
       <Button fx:id="RemoveSongFromPlaylist" layoutX="322.0" layoutY="582.0" mnemonicParsing="false" onAction="#RemoveSongFromPlaylist" text="Remove" />
-      <Button fx:id="newSong" layoutX="506.0" layoutY="581.0" mnemonicParsing="false" onAction="#newSon" text="New..." />
+      <Button fx:id="newSong" layoutX="506.0" layoutY="581.0" mnemonicParsing="false" onAction="#newSong" text="New..." />
       <Button fx:id="EditSong" layoutX="577.0" layoutY="581.0" mnemonicParsing="false" onAction="#EditSong" text="Edit..." />
       <Button fx:id="DeleteSong" layoutX="646.0" layoutY="582.0" mnemonicParsing="false" onAction="#DeleteSong" text="Delete" />
       <Button fx:id="Exit" layoutX="783.0" layoutY="582.0" mnemonicParsing="false" onAction="#Exit" text="Exit" />
@@ -54,7 +55,7 @@
          </font>
       </Label>
       <Button fx:id="previous" layoutX="32.0" layoutY="35.0" mnemonicParsing="false" onAction="#previous" text="&lt;&lt;" />
-      <Button fx:id="Play" layoutX="72.0" layoutY="28.0" mnemonicParsing="false" onAction="#Play" text="&gt;">
+      <Button fx:id="Play" layoutX="72.0" layoutY="28.0" mnemonicParsing="false" onAction="#Play" text="&gt;ll">
          <font>
             <Font size="18.0" />
          </font>
@@ -76,5 +77,6 @@
             <TableColumn prefWidth="45.600006103515625" text="Time" />
         </columns>
       </TableView>
+      <MediaView fx:id="mediaView" fitHeight="200.0" fitWidth="200.0" layoutX="307.0" />
    </children>
 </AnchorPane>

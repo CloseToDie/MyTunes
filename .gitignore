@@ -38,6 +38,7 @@ nbdist/
 .nb-gradle/
 
 # End of https://www.gitignore.io/api/java,netbeans
+
 .txt
 *.txt
 *.mp3
