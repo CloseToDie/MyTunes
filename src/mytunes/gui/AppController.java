@@ -12,7 +12,10 @@ import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -30,8 +33,9 @@ import javafx.scene.media.MediaView;
  *
  * @author andreasvillumsen
  */
-public class AppController implements Initializable {
-    
+public class AppController implements Initializable
+{
+
     private Label label;
     @FXML
     private TableView<?> playlist;
@@ -71,16 +75,12 @@ public class AppController implements Initializable {
     private Button Skip;
     @FXML
     private Slider volume;
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
-    
+
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         // TODO
-    }    
+    }
 
     @FXML
     private void Search(KeyEvent event)
@@ -119,11 +119,6 @@ public class AppController implements Initializable {
 
     @FXML
     private void RemoveSongFromPlaylist(ActionEvent event)
-    {
-    }
-
-    @FXML
-    private void newSon(ActionEvent event)
     {
     }
 
@@ -167,5 +162,23 @@ public class AppController implements Initializable {
     private void changeVolume(MouseEvent event)
     {
     }
-    
+
+    /**
+     * Opens the menu to add a new song,
+     * when the button "new" under the song list is pressed.
+     * (shit dont work yet)
+     * @param event 
+     */
+    @FXML
+    private void newSong(ActionEvent event) throws Exception
+    {       
+       
+            Parent root = FXMLLoader.load(getClass().getResource("gui/NewSong.fxml"));
+            Stage stage = new Stage();
+            stage.setTitle("add/edit song");
+            stage.setScene(new Scene(root));
+            stage.show();
+          
+    }
+
 }
