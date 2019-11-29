@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -33,6 +34,8 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import mytunes.be.Playlist;
+import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
 
 
@@ -48,11 +51,11 @@ public class AppController implements Initializable
     private MusicPlayer d;
     private Label label;
     @FXML
-    private TableView<?> playlist;
+    private TableView<Playlist> playlist;
     @FXML
-    private TableView<?> Songs;
+    private TableView<Song> Songs;
     @FXML
-    private ListView<?> SongsInPlaylist;
+    private ListView<Song> SongsInPlaylist;
     @FXML
     private TextField Search;
     @FXML
@@ -88,7 +91,19 @@ public class AppController implements Initializable
     @FXML
     private Label isPlaying;
     @FXML
-    private MediaView mediaView;
+    private TableColumn<Song, String> songTitelCol;
+    @FXML
+    private TableColumn<Song, String> songArtistCol;
+    @FXML
+    private TableColumn<Song, String> songCategoryCol;
+    @FXML
+    private TableColumn<Song, Integer> songTimeCol;
+    @FXML
+    private TableColumn<Playlist, String> playlistNameCol;
+    @FXML
+    private TableColumn<Playlist, Integer> playlistSongsCol;
+    @FXML
+    private TableColumn<Playlist, Integer> playlistTimeCol;
 
 
     @Override
@@ -104,6 +119,9 @@ public class AppController implements Initializable
                 d.getMP().setVolume(volume.getValue() /100);
             }
         });
+        
+        
+        
         
       
     }
