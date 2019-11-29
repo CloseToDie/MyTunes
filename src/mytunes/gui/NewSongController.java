@@ -17,6 +17,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -83,6 +84,10 @@ public class NewSongController implements Initializable
     @FXML
     private void Cancel(ActionEvent event)
     {
+           // get a handle to the stage
+    Stage stage = (Stage) Cancel.getScene().getWindow();
+    // do what you have to do
+    stage.close();
     }
 
     @FXML
