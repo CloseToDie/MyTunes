@@ -5,10 +5,13 @@
  */
 package mytunes.dal;
 
+import java.util.List;
+import mytunes.be.Song;
+
 /**
  *
  * @author andreasvillumsen
  */
 public interface SongFacade {
-    
+    public List<Song> getAllSongs();
 }

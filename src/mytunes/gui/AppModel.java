@@ -21,7 +21,7 @@ public class AppModel {
     private SongManager songManager; 
     private AppController controler;
 
-    public AppModel() {
+    public AppModel() throws Exception {
         
         songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
