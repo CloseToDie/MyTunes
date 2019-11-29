@@ -73,8 +73,7 @@ public class AppController implements Initializable
     private Button Skip;
     @FXML
     private Slider volume;
-    @FXML
-    private Button pause;
+    
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -176,10 +175,4 @@ public class AppController implements Initializable
             stage.show();
           
     }
-
-    @FXML
-    private void Pause(ActionEvent event)
-    {
-    }
-
 }
