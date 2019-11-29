@@ -6,11 +6,15 @@
 package mytunes.gui;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -23,12 +27,6 @@ public class NewSongController implements Initializable
 {
 
     @FXML
-    private Label Category;
-    @FXML
-    private Label Time;
-    @FXML
-    private Label File;
-    @FXML
     private TextField Title;
     @FXML
     private TextField Artist;
@@ -38,7 +36,21 @@ public class NewSongController implements Initializable
     private Button Cancel;
     @FXML
     private Button Save;
+    @FXML
+    private Label CategoryLabel;
+    @FXML
+    private Label TimeLabel;
+    @FXML
+    private Label fileLabel;
+    @FXML
+    private TextField Time_textField;
+    @FXML
+    private TextField FileTextField;
+    @FXML
+    private ChoiceBox<String> CategoryChoiceBox;
 
+    private ObservableList<String> list;
+    private ArrayList<String> categories;
     /**
      * Initializes the controller class.
      */
@@ -46,6 +58,21 @@ public class NewSongController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
+        ArrayList<String> categories = new ArrayList<>();
+        
+        list = FXCollections.observableArrayList(categories);
+        
+        list.add("rock");
+         list.add("punk");
+          list.add("jazz");
+        
+         for (String string : list) {
+            
+             System.out.println(string);
+        }
+        
+        CategoryChoiceBox.setItems(list);
+        
     }    
 
     @FXML
