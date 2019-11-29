@@ -164,6 +164,10 @@ public class AppController implements Initializable
     @FXML
     private void Exit(ActionEvent event)
     {
+           // get a handle to the stage
+    Stage stage = (Stage) Exit.getScene().getWindow();
+    // do what you have to do
+    stage.close();
     }
 
     @FXML
@@ -223,6 +227,7 @@ public class AppController implements Initializable
     @FXML
     private void changeVolume(MouseEvent event)
     {
+        
     }
 
     /**
