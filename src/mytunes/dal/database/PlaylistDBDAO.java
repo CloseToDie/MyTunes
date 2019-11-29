@@ -25,6 +25,16 @@ public class PlaylistDBDAO {
         
         PlaylistDBDAO dao;
         dao = new PlaylistDBDAO();
+        
+       // dao.createPlaylist(new Playlist(0, "acustic depression"));
+        
+       
+        
+        for (Playlist allPlaylist : dao.getAllPlaylists()) {
+            
+            System.out.println(allPlaylist);
+            
+        }
     }
     
     private final DatabaseConnector dbCon;
@@ -37,7 +47,7 @@ public class PlaylistDBDAO {
         ArrayList<Playlist> playlists = new ArrayList<>();
         
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM playlists");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM playlist");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next())
@@ -59,7 +69,7 @@ public class PlaylistDBDAO {
     
     public Playlist createPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO playlists "
+            PreparedStatement ps = con.prepareStatement("INSERT INTO playlist "
                     + "(name) VALUES (?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, playlist.getName());
             
@@ -85,7 +95,7 @@ public class PlaylistDBDAO {
     
     public boolean updatePlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE playlists SET name = ? WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE playlist SET name = ? WHERE id = ?");
             ps.setString(1, playlist.getName());
             ps.setInt(2, playlist.getId());
             int updatedRows = ps.executeUpdate();
@@ -103,7 +113,7 @@ public class PlaylistDBDAO {
     public boolean deletePlaylist(Playlist playlist) {
         
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM playlists WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM playlist WHERE id = ?");
             ps.setInt(1, playlist.getId());
             int updatedRows = ps.executeUpdate();
             return updatedRows > 0;
