@@ -6,6 +6,7 @@
 package mytunes.gui;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
@@ -16,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +34,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 import mytunes.bll.MusicPlayer;
+
 
 /**
  *
@@ -116,13 +119,15 @@ public class AppController implements Initializable
     }
 
     @FXML
-    private void NewPlaylist(ActionEvent event)
+    private void NewPlaylist(ActionEvent event) throws IOException
     {
+        openMenu("Playlist.fxml", "new/edit Playlist");
     }
 
     @FXML
-    private void EditPlaylist(ActionEvent event)
+    private void EditPlaylist(ActionEvent event) throws IOException
     {
+        openMenu("Playlist.fxml", "new/edit Playlist");
     }
 
     @FXML
@@ -146,8 +151,9 @@ public class AppController implements Initializable
     }
 
     @FXML
-    private void EditSong(ActionEvent event)
+    private void EditSong(ActionEvent event) throws IOException
     {
+        openMenu("NewSong.fxml", "add/edit Song");
     }
 
     @FXML
@@ -221,29 +227,25 @@ public class AppController implements Initializable
     /**
      * Opens the menu to add a new song,
      * when the button "new" under the song list is pressed.
-     * (shit dont work yet)
      * @param event 
      */
     @FXML
-    private void newSong(ActionEvent event) throws Exception
+    private void newSong(ActionEvent event) throws IOException
     {       
-       /*
-            Parent root = FXMLLoader.load(getClass().getResource("gui/NewSong.fxml"));
-            Stage stage = new Stage();
-            stage.setTitle("add/edit song");
-            stage.setScene(new Scene(root));
-            stage.show();
-            */
-          FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("NewSong.fxml"));
-          Parent root1 = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));  
-            stage.show();
-
+        
+           openMenu("NewSong.fxml", "add/edit Song");
     }
 
     public Label getIsPlaying() {
         return isPlaying;
     }
 
+    public void openMenu(String fxmlFile, String title) throws IOException
+    {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
+            Stage stage = new Stage();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+            stage.show();
+    } 
 }
