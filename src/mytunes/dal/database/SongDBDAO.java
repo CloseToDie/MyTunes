@@ -21,7 +21,7 @@ import mytunes.dal.SongFacade;
  *
  * @author andreasvillumsen
  */
-public class SongDBDAO  {
+public class SongDBDAO implements SongFacade  {
     public static void main(String[] args) throws Exception {
         SongDBDAO songDBDAO = new SongDBDAO();
         //Song song = new Song(3, "Køb Bananer", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
@@ -38,6 +38,7 @@ public class SongDBDAO  {
         dbCon = new DatabaseConnector();
     }
     
+    @Override
     public List<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<>();
         

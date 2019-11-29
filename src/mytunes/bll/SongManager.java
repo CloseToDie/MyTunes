@@ -6,9 +6,11 @@
 package mytunes.bll;
 
 import java.io.IOException;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import mytunes.be.Song;
+import mytunes.dal.SongFacade;
 import mytunes.dal.database.SongDBDAO;
 
 /**
@@ -17,6 +19,19 @@ import mytunes.dal.database.SongDBDAO;
  */
 
 public class SongManager {
+    
+    private SongFacade songDBDAO;
+    
+    public SongManager() throws Exception
+    {
+        songDBDAO = new SongDBDAO();
+
+    }
+    
+     public List<Song> getAllSongs()
+     {
+        return songDBDAO.getAllSongs();
+     }
         
     
 
@@ -26,9 +41,5 @@ public void fetchData() {
     
     
     
-    }
-
-    public Song[] getAllSongs() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

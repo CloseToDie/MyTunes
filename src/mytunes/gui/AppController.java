@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
 import javafx.beans.Observable;
@@ -45,9 +47,9 @@ import mytunes.bll.MusicPlayer;
  */
 public class AppController implements Initializable
 {
-
     private boolean tock = false;
     private boolean tick = false;
+    private SongModel songModel;
     private MusicPlayer d;
     private Label label;
     @FXML
@@ -109,6 +111,14 @@ public class AppController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        /*try
+        {
+            songModel = new SongModel();
+            Songs.setItems(songModel.getAllSongs());
+        } catch (Exception ex)
+        {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
          d = new MusicPlayer("music/test.mp3");
         
         volume.setValue(d.getMP().getVolume()* 100);
