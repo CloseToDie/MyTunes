@@ -7,6 +7,7 @@ package mytunes.gui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Label;
 import mytunes.be.Song;
 import mytunes.bll.SongManager;
 
@@ -18,6 +19,7 @@ public class AppModel {
     
     private ObservableList<Song> allSongs;
     private SongManager songManager; 
+    private AppController controler;
 
     public AppModel() {
         
@@ -43,6 +45,10 @@ public class AppModel {
      
      
      }
+     
+     public Label getIsPlaying() {
+        return controler.getIsPlaying();
+    }
     
     
     

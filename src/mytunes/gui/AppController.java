@@ -10,6 +10,8 @@ import java.net.URL;
 import java.util.Map;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.Observable;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,11 +82,26 @@ public class AppController implements Initializable
     private Button Skip;
     @FXML
     private Slider volume;
+    @FXML
+    private Label isPlaying;
+    @FXML
+    private MediaView mediaView;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+         d = new MusicPlayer("music/test.mp3");
+        
+        volume.setValue(d.getMP().getVolume()* 100);
+        volume.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                
+                d.getMP().setVolume(volume.getValue() /100);
+            }
+        });
+        
+      
     }
 
     @FXML
@@ -150,11 +167,24 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-         
+      if(d != null)  {
+        if(d.isDone()){
+        
+            System.out.println("done");
+            tock = false;
+        
+        }
+        else{
+        System.out.println("not done");
+        } 
+            
+      }
         
         if (tock == false)
         {
+            
              d = new MusicPlayer("music/test.mp3");
+          
             tock = true;
             
         } 
@@ -207,6 +237,10 @@ public class AppController implements Initializable
             stage.setScene(new Scene(root1));  
             stage.show();
 
+    }
+
+    public Label getIsPlaying() {
+        return isPlaying;
     }
     
     
