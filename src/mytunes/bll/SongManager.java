@@ -6,6 +6,7 @@
 package mytunes.bll;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,6 +20,15 @@ import mytunes.dal.database.SongDBDAO;
  */
 
 public class SongManager {
+    
+    public static void main(String[] args) throws Exception {
+        SongManager songm = new SongManager();
+        
+        ArrayList<Song> songs = new ArrayList<>();
+        songs.addAll(songm.getAllSongs());
+        System.out.println(songs.get(0).getTitle());
+        
+    }
     
     private SongFacade songDBDAO;
     

@@ -8,6 +8,7 @@ package mytunes.gui;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,6 +30,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -130,8 +132,40 @@ public class AppController implements Initializable
             }
         });
         
-        
-        
+                    songTitelCol.setCellValueFactory(
+                new PropertyValueFactory<Song,String>("title")
+            );
+            songArtistCol.setCellValueFactory(
+                new PropertyValueFactory<Song,String>("artist")
+            );
+            songCategoryCol.setCellValueFactory(
+                new PropertyValueFactory<Song,String>("category")
+            );
+
+            songTimeCol.setCellValueFactory(
+                new PropertyValueFactory<Song,Integer>("time")
+            );
+            
+            
+            try
+        {
+           SongModel songModel = new SongModel();
+           
+           Songs.setItems(songModel.getAllSongs());
+           //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
+            
+        } catch (Exception ex)
+        {
+            Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+             
+            /*
+            Songs.setItems(songModel.getAllSongs());
+            Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
+            */
+            
+          
         
       
     }

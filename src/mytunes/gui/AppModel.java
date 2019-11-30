@@ -5,6 +5,7 @@
  */
 package mytunes.gui;
 
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -17,6 +18,15 @@ import mytunes.bll.SongManager;
  * @author andreasvillumsen
  */
 public class AppModel {
+    
+     public static void main(String[] args) throws Exception {
+        AppModel app = new AppModel();
+        
+        ArrayList<Song> songs = new ArrayList<>();
+        songs.addAll(app.getAllSongs());
+        System.out.println(songs.get(0).getTitle());
+        
+    }
     
     private ObservableList<Song> allSongs;
     private ObservableList<Playlist> allPlaylist;

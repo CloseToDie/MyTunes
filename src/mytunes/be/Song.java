@@ -5,26 +5,29 @@
  */
 package mytunes.be;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author andreasvillumsen
  */
 public class Song {
     private int id;
-    private String title;
-    private String album;
-    private String artist;
-    private String category;
-    private int time;
+    private final SimpleStringProperty title;
+    private final SimpleStringProperty album;
+    private final SimpleStringProperty artist;
+    private final SimpleStringProperty category;
+    private final SimpleIntegerProperty time;
     private String path;
 
     public Song(int id, String title, String album, String artist, String category, int time, String path) {
         this.id = id;
-        this.title = title;
-        this.album = album;
-        this.artist = artist;
-        this.category = category;
-        this.time = time;
+        this.title = new SimpleStringProperty(title);
+        this.album = new SimpleStringProperty(album);
+        this.artist = new SimpleStringProperty(artist);
+        this.category = new SimpleStringProperty(category);
+        this.time = new SimpleIntegerProperty(time);
         this.path = path;
     }
 
@@ -49,7 +52,7 @@ public class Song {
      * @return title
      */
     public String getTitle() {
-        return title;
+        return title.get();
     }
 
     /**
@@ -57,7 +60,7 @@ public class Song {
      * @param title 
      */
     public void setTitle(String title) {
-        this.title = title;
+        this.title.set(title);
     }
 
     /**
@@ -65,7 +68,7 @@ public class Song {
      * @return album
      */
     public String getAlbum() {
-        return album;
+        return album.get();
     }
 
     /**
@@ -73,7 +76,7 @@ public class Song {
      * @param album 
      */
     public void setAlbum(String album) {
-        this.album = album;
+        this.album.set(album);
     }
 
     /**
@@ -81,7 +84,7 @@ public class Song {
      * @return artist
      */
     public String getArtist() {
-        return artist;
+        return artist.get();
     }
 
     /**
@@ -89,7 +92,7 @@ public class Song {
      * @param artist 
      */
     public void setArtist(String artist) {
-        this.artist = artist;
+        this.artist.set(artist);
     }
 
     /**
@@ -97,7 +100,7 @@ public class Song {
      * @return category
      */
     public String getCategory() {
-        return category;
+        return category.get();
     }
 
     /**
@@ -105,7 +108,7 @@ public class Song {
      * @param category 
      */
     public void setCategory(String category) {
-        this.category = category;
+        this.category.set(category);
     }
 
     /**
@@ -113,7 +116,7 @@ public class Song {
      * @return time
      */
     public int getTime() {
-        return time;
+        return time.get();
     }
 
     /**
@@ -121,7 +124,7 @@ public class Song {
      * @param time 
      */
     public void setTime(int time) {
-        this.time = time;
+        this.time.set(time);
     }
     
     /**
@@ -142,7 +145,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song{" + "id=" + id + ", title=" + title + ", album=" + album + ", artist=" + artist + ", category=" + category + ", time=" + time + ", path=" + path + '}';
+        return "Song{" + "id=" + getId() + ", title=" + getTitle() + ", album=" + getAlbum() + ", artist=" + getArtist() + ", category=" + getCategory() + ", time=" + getTime() + ", path=" + path + '}';
     }
     
     
