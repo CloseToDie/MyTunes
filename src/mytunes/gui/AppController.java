@@ -155,7 +155,7 @@ public class AppController implements Initializable
            appmodel = new AppModel();
            
            Songs.setItems(appmodel.getAllSongs());
-           //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
+          // Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
         {
@@ -233,6 +233,8 @@ public class AppController implements Initializable
     @FXML
     private void DeleteSong(ActionEvent event)
     {
+        Songs.refresh();
+        System.out.println("mytunes.gui.AppController.DeleteSong()");
     }
 
     @FXML
@@ -311,9 +313,17 @@ public class AppController implements Initializable
      */
     @FXML
     private void newSong(ActionEvent event) throws IOException
-    {       
-        
-           openMenu("NewSong.fxml", "add/edit Song");
+    {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("NewSong.fxml").openStream());
+            NewSongController cont = (NewSongController) fxmlLoader.getController();
+            cont.setappmodel(appmodel);
+            Stage stage = new Stage();
+            stage.setTitle("New Song");
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     public Label getIsPlaying() {
@@ -322,6 +332,7 @@ public class AppController implements Initializable
 
     public void openMenu(String fxmlFile, String title) throws IOException
     {
+        
         Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
             Stage stage = new Stage();
             stage.setTitle(title);

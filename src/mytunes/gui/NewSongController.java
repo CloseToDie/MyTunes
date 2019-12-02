@@ -12,6 +12,8 @@ import java.net.URL;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -38,6 +40,7 @@ public class NewSongController implements Initializable
     private int duration = 0;
     private String filename = "";
     private String directory = "";
+    private AppModel appmodel;
 
     @FXML
     private TextField Title;
@@ -72,6 +75,7 @@ public class NewSongController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+       
         // TODO
         ArrayList<String> categories = new ArrayList<>();
         
@@ -89,7 +93,13 @@ public class NewSongController implements Initializable
         CategoryChoiceBox.setItems(list);
         
        
-    }    
+    } 
+    
+    public void setappmodel(AppModel app){
+    
+    appmodel = app;
+    
+    }
 
     @FXML
     private void MoreCategories(ActionEvent event)
@@ -108,7 +118,7 @@ public class NewSongController implements Initializable
     @FXML
     private void Save(ActionEvent event)
     {
-        SongDBDAO addSong = new SongDBDAO();
+        //SongDBDAO addSong = new SongDBDAO();
         
         String title = Title.getText();
         String artist = Artist.getText();
@@ -158,7 +168,7 @@ public class NewSongController implements Initializable
         
         
         Song songToAdd = new Song(1, title,"",artist, genre, duration, songPath);
-        addSong.createSong(songToAdd);
+        appmodel.createSong(songToAdd);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
             
