@@ -53,7 +53,15 @@ public class AppModel {
      */
      public void search(String query){
      //TO-DO implement the search
-     
+             if (query.isEmpty())
+        {
+            allSongs.clear();
+           allSongs.addAll(songManager.getAllSongs());
+        } else
+        {
+            allSongs.clear();
+            allSongs.addAll(songManager.search(query));
+        }
      
      
      }

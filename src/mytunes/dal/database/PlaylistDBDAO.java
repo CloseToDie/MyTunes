@@ -14,12 +14,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import mytunes.be.Playlist;
+import mytunes.dal.PlaylistFacade;
 
 /**
  *
  * @author andreasvillumsen
  */
-public class PlaylistDBDAO {
+public class PlaylistDBDAO implements PlaylistFacade{
     
     public static void main(String[] args) throws Exception {
         

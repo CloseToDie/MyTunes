@@ -52,6 +52,7 @@ public class AppController implements Initializable
     private boolean tock = false;
     private boolean tick = false;
     private SongModel songModel;
+    private AppModel appmodel;
     private MusicPlayer d;
     private Label label;
     @FXML
@@ -149,9 +150,11 @@ public class AppController implements Initializable
             
             try
         {
-           SongModel songModel = new SongModel();
+            
+           songModel = new SongModel();
+           appmodel = new AppModel();
            
-           Songs.setItems(songModel.getAllSongs());
+           Songs.setItems(appmodel.getAllSongs());
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
@@ -173,6 +176,15 @@ public class AppController implements Initializable
     @FXML
     private void Search(KeyEvent event)
     {
+        try
+        {
+            String query = Search.getText().trim();
+            appmodel.search(query);
+        } catch (Exception ex)
+        {
+            ex.printStackTrace();
+        }
+        
     }
 
     @FXML
