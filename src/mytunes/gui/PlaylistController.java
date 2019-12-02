@@ -38,6 +38,10 @@ public class PlaylistController implements Initializable
         // TODO
     }    
 
+    /**
+     * closes the window without aplaying changes
+     * @param event 
+     */
     @FXML
     private void Cancel(ActionEvent event)
     {
@@ -47,6 +51,11 @@ public class PlaylistController implements Initializable
     stage.close();
     }
 
+    /**
+     * adds a new playlist or applyes the changes
+     * to an already existing playlist
+     * @param event 
+     */
     @FXML
     private void Save(ActionEvent event)
     {

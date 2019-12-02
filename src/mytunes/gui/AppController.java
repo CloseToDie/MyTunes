@@ -111,6 +111,11 @@ public class AppController implements Initializable
     private TableColumn<Playlist, Integer> playlistTimeCol;
 
 
+    /**
+     * 
+     * @param url
+     * @param rb 
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
@@ -173,6 +178,10 @@ public class AppController implements Initializable
       
     }
 
+    /**
+     * let's the user search from the different songs in the database
+     * @param event 
+     */
     @FXML
     private void Search(KeyEvent event)
     {
@@ -187,54 +196,97 @@ public class AppController implements Initializable
         
     }
 
+    /**
+     * adds a song to a playlist
+     * @param event 
+     */
     @FXML
     private void ToPlaylist(ActionEvent event)
     {
     }
 
+    /**
+     * Opens the add/edit playlist window
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void NewPlaylist(ActionEvent event) throws IOException
     {
         openMenu("Playlist.fxml", "new/edit Playlist");
     }
 
+    /**
+     * Opens the add/edit playlist window
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void EditPlaylist(ActionEvent event) throws IOException
     {
         openMenu("Playlist.fxml", "new/edit Playlist");
     }
 
+    /**
+     * Deletes a playllist from the database
+     * @param event 
+     */
     @FXML
     private void deletePlaylist(ActionEvent event)
     {
     }
 
+    /**
+     * Moves a song up in a playlist
+     * @param event 
+     */
     @FXML
     private void goUp(ActionEvent event)
     {
     }
 
+    /**
+     * Moves a song down in a playlist
+     * @param event 
+     */
     @FXML
     private void GoDown(ActionEvent event)
     {
     }
 
+    /**
+     * Removes a song from a chosen playlist
+     * @param event 
+     */
     @FXML
     private void RemoveSongFromPlaylist(ActionEvent event)
     {
     }
 
+    /**
+     * Opens the menu to add/edit songs 
+     * @param event
+     * @throws IOException 
+     */
     @FXML
     private void EditSong(ActionEvent event) throws IOException
     {
         openMenu("NewSong.fxml", "add/edit Song");
     }
 
+    /**
+     * Deletes a song from the list/database
+     * @param event 
+     */
     @FXML
     private void DeleteSong(ActionEvent event)
     {
     }
 
+    /**
+     * Closes the app
+     * @param event 
+     */
     @FXML
     private void Exit(ActionEvent event)
     {
@@ -244,12 +296,20 @@ public class AppController implements Initializable
     stage.close();
     }
 
+    /**
+     * ´Plays the previous song from the song list or playlist
+     * @param event 
+     */
     @FXML
     private void previous(ActionEvent event)
     {
          //d = new MusicPlayer("music/Mudkip.mp3");
     }
 
+    /**
+     * it plays the selcted song/playlist 
+     * @param event 
+     */
     @FXML
     private void Play(ActionEvent event)
     {
@@ -320,6 +380,13 @@ public class AppController implements Initializable
         return isPlaying;
     }
 
+    /**
+     * Opens a new window and gives it a name.
+     * The Window is determent by the fxmlFile given.
+     * @param fxmlFile: the FXML file that should be opened
+     * @param title: the name of the window
+     * @throws IOException 
+     */
     public void openMenu(String fxmlFile, String title) throws IOException
     {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));

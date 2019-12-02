@@ -39,6 +39,10 @@ public class AppModel {
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
     }
+    /**
+     * returns all songs in the database
+     * @return 
+     */
      public ObservableList<Song> getAllSongs()
     {
         return allSongs;
@@ -51,8 +55,7 @@ public class AppModel {
      * @param query
      * 
      */
-     public void search(String query){
-     //TO-DO implement the search
+     public void search(String query){     
              if (query.isEmpty())
         {
             allSongs.clear();
