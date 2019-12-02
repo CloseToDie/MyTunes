@@ -32,7 +32,7 @@ public class MusicPlayer
             
              title = (String)m.getMetadata().get("title");
              
-             System.out.println(title);
+             //System.out.println(title);
    });
         
         

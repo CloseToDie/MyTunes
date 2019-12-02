@@ -20,7 +20,8 @@ import mytunes.dal.database.SongDBDAO;
  */
 
 public class SongManager {
-    
+     private SongFacade songDBDAO;
+     
     public static void main(String[] args) throws Exception {
         SongManager songm = new SongManager();
         
@@ -30,7 +31,7 @@ public class SongManager {
         
     }
     
-    private SongFacade songDBDAO;
+   
     
     public SongManager() throws Exception
     {
@@ -51,5 +52,21 @@ public void fetchData() {
     
     
     
+    }
+
+
+ public List<Song> search(String query) 
+    {
+        List<Song> searchBase = songDBDAO.getAllSongs();
+        List<Song> result = new ArrayList<>();
+
+        for (Song movie : searchBase)
+        {
+            if (movie.getTitle().toLowerCase().contains(query.toLowerCase()))
+            {
+                result.add(movie);
+            }
+        }
+        return result;
     }
 }
