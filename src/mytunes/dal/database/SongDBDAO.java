@@ -27,6 +27,8 @@ public class SongDBDAO implements SongFacade  {
         //Song song = new Song(3, "Køb Bananer", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
         //songDBDAO.updateSong(song);
         
+        //songDBDAO.createSong(new Song(0, "stuuf", "album", "artist", "category", 202, "path"));
+        
         ArrayList<Song> songs = new ArrayList<>();
         songs.addAll(songDBDAO.getAllSongs());
         System.out.println(songs.get(0).getTitle());
