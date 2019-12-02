@@ -393,6 +393,7 @@ public class AppController implements Initializable
             Stage stage = new Stage();
             stage.setTitle(title);
             stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
             stage.show();
     } 
 }
