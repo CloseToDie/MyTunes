@@ -28,7 +28,7 @@ public class AppModel {
         
     }
     
-    private ObservableList<Song> allSongs;
+    private final ObservableList<Song> allSongs;
     private ObservableList<Playlist> allPlaylist;
     private SongManager songManager; 
     private AppController controler;
@@ -45,7 +45,17 @@ public class AppModel {
      */
      public ObservableList<Song> getAllSongs()
     {
+        allSongs.clear();
+         allSongs.addAll(songManager.getAllSongs());
         return allSongs;
+    }
+     
+     public void fetchData() {
+         
+    allSongs.clear();
+    allSongs.addAll(songManager.getAllSongs());
+    
+    
     }
      
      
@@ -71,6 +81,13 @@ public class AppModel {
      
      public Label getIsPlaying() {
         return controler.getIsPlaying();
+    }
+
+    void createSong(Song songToAdd)
+    {
+        songManager.createSong(songToAdd);
+        allSongs.clear();
+        allSongs.addAll(songManager.getAllSongs());
     }
     
     
