@@ -150,11 +150,12 @@ public class AppController implements Initializable
             
             try
         {
-            
-           songModel = new SongModel();
+            //TO-DO get rid of the songmodel
+           //songModel = new SongModel();
            appmodel = new AppModel();
            
            Songs.setItems(appmodel.getAllSongs());
+           playlist.setItems(appmodel.getAllPlaylist());
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
@@ -301,6 +302,7 @@ public class AppController implements Initializable
     @FXML
     private void changeVolume(MouseEvent event)
     {
+        
         
     }
 

@@ -44,6 +44,9 @@ public class AppModel {
         return allSongs;
     }
      
+     ObservableList<Playlist> getAllPlaylist() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
      
       /**
      * calls the search function of the songmanager.
@@ -69,6 +72,8 @@ public class AppModel {
      public Label getIsPlaying() {
         return controler.getIsPlaying();
     }
+
+    
     
     
     
