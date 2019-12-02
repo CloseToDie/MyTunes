@@ -40,6 +40,10 @@ public class SongDBDAO implements SongFacade  {
         dbCon = new DatabaseConnector();
     }
     
+    /**
+     * List over all songs in database
+     * @return 
+     */
     @Override
     public List<Song> getAllSongs() {
         ArrayList<Song> songs = new ArrayList<>();
@@ -70,6 +74,11 @@ public class SongDBDAO implements SongFacade  {
         return null;
     }
     
+    /**
+     * creats new song in the database
+     * @param song
+     * @return 
+     */
     public Song createSong(Song song) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO song "
@@ -102,7 +111,11 @@ public class SongDBDAO implements SongFacade  {
         
         return null;
     }
-    
+    /**
+     * updates the database
+     * @param song
+     * @return 
+     */
     public boolean updateSong(Song song) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE song SET title = ?, album = ?, artist = ?, category = ?, time = ?, path = ? WHERE id = ?");
@@ -124,7 +137,11 @@ public class SongDBDAO implements SongFacade  {
         
         return false;
     }
-    
+    /**
+     * deletes a song from the database
+     * @param song
+     * @return 
+     */
     public boolean deleteSong(Song song) {
         
         try(Connection con = dbCon.getConnection()) {
