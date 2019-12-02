@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import mytunes.be.Song;
 import mytunes.dal.database.SongDBDAO;
-import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFile; 
 import org.jaudiotagger.audio.AudioFileIO;
 
 /**
@@ -91,11 +91,19 @@ public class NewSongController implements Initializable
        
     }    
 
+    /**
+     * let's the user add another categorie to a song
+     * @param event 
+     */
     @FXML
     private void MoreCategories(ActionEvent event)
     {
     }
 
+    /**
+     * closes the window without applying any changes
+     * @param event 
+     */
     @FXML
     private void Cancel(ActionEvent event)
     {
@@ -105,6 +113,10 @@ public class NewSongController implements Initializable
     stage.close();
     }
 
+    /**
+     * sends the changes to the database and closes the window
+     * @param event 
+     */
     @FXML
     private void Save(ActionEvent event)
     {
@@ -167,8 +179,11 @@ public class NewSongController implements Initializable
           
     }
 
-    @FXML
-    
+    /**
+     * opens a window to find the audio file for the song
+     * @param event 
+     */
+    @FXML    
     private void songChoiceButton(ActionEvent event)
     {
         FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null);
