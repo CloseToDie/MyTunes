@@ -28,7 +28,7 @@ public class AppModel {
         
     }
     
-    private ObservableList<Song> allSongs;
+    private final ObservableList<Song> allSongs;
     private ObservableList<Playlist> allPlaylist;
     private SongManager songManager; 
     private AppController controler;
@@ -39,14 +39,28 @@ public class AppModel {
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
     }
+    /**
+     * returns all songs in the database
+     * @return 
+     */
      public ObservableList<Song> getAllSongs()
     {
+        allSongs.clear();
+         allSongs.addAll(songManager.getAllSongs());
         return allSongs;
     }
      
      ObservableList<Playlist> getAllPlaylist() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+     public void fetchData() {
+         
+    allSongs.clear();
+    allSongs.addAll(songManager.getAllSongs());
+    
+    
+    }
+     
      
       /**
      * calls the search function of the songmanager.
@@ -54,8 +68,7 @@ public class AppModel {
      * @param query
      * 
      */
-     public void search(String query){
-     //TO-DO implement the search
+     public void search(String query){     
              if (query.isEmpty())
         {
             allSongs.clear();
@@ -73,7 +86,12 @@ public class AppModel {
         return controler.getIsPlaying();
     }
 
-    
+    void createSong(Song songToAdd)
+    {
+        songManager.createSong(songToAdd);
+        allSongs.clear();
+        allSongs.addAll(songManager.getAllSongs());
+    }
     
     
     

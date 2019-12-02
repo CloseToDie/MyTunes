@@ -69,4 +69,9 @@ public void fetchData() {
         }
         return result;
     }
+
+    public void createSong(Song songToAdd)
+    {
+        songDBDAO.createSong(songToAdd);
+    }
 }
