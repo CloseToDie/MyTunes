@@ -171,11 +171,11 @@ public class AppController implements Initializable
            appmodel = new AppModel();
            File file = new File(appmodel.getAllSongs().get(0).getPath());
            int i = 0;
-           while( !file.exists())
+           while( !appmodel.getAllSongs().isEmpty() && !file.exists() && i <= appmodel.getAllSongs().size() -1)
            {
-                i = i+1;
+                
                 file = new File(appmodel.getAllSongs().get(i).getPath()); 
-          
+                i = i+1;
            }
            if (file.exists())
            {
