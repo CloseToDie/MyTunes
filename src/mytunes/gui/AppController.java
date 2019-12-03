@@ -41,6 +41,7 @@ import javafx.stage.Stage;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
+import mytunes.bll.SongManager;
 
 
 /**
@@ -282,8 +283,10 @@ public class AppController implements Initializable
     @FXML
     private void DeleteSong(ActionEvent event)
     {
-        Songs.refresh();
-        System.out.println("mytunes.gui.AppController.DeleteSong()");
+        
+        Song selectedItem = Songs.getSelectionModel().getSelectedItem();        
+        Songs.getItems().remove(selectedItem);
+        appmodel.delteSong(selectedItem);
     }
 
     /**

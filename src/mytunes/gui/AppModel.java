@@ -93,7 +93,12 @@ public class AppModel {
         allSongs.addAll(songManager.getAllSongs());
     }
     
-    
+    public void delteSong(Song songToDelete)
+    {
+        songManager.deleteSong(songToDelete);
+        allSongs.clear();
+        allSongs.addAll(songManager.getAllSongs());
+    }
     
     
 }

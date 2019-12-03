@@ -47,14 +47,6 @@ public class SongManager {
     
 
 
-public void fetchData() {
-    
-    
-    
-    
-    }
-
-
  public List<Song> search(String query) 
     {
         List<Song> searchBase = songDBDAO.getAllSongs();
@@ -70,6 +62,10 @@ public void fetchData() {
                     {
                         result.add(song);
                     }
+            else if(song.getCategory().toLowerCase().contains(query.toLowerCase()))
+            {
+                result.add(song);
+            }
         }
         return result;
     }
@@ -77,5 +73,11 @@ public void fetchData() {
     public void createSong(Song songToAdd)
     {
         songDBDAO.createSong(songToAdd);
+    }
+    
+    
+    public void deleteSong(Song songToDelete)
+    {
+        songDBDAO.deleteSong(songToDelete);
     }
 }
