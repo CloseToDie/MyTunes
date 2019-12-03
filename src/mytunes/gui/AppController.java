@@ -161,7 +161,7 @@ public class AppController implements Initializable
            appmodel = new AppModel();
            
            Songs.setItems(appmodel.getAllSongs());
-           playlist.setItems(appmodel.getAllPlaylist());
+           //playlist.setItems(appmodel.getAllPlaylist());
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
@@ -273,7 +273,17 @@ public class AppController implements Initializable
     @FXML
     private void EditSong(ActionEvent event) throws IOException
     {
-        openMenu("NewSong.fxml", "add/edit Song");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditSong.fxml").openStream());
+            EditSongController cont = (EditSongController) fxmlLoader.getController();
+            cont.setappmodel(appmodel);
+            cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("New/edit Song");
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     /**

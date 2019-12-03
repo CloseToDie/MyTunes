@@ -100,5 +100,11 @@ public class AppModel {
         allSongs.addAll(songManager.getAllSongs());
     }
     
+    public void updateSong(Song SongToUpdate)
+    {
+        songManager.updateSong(SongToUpdate);
+        allSongs.clear();
+        allSongs.addAll(songManager.getAllSongs());
+    }
     
 }

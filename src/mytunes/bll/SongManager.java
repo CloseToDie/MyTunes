@@ -80,4 +80,9 @@ public class SongManager {
     {
         songDBDAO.deleteSong(songToDelete);
     }
+    
+    public void updateSong(Song SongToUpdate)
+    {
+        songDBDAO.updateSong(SongToUpdate);
+    }
 }

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="286.0" prefWidth="310.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mytunes.gui.EditSongController">
+   <children>
+      <Label layoutX="54.0" layoutY="30.0" text="Title:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="69.0" prefHeight="27.0" prefWidth="46.0" text="Artist:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="CategoryLabel" layoutX="54.0" layoutY="111.0" text="Category:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="TimeLabel" layoutX="54.0" layoutY="146.0" text="Time:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="fileLabel" layoutX="57.0" layoutY="180.0" text="File:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="Title" layoutX="151.0" layoutY="31.0" />
+      <TextField fx:id="Artist" layoutX="151.0" layoutY="70.0" />
+      <TextField fx:id="Time_textField" layoutX="151.0" layoutY="147.0" />
+      <ChoiceBox fx:id="CategoryChoiceBox" layoutX="150.0" layoutY="112.0" prefHeight="26.0" prefWidth="76.0" />
+      <Button fx:id="MoreCategories" layoutX="239.0" layoutY="112.0" mnemonicParsing="false" onAction="#MoreCategories" text="More.." />
+      <Button fx:id="Cancel" layoutX="162.0" layoutY="246.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
+      <Button fx:id="Save" layoutX="238.0" layoutY="246.0" mnemonicParsing="false" onAction="#Save" text="Save" />
+      <Button fx:id="songChoiceButton" layoutX="151.0" layoutY="207.0" mnemonicParsing="false" onAction="#songChoiceButton" prefHeight="26.0" prefWidth="87.0" text="Choose Song" />
+      <TextField fx:id="FileTextField" layoutX="150.0" layoutY="181.0" />
+   </children>
+</AnchorPane>
