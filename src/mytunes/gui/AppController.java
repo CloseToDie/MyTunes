@@ -161,12 +161,13 @@ public class AppController implements Initializable
             playlistNameCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,String>("name")
             );
+            /*
             playlistSongsCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,Integer>("artist")
             );
             playlistTimeCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,Integer>("time")
-            );
+            );*/
             
             
             
