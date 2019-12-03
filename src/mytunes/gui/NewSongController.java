@@ -181,8 +181,10 @@ public class NewSongController implements Initializable
         
         Song songToAdd = new Song(1, title,"",artist, genre, duration, songPath);
         appmodel.createSong(songToAdd);
+         System.out.print(directory+"dræb mig");
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
+        
             
         
               
@@ -205,7 +207,8 @@ public class NewSongController implements Initializable
     if (filename == null){
     JOptionPane.showMessageDialog(null, "Add song canceled");}
     else{
-        FileTextField.setText(filename);
+        FileTextField.setText(directory + filename);
+        System.out.print(directory+"dræb mig");
     }
     
     

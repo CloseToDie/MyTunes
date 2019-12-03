@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
+import mytunes.bll.MusicPlayer;
 import mytunes.bll.SongManager;
 
 /**
@@ -18,6 +19,7 @@ import mytunes.bll.SongManager;
  * @author andreasvillumsen
  */
 public class AppModel {
+    private MusicPlayer musicPlayer;
     
      public static void main(String[] args) throws Exception {
         AppModel app = new AppModel();
@@ -92,6 +94,19 @@ public class AppModel {
         allSongs.clear();
         allSongs.addAll(songManager.getAllSongs());
     }
+    
+    void createMusicPlayer(String path)
+    {
+        musicPlayer = new MusicPlayer(path);
+    }
+
+    public MusicPlayer getmusicPlayer()
+    {
+        return musicPlayer;
+    }
+
+    
+    
     
     
     
