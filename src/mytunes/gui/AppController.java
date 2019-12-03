@@ -111,6 +111,7 @@ public class AppController implements Initializable
     private TableColumn<Playlist, Integer> playlistSongsCol;
     @FXML
     private TableColumn<Playlist, Integer> playlistTimeCol;
+    private int SelectedIndex;
 
 
     /**
@@ -212,7 +213,13 @@ public class AppController implements Initializable
             Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             */
             
-          
+          appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+       public void run() {
+           
+            System.out.println("end of media");
+         
+       }
+   });
         
       
     }
@@ -425,6 +432,15 @@ public class AppController implements Initializable
             isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
             appmodel.getmusicPlayer().playSound();
             
+              appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+       public void run() {
+           
+            System.out.println("end of media");
+            skip();
+            
+         
+       }
+   });
         } 
        
     
@@ -444,14 +460,73 @@ public class AppController implements Initializable
        
         
 
-    }   
+    }
     
+     private void Play(){
+     
+      appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
+          currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
+            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+            appmodel.getmusicPlayer().playSound();
+            
+        appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+       public void run() {
+           
+            System.out.println("end of media");
+            skip();
+         
+       }
+   });
+     
+     
+     
+     }
+    
+
     @FXML
     private void Skip(ActionEvent event)
     {
-   
+        skip();
+    }
+    public void skip(){
+     System.out.println();
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
+      
+      System.out.println(Songs.getItems().size() +"    storlse");
+      
+      System.out.println(SelectedIndex +"       SelectedIndex");
+      System.out.println(SelectedIndex +1 +"       SelectedIndex ++");
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      
+      if( SelectedIndex +1 == Songs.getItems().size())
+      {
+      
+            Songs.getSelectionModel().selectFirst();
+            System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            Play();
+            
+      
+      }
+      else{
+           Songs.getSelectionModel().select(SelectedIndex +1);
+           Play();
+           
+      }
+     
+      
+      
         
-       
+        System.out.println(Songs.getSelectionModel().getSelectedIndex());
+        
+    
+    
+    
     }
 
     @FXML
