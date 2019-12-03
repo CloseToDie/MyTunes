@@ -50,6 +50,7 @@ import mytunes.bll.SongManager;
  */
 public class AppController implements Initializable
 {
+    private String currentlyPlayingSong = "";
     private boolean tock = false;
     private boolean tick = false;
     private SongModel songModel;
@@ -347,6 +348,17 @@ public class AppController implements Initializable
     {
 
       if(appmodel.getmusicPlayer() != null)  {
+          if(Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong)
+          {
+              appmodel.getmusicPlayer().PauseSound();
+              System.out.println("changing song");
+              tock = false;
+          }
+          else
+          {
+             System.out.println("still playing current song");
+          }
+          
         if(appmodel.getmusicPlayer().isDone()){
         
             System.out.println("done");
@@ -363,20 +375,22 @@ public class AppController implements Initializable
         {
             
              /*d = new MusicPlayer("music/test.mp3");*/
+            
             appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
-          
+          currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem().getTitle();
             tock = true;
+            appmodel.getmusicPlayer().playSound();
             
         } 
        
     
-        if (tick == false)
+        if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong)
         {
             tick = true;
             appmodel.getmusicPlayer().playSound();
             
         }
-        else if(tick == true)
+        else if(tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong)
         {
             tick = false;
             appmodel.getmusicPlayer().PauseSound();

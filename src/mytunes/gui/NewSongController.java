@@ -208,7 +208,7 @@ public class NewSongController implements Initializable
     if (filename == null){
     JOptionPane.showMessageDialog(null, "Add song canceled");}
     else{
-        FileTextField.setText(directory + filename);
+        FileTextField.setText("music/" + filename);
         System.out.print(directory+"dræb mig");
     }
     
