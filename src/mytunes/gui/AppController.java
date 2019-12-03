@@ -41,6 +41,7 @@ import javafx.stage.Stage;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
+import mytunes.bll.SongManager;
 
 
 /**
@@ -288,7 +289,17 @@ public class AppController implements Initializable
     @FXML
     private void EditSong(ActionEvent event) throws IOException
     {
-        openMenu("NewSong.fxml", "add/edit Song");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditSong.fxml").openStream());
+            EditSongController cont = (EditSongController) fxmlLoader.getController();
+            cont.setappmodel(appmodel);
+            cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("New/edit Song");
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     /**
@@ -298,8 +309,10 @@ public class AppController implements Initializable
     @FXML
     private void DeleteSong(ActionEvent event)
     {
-        Songs.refresh();
-        System.out.println("mytunes.gui.AppController.DeleteSong()");
+        
+        Song selectedItem = Songs.getSelectionModel().getSelectedItem();        
+        Songs.getItems().remove(selectedItem);
+        appmodel.delteSong(selectedItem);
     }
 
     /**

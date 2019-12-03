@@ -35,7 +35,7 @@ import org.jaudiotagger.audio.AudioFileIO;
  *
  * @author lumby
  */
-public class NewSongController implements Initializable
+public class EditSongController implements Initializable
 {
     private int duration = 0;
     private String filename = "";
@@ -69,6 +69,7 @@ public class NewSongController implements Initializable
     private Button songChoiceButton;
     @FXML
     private TextField FileTextField;
+    private Song song;
     /**
      * Initializes the controller class.
      */
@@ -99,6 +100,7 @@ public class NewSongController implements Initializable
     public void setappmodel(AppModel app){
     
     appmodel = app;
+    
     
     }
 
@@ -180,12 +182,10 @@ public class NewSongController implements Initializable
         
         
         
-        Song songToAdd = new Song(1, title,"",artist, genre, duration, songPath);
-        appmodel.createSong(songToAdd);
-         System.out.print(directory+"dræb mig");
+        Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath);
+        appmodel.updateSong(songToUpdate);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
-        
             
         
               
@@ -208,8 +208,7 @@ public class NewSongController implements Initializable
     if (filename == null){
     JOptionPane.showMessageDialog(null, "Add song canceled");}
     else{
-        FileTextField.setText(directory + filename);
-        System.out.print(directory+"dræb mig");
+        FileTextField.setText(filename);
     }
     
     
@@ -229,4 +228,14 @@ public class NewSongController implements Initializable
         
     }
     
+    public void setSong(Song song)
+    {
+        this.song = song;
+        
+        Title.setText(song.getTitle());
+        Artist.setText(song.getArtist());
+        CategoryChoiceBox.setValue(song.getCategory());
+        Time_textField.setText(song.getTime() + "");
+        FileTextField.setText(song.getPath());
+    }
 }
