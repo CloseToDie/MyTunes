@@ -252,7 +252,17 @@ public class AppController implements Initializable
     @FXML
     private void NewPlaylist(ActionEvent event) throws IOException
     {
-        openMenu("Playlist.fxml", "new/edit Playlist");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("sPlaylist.fxml").openStream());
+            //PlaylistController cont = (PlaylistController) fxmlLoader.getController();
+            //cont.setappmodel(appmodel);
+            //cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("New/Edit Playlist");
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     /**
@@ -263,7 +273,17 @@ public class AppController implements Initializable
     @FXML
     private void EditPlaylist(ActionEvent event) throws IOException
     {
-        openMenu("Playlist.fxml", "new/edit Playlist");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("Playlist.fxml").openStream());
+            //PlaylistController cont = (PlaylistController) fxmlLoader.getController();
+            //cont.setappmodel(appmodel);
+            //cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("New/Edit Playlist");
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     /**
@@ -402,7 +422,7 @@ public class AppController implements Initializable
             appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
           currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
             tock = true;
-            isPlaying.setText(currentlyPlayingSong + " is playing");
+            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
             appmodel.getmusicPlayer().playSound();
             
         } 
@@ -412,7 +432,7 @@ public class AppController implements Initializable
         {
             tick = true;
             appmodel.getmusicPlayer().playSound();
-            isPlaying.setText(currentlyPlayingSong + " is playing");
+            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
             
         }
         else if(tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
@@ -424,12 +444,12 @@ public class AppController implements Initializable
        
         
 
-    }
-
+    }   
+    
     @FXML
     private void Skip(ActionEvent event)
     {
-       
+   
         
        
     }
@@ -449,7 +469,7 @@ public class AppController implements Initializable
     @FXML
     private void newSong(ActionEvent event) throws IOException
     {
-            FXMLLoader fxmlLoader = new FXMLLoader();
+           FXMLLoader fxmlLoader = new FXMLLoader();
             
             Parent root = (Parent) fxmlLoader.load(getClass().getResource("NewSong.fxml").openStream());
             NewSongController cont = (NewSongController) fxmlLoader.getController();
@@ -458,29 +478,13 @@ public class AppController implements Initializable
             stage.setTitle("New/edit Song");
             stage.setScene(new Scene(root));
             stage.setAlwaysOnTop(true);
-            stage.show();
+            stage.show();         
     }
 
     public Label getIsPlaying() {
    
         return isPlaying;
-    }
-
-    /**
-     * Opens a new window and gives it a name.
-     * The Window is determent by the fxmlFile given.
-     * @param fxmlFile: the FXML file that should be opened
-     * @param title: the name of the window
-     * @throws IOException 
-     */
-    public void openMenu(String fxmlFile, String title) throws IOException
-    {
-        
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlFile));
-            Stage stage = new Stage();
-            stage.setTitle(title);
-            stage.setScene(new Scene(root));
-            stage.setAlwaysOnTop(true);
-            stage.show();
-    } 
+    }    
+ 
+    
 }
