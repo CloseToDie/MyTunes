@@ -5,17 +5,20 @@
  */
 package mytunes.be;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
  * @author andreasvillumsen
  */
 public class Playlist {
     private int id;
-    private String name;
+    private final SimpleStringProperty name;
+    
 
     public Playlist(int id, String name) {
         this.id = id;
-        this.name = name;
+        this.name = new SimpleStringProperty(name);
     }
 
     /**
@@ -39,7 +42,7 @@ public class Playlist {
      * @return name
      */
     public String getName() {
-        return name;
+        return name.get();
     }
 
     /**
@@ -47,12 +50,12 @@ public class Playlist {
      * @param name 
      */
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     @Override
     public String toString() {
-        return "Playlist{" + "id=" + id + ", name=" + name + '}';
+        return "Playlist{" + "id=" + id + ", name=" + name.get() + '}';
     }
     
     

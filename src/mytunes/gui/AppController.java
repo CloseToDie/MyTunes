@@ -152,6 +152,24 @@ public class AppController implements Initializable
                 new PropertyValueFactory<Song,Integer>("time")
             );
             
+           /* private TableColumn<Playlist, String> playlistNameCol;
+    @FXML
+    private TableColumn<Playlist, Integer> playlistSongsCol;
+    @FXML
+    private TableColumn<Playlist, Integer> playlistTimeCol;*/
+            
+            playlistNameCol.setCellValueFactory(
+                new PropertyValueFactory<Playlist,String>("name")
+            );
+            playlistSongsCol.setCellValueFactory(
+                new PropertyValueFactory<Playlist,Integer>("artist")
+            );
+            playlistTimeCol.setCellValueFactory(
+                new PropertyValueFactory<Playlist,Integer>("time")
+            );
+            
+            
+            
             
             try
         {
@@ -323,7 +341,7 @@ public class AppController implements Initializable
             System.out.println("done");
             tock = false;
         
-        }
+        }    
         else{
         System.out.println("not done");
         } 
