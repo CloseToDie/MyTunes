@@ -139,7 +139,7 @@ public class EditSongController implements Initializable
         String artist = Artist.getText();
         String genre = CategoryChoiceBox.getSelectionModel().getSelectedItem();
         String songPath = FileTextField.getText();
-        
+        //duration = song.getTime();
         if(title == "")
         {
             JOptionPane.showMessageDialog(null, "Song title can not be blank!");
@@ -180,6 +180,12 @@ public class EditSongController implements Initializable
            songPath = FileTextField.getText(); 
         }
         
+        if(duration == 0)
+        {
+            duration = song.getTime();
+        }
+        
+        
         
         
         Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath);
@@ -208,7 +214,7 @@ public class EditSongController implements Initializable
     if (filename == null){
     JOptionPane.showMessageDialog(null, "Add song canceled");}
     else{
-        FileTextField.setText(filename);
+        FileTextField.setText("music/" + filename);
     }
     
     
