@@ -398,6 +398,7 @@ public class AppController implements Initializable
             appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
           currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem().getTitle();
             tock = true;
+            isPlaying.setText(currentlyPlayingSong + " is playing");
             appmodel.getmusicPlayer().playSound();
             
         } 
@@ -407,11 +408,13 @@ public class AppController implements Initializable
         {
             tick = true;
             appmodel.getmusicPlayer().playSound();
+            isPlaying.setText(currentlyPlayingSong + " is playing");
             
         }
         else if(tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong)
         {
             tick = false;
+            isPlaying.setText("(None)... is playing");
             appmodel.getmusicPlayer().PauseSound();
         }
        
@@ -452,6 +455,7 @@ public class AppController implements Initializable
     }
 
     public Label getIsPlaying() {
+   
         return isPlaying;
     }
 
