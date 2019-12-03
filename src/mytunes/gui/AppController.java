@@ -41,6 +41,7 @@ import javafx.stage.Stage;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
+import mytunes.bll.SongManager;
 
 
 /**
@@ -127,16 +128,7 @@ public class AppController implements Initializable
         {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }*/
-         d = new MusicPlayer("music/test.mp3");
-        
-        volume.setValue(d.getMP().getVolume()* 100);
-        volume.valueProperty().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                
-                d.getMP().setVolume(volume.getValue() /100);
-            }
-        });
+         
         
                     songTitelCol.setCellValueFactory(
                 new PropertyValueFactory<Song,String>("title")
@@ -177,9 +169,34 @@ public class AppController implements Initializable
             //TO-DO get rid of the songmodel
            //songModel = new SongModel();
            appmodel = new AppModel();
+           File file = new File(appmodel.getAllSongs().get(0).getPath());
+           int i = 0;
+           while( !file.exists())
+           {
+                i = i+1;
+                file = new File(appmodel.getAllSongs().get(i).getPath()); 
+          
+           }
+           if (file.exists())
+           {
+                appmodel.createMusicPlayer(file.getPath()); 
+        
+        volume.setValue( appmodel.getmusicPlayer().getMP().getVolume()* 100);
+        volume.valueProperty().addListener(new InvalidationListener() {
+            @Override
+            public void invalidated(Observable observable) {
+                
+                appmodel.getmusicPlayer().getMP().setVolume(volume.getValue() /100);
+            }
+        });
+           }
+           
+        
+     
+           
            
            Songs.setItems(appmodel.getAllSongs());
-           playlist.setItems(appmodel.getAllPlaylist());
+          /* playlist.setItems(appmodel.getAllPlaylist());*/
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
@@ -291,7 +308,17 @@ public class AppController implements Initializable
     @FXML
     private void EditSong(ActionEvent event) throws IOException
     {
-        openMenu("NewSong.fxml", "add/edit Song");
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditSong.fxml").openStream());
+            EditSongController cont = (EditSongController) fxmlLoader.getController();
+            cont.setappmodel(appmodel);
+            cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("New/edit Song");
+            stage.setScene(new Scene(root));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     /**
@@ -301,8 +328,10 @@ public class AppController implements Initializable
     @FXML
     private void DeleteSong(ActionEvent event)
     {
-        Songs.refresh();
-        System.out.println("mytunes.gui.AppController.DeleteSong()");
+        
+        Song selectedItem = Songs.getSelectionModel().getSelectedItem();        
+        Songs.getItems().remove(selectedItem);
+        appmodel.deleteSong(selectedItem);
     }
 
     /**
@@ -336,8 +365,8 @@ public class AppController implements Initializable
     private void Play(ActionEvent event)
     {
 
-      if(d != null)  {
-        if(d.isDone()){
+      if(appmodel.getmusicPlayer() != null)  {
+        if(appmodel.getmusicPlayer().isDone()){
         
             System.out.println("done");
             tock = false;
@@ -352,7 +381,8 @@ public class AppController implements Initializable
         if (tock == false)
         {
             
-             d = new MusicPlayer("music/test.mp3");
+             /*d = new MusicPlayer("music/test.mp3");*/
+            appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
           
             tock = true;
             
@@ -362,13 +392,13 @@ public class AppController implements Initializable
         if (tick == false)
         {
             tick = true;
-            d.playSound();
+            appmodel.getmusicPlayer().playSound();
             
         }
         else if(tick == true)
         {
             tick = false;
-            d.PauseSound();
+            appmodel.getmusicPlayer().PauseSound();
         }
        
         
