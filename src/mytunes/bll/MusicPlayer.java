@@ -83,7 +83,7 @@ public class MusicPlayer
     
     }
     
-    public static MediaPlayer getMP(){
+    public  MediaPlayer getMP(){
     
     return player; 
     
