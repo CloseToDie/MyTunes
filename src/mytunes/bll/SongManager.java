@@ -60,12 +60,16 @@ public void fetchData() {
         List<Song> searchBase = songDBDAO.getAllSongs();
         List<Song> result = new ArrayList<>();
 
-        for (Song movie : searchBase)
+        for (Song song : searchBase)
         {
-            if (movie.getTitle().toLowerCase().contains(query.toLowerCase()))
+            if (song.getTitle().toLowerCase().contains(query.toLowerCase()))
             {
-                result.add(movie);
+                result.add(song);
             }
+            else if(song.getArtist().toLowerCase().contains(query.toLowerCase()))
+                    {
+                        result.add(song);
+                    }
         }
         return result;
     }

@@ -382,7 +382,7 @@ public class AppController implements Initializable
             NewSongController cont = (NewSongController) fxmlLoader.getController();
             cont.setappmodel(appmodel);
             Stage stage = new Stage();
-            stage.setTitle("New Song");
+            stage.setTitle("New/edit Song");
             stage.setScene(new Scene(root));
             stage.setAlwaysOnTop(true);
             stage.show();
