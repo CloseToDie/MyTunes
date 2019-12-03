@@ -24,8 +24,9 @@ import mytunes.dal.SongFacade;
 public class SongDBDAO implements SongFacade  {
     public static void main(String[] args) throws Exception {
         SongDBDAO songDBDAO = new SongDBDAO();
-        //Song song = new Song(3, "Køb Bananer", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
-        //songDBDAO.updateSong(song);
+       /* 
+        Song song = new Song(3, "Køb apelsiner", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
+        songDBDAO.updateSong(song);*/
         
         //songDBDAO.createSong(new Song(0, "stuuf", "album", "artist", "category", 202, "path"));
         

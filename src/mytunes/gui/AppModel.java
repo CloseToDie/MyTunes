@@ -13,6 +13,7 @@ import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
 import mytunes.bll.SongManager;
+import mytunes.bll.playListManager;
 
 /**
  *
@@ -33,6 +34,7 @@ public class AppModel {
     private final ObservableList<Song> allSongs;
     private ObservableList<Playlist> allPlaylist;
     private SongManager songManager; 
+    private playListManager pm;
     private AppController controler;
 
     public AppModel() throws Exception {
@@ -40,6 +42,11 @@ public class AppModel {
         songManager = new SongManager();
         allSongs = FXCollections.observableArrayList();
         allSongs.addAll(songManager.getAllSongs());
+        
+        
+        pm = new playListManager();
+        allPlaylist = FXCollections.observableArrayList();
+        allPlaylist.addAll(pm.getAllPlaylists());
     }
     /**
      * returns all songs in the database
@@ -53,8 +60,12 @@ public class AppModel {
     }
      
      ObservableList<Playlist> getAllPlaylist() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        allPlaylist.clear();
+        allPlaylist.addAll(pm.getAllPlaylists());
+        return allPlaylist;
     }
+     
+     
      public void fetchData() {
          
     allSongs.clear();
