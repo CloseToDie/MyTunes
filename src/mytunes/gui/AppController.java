@@ -50,7 +50,7 @@ import mytunes.bll.SongManager;
  */
 public class AppController implements Initializable
 {
-    private String currentlyPlayingSong = "";
+    private Song currentlyPlayingSong = null;
     private boolean tock = false;
     private boolean tick = false;
     private SongModel songModel;
@@ -181,6 +181,7 @@ public class AppController implements Initializable
            if (file.exists())
            {
                 appmodel.createMusicPlayer(file.getPath()); 
+                currentlyPlayingSong = appmodel.getAllSongs().get(i);
         
         volume.setValue( appmodel.getmusicPlayer().getMP().getVolume()* 100);
         volume.valueProperty().addListener(new InvalidationListener() {
@@ -367,7 +368,9 @@ public class AppController implements Initializable
     {
 
       if(appmodel.getmusicPlayer() != null)  {
-          if(Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong)
+        
+       if(!Songs.getSelectionModel().getSelectedItem().equals(null))  { 
+          if(Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
           {
               appmodel.getmusicPlayer().PauseSound();
               System.out.println("changing song");
@@ -377,6 +380,7 @@ public class AppController implements Initializable
           {
              System.out.println("still playing current song");
           }
+       }
           
         if(appmodel.getmusicPlayer().isDone()){
         
@@ -396,20 +400,20 @@ public class AppController implements Initializable
              /*d = new MusicPlayer("music/test.mp3");*/
             
             appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
-          currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem().getTitle();
+          currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
             tock = true;
             appmodel.getmusicPlayer().playSound();
             
         } 
        
     
-        if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong)
+        if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
         {
             tick = true;
             appmodel.getmusicPlayer().playSound();
             
         }
-        else if(tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong)
+        else if(tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
         {
             tick = false;
             appmodel.getmusicPlayer().PauseSound();
@@ -422,6 +426,8 @@ public class AppController implements Initializable
     @FXML
     private void Skip(ActionEvent event)
     {
+        
+       
     }
 
     @FXML
