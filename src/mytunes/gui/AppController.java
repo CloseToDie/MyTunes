@@ -312,7 +312,7 @@ public class AppController implements Initializable
         
         Song selectedItem = Songs.getSelectionModel().getSelectedItem();        
         Songs.getItems().remove(selectedItem);
-        appmodel.delteSong(selectedItem);
+        appmodel.deleteSong(selectedItem);
     }
 
     /**
