@@ -55,7 +55,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
             {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                playlists.add(new Playlist(id, name));
+                playlists.add(new Playlist(id, name,1,1));
             }
             return playlists;
             
