@@ -155,13 +155,13 @@ public class AppController implements Initializable
             playlistNameCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,String>("name")
             );
-            /*
+            
             playlistSongsCol.setCellValueFactory(
-                new PropertyValueFactory<Playlist,Integer>("artist")
+                new PropertyValueFactory<Playlist,Integer>("songs")
             );
             playlistTimeCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,Integer>("time")
-            );*/
+            );
             
             
             
@@ -209,7 +209,7 @@ public class AppController implements Initializable
            
            
            Songs.setItems(appmodel.getAllSongs());
-          /* playlist.setItems(appmodel.getAllPlaylist());*/
+           playlist.setItems(appmodel.getAllPlaylist());
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
