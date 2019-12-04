@@ -307,8 +307,19 @@ public class AppController implements Initializable
      * @param event 
      */
     @FXML
-    private void deletePlaylist(ActionEvent event)
+    private void deletePlaylist(ActionEvent event) throws IOException
     {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root2 = (Parent) fxmlLoader.load(getClass().getResource("DeletePlaylist.fxml").openStream());
+            DeletePlaylistController cont2 = (DeletePlaylistController) fxmlLoader.getController();
+            cont2.setAppModel(appmodel);
+            cont2.setPlaylist(playlist.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("Delete Playlist");
+            stage.setScene(new Scene(root2));
+            stage.setAlwaysOnTop(true);
+            stage.show();
     }
 
     /**
