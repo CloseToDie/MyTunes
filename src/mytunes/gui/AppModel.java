@@ -99,12 +99,7 @@ public class AppModel {
         return controler.getIsPlaying();
     }
 
-    void createSong(Song songToAdd)
-    {
-        songManager.createSong(songToAdd);
-        allSongs.clear();
-        allSongs.addAll(songManager.getAllSongs());
-    }
+    
     
 
     void createMusicPlayer(String path)
@@ -117,20 +112,58 @@ public class AppModel {
         return musicPlayer;
     }
 
-    
+    void createSong(Song songToAdd)
+    {
+        songManager.createSong(songToAdd);
+        songClearAdd();
+    }
     
     
     public void deleteSong(Song songToDelete)
     {
         songManager.deleteSong(songToDelete);
-        allSongs.clear();
-        allSongs.addAll(songManager.getAllSongs());
+        songClearAdd();
     }
 
     
     public void updateSong(Song SongToUpdate)
     {
         songManager.updateSong(SongToUpdate);
+        songClearAdd();
+    }
+    
+    
+    
+    void createPlaylist(Playlist playlistToAdd)
+    {
+        pm.createPlaylist(playlistToAdd);
+        playlistClearAdd();
+    }
+    
+    
+    public void deletePlaylist(Playlist playlistToDelete)
+    {
+        pm.deletePlaylist(playlistToDelete);
+        playlistClearAdd();
+    }
+
+    
+    public void updatePlaylist(Playlist PlaylistToUpdate)
+    {
+        pm.updatePlaylist(PlaylistToUpdate);
+        playlistClearAdd();
+    }
+    
+    
+    
+    public void playlistClearAdd()
+    {
+        allPlaylist.clear();
+        allPlaylist.addAll(pm.getAllPlaylists());
+    }
+    
+    public void songClearAdd()
+    {
         allSongs.clear();
         allSongs.addAll(songManager.getAllSongs());
     }

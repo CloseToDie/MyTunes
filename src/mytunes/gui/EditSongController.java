@@ -40,7 +40,7 @@ public class EditSongController implements Initializable
     private int duration = 0;
     private String filename = "";
     private String directory = "";
-    private AppModel appmodel;
+    private AppModel appModel;
 
     @FXML
     private TextField Title;
@@ -97,9 +97,9 @@ public class EditSongController implements Initializable
        
     } 
     
-    public void setappmodel(AppModel app){
+    public void setAppModel(AppModel app){
     
-    appmodel = app;
+    appModel = app;
     
     
     }
@@ -189,7 +189,7 @@ public class EditSongController implements Initializable
         
         
         Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath);
-        appmodel.updateSong(songToUpdate);
+        appModel.updateSong(songToUpdate);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
             

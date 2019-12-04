@@ -271,15 +271,14 @@ public class AppController implements Initializable
     {
         FXMLLoader fxmlLoader = new FXMLLoader();
             
-            Parent root = (Parent) fxmlLoader.load(getClass().getResource("sPlaylist.fxml").openStream());
-            //PlaylistController cont = (PlaylistController) fxmlLoader.getController();
-            //cont.setappmodel(appmodel);
-            //cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("Playlist.fxml").openStream());
+            PlaylistController cont = (PlaylistController) fxmlLoader.getController();
+            cont.setAppModel(appmodel);
             Stage stage = new Stage();
             stage.setTitle("New/Edit Playlist");
             stage.setScene(new Scene(root));
             stage.setAlwaysOnTop(true);
-            stage.show();
+            stage.show(); 
     }
 
     /**
@@ -351,7 +350,7 @@ public class AppController implements Initializable
             
             Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditSong.fxml").openStream());
             EditSongController cont = (EditSongController) fxmlLoader.getController();
-            cont.setappmodel(appmodel);
+            cont.setAppModel(appmodel);
             cont.setSong(Songs.getSelectionModel().getSelectedItem());
             Stage stage = new Stage();
             stage.setTitle("New/edit Song");
@@ -620,7 +619,7 @@ public class AppController implements Initializable
             
             Parent root = (Parent) fxmlLoader.load(getClass().getResource("NewSong.fxml").openStream());
             NewSongController cont = (NewSongController) fxmlLoader.getController();
-            cont.setappmodel(appmodel);
+            cont.setAppModel(appmodel);
             Stage stage = new Stage();
             stage.setTitle("New/edit Song");
             stage.setScene(new Scene(root));

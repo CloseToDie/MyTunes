@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
+import mytunes.be.Playlist;
 
 /**
  * FXML Controller class
@@ -28,6 +30,10 @@ public class PlaylistController implements Initializable
     private Button Cancel;
     @FXML
     private Button Save;
+    
+    private AppModel appModel;
+    
+    private Playlist playlist;
 
     /**
      * Initializes the controller class.
@@ -50,6 +56,11 @@ public class PlaylistController implements Initializable
     // do what you have to do
     stage.close();
     }
+    
+    public void setAppModel(AppModel app)
+    {
+        appModel = app;
+    }
 
     /**
      * adds a new playlist or applyes the changes
@@ -59,6 +70,29 @@ public class PlaylistController implements Initializable
     @FXML
     private void Save(ActionEvent event)
     {
+        String playlistName = Name.getText();
+        if(playlistName == "")
+        {
+            JOptionPane.showMessageDialog(null, "Song title can not be blank!");
+            playlistName = "EDIT ME"; 
+        }
+        else
+        {
+            playlistName = Name.getText(); 
+        }
+        
+        Playlist Playlist = new Playlist(0, playlistName);
+        appModel.createPlaylist(Playlist);
+        Stage stage = (Stage) Cancel.getScene().getWindow();
+        stage.close();
+    }
+    
+    public void setPlaylist(Playlist playlist)
+    {
+        this.playlist = playlist;
+        
+        Name.setText(playlist.getName());              
+        
     }
     
 }
