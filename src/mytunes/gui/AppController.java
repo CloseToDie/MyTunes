@@ -155,13 +155,13 @@ public class AppController implements Initializable
             playlistNameCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,String>("name")
             );
-            /*
+            
             playlistSongsCol.setCellValueFactory(
-                new PropertyValueFactory<Playlist,Integer>("artist")
+                new PropertyValueFactory<Playlist,Integer>("songs")
             );
             playlistTimeCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist,Integer>("time")
-            );*/
+            );
             
             
             
@@ -209,7 +209,7 @@ public class AppController implements Initializable
            
            
            Songs.setItems(appmodel.getAllSongs());
-          /* playlist.setItems(appmodel.getAllPlaylist());*/
+           playlist.setItems(appmodel.getAllPlaylist());
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
@@ -364,12 +364,24 @@ public class AppController implements Initializable
      * @param event 
      */
     @FXML
-    private void DeleteSong(ActionEvent event)
+    private void DeleteSong(ActionEvent event) throws IOException
     {
         
-        Song selectedItem = Songs.getSelectionModel().getSelectedItem();        
+        FXMLLoader fxmlLoader = new FXMLLoader();
+            
+            Parent root2 = (Parent) fxmlLoader.load(getClass().getResource("DeleteSong.fxml").openStream());
+            DeleteSongController cont2 = (DeleteSongController) fxmlLoader.getController();
+            cont2.setappmodel(appmodel);
+            cont2.setSong(Songs.getSelectionModel().getSelectedItem());
+            Stage stage = new Stage();
+            stage.setTitle("Delete song");
+            stage.setScene(new Scene(root2));
+            stage.setAlwaysOnTop(true);
+            stage.show();
+        
+       /* Song selectedItem = Songs.getSelectionModel().getSelectedItem();        
         Songs.getItems().remove(selectedItem);
-        appmodel.deleteSong(selectedItem);
+        appmodel.deleteSong(selectedItem);*/
     }
 
     /**
