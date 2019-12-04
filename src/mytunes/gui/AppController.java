@@ -181,6 +181,16 @@ public class AppController implements Initializable
            }
            if (file.exists())
            {
+               
+               
+               if(appmodel.getmusicPlayer() != null) {
+          
+          
+          //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                    appmodel.getmusicPlayer().getMP().dispose();
+            }
+               
+               
                 appmodel.createMusicPlayer(file.getPath()); 
                 currentlyPlayingSong = appmodel.getAllSongs().get(i);
         
@@ -384,6 +394,50 @@ public class AppController implements Initializable
     private void previous(ActionEvent event)
     {
          //d = new MusicPlayer("music/Mudkip.mp3");
+        previous();
+    }
+    private void previous()
+    {
+        System.out.println();
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
+      
+      System.out.println(Songs.getItems().size() +"    storlse");
+      
+      System.out.println(SelectedIndex +"       SelectedIndex");
+      System.out.println(SelectedIndex +1 +"       SelectedIndex ++");
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      
+      if( SelectedIndex -1 <= -1)
+      {
+      
+            Songs.getSelectionModel().selectLast();
+            System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            Play();
+            
+      
+      }
+      else{
+           Songs.getSelectionModel().select(SelectedIndex -1);
+           Play();
+           
+      }
+     
+      
+      
+        
+        System.out.println(Songs.getSelectionModel().getSelectedIndex());
+        
+    
+    
+    
+    
+    
     }
 
     /**
@@ -426,6 +480,13 @@ public class AppController implements Initializable
             
              /*d = new MusicPlayer("music/test.mp3");*/
             
+            if(appmodel.getmusicPlayer() != null) {
+          
+          
+          //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+          appmodel.getmusicPlayer().getMP().dispose();
+            }
+            
             appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
           currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
             tock = true;
@@ -433,6 +494,7 @@ public class AppController implements Initializable
             appmodel.getmusicPlayer().playSound();
             
               appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+                  
        public void run() {
            
             System.out.println("end of media");
@@ -463,13 +525,22 @@ public class AppController implements Initializable
     }
     
      private void Play(){
-     
+      if(appmodel.getmusicPlayer() != null) {
+          
+          
+          //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+          appmodel.getmusicPlayer().getMP().dispose();
+          
+          
+          
       appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
+      
           currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
             isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
             appmodel.getmusicPlayer().playSound();
             
         appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+            
        public void run() {
            
             System.out.println("end of media");
@@ -479,7 +550,7 @@ public class AppController implements Initializable
    });
      
      
-     
+      }
      }
     
 
@@ -489,20 +560,21 @@ public class AppController implements Initializable
         skip();
     }
     public void skip(){
-     System.out.println();
-      System.out.println();
-      System.out.println();
-      System.out.println();
+        
+   //  System.out.println();
+    //  System.out.println();
+     // System.out.println();
+     // System.out.println();
       SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
       
-      System.out.println(Songs.getItems().size() +"    storlse");
+    //  System.out.println(Songs.getItems().size() +"    storlse");
       
-      System.out.println(SelectedIndex +"       SelectedIndex");
-      System.out.println(SelectedIndex +1 +"       SelectedIndex ++");
-      System.out.println();
-      System.out.println();
-      System.out.println();
-      System.out.println();
+    //  System.out.println(SelectedIndex +"       SelectedIndex");
+    //  System.out.println(SelectedIndex +1 +"       SelectedIndex ++");
+   //   System.out.println();
+    //  System.out.println();
+     // System.out.println();
+      //System.out.println();
       
       if( SelectedIndex +1 == Songs.getItems().size())
       {

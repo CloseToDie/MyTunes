@@ -20,7 +20,7 @@ import mytunes.bll.playListManager;
  * @author andreasvillumsen
  */
 public class AppModel {
-    private MusicPlayer musicPlayer;
+    private  MusicPlayer musicPlayer;
     
      public static void main(String[] args) throws Exception {
         AppModel app = new AppModel();

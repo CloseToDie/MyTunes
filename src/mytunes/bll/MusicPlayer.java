@@ -18,8 +18,8 @@ import javafx.util.Duration;
  */
 public class MusicPlayer
 {
-    static Media m; 
-    static MediaPlayer player;
+    private static Media m; 
+    private static MediaPlayer player;
     private String title;
    
     
@@ -34,6 +34,7 @@ public class MusicPlayer
              
              //System.out.println(title);
    });
+        
         
         
         player = new MediaPlayer(m);
