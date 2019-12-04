@@ -85,6 +85,7 @@ public class NewSongController implements Initializable
          list.add("punk");
           list.add("jazz");
             list.add("pop");
+               list.add("rap");
         
          for (String string : list) {
             
