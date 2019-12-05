@@ -87,6 +87,10 @@ public class PlaylistController implements Initializable
         stage.close();
     }
     
+    /**
+     * sets playlist name in the text field.
+     * @param playlist 
+     */
     public void setPlaylist(Playlist playlist)
     {
         this.playlist = playlist;
