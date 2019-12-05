@@ -30,7 +30,9 @@ public class PlaylistDBDAO implements PlaylistFacade{
         
        // dao.createPlaylist(new Playlist(0, "acustic depression"));
         
-       
+       //dao.clearPlaylist(new Playlist(1, "stuf", 0, 0));
+       //dao.addToPlaylist( new Playlist(1, "name", 0, 0), new Song(42, "title", "album", "artist", "category", 0, "path"), 2);
+       dao.deletePlaylist(new Playlist(1, "name", 0, 0));
         
         for (Song song : dao.getAllSongsInPlaylist(new Playlist(1, "acustic", 0, 0))) {
             
@@ -174,7 +176,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
             ps.setInt(1, playlist.getId());
             ps.executeUpdate();
             
-            PreparedStatement pStatement = con.prepareStatement("SELECT * song_playlist WHERE playlistid = ?");
+            PreparedStatement pStatement = con.prepareStatement("SELECT * FROM song_playlist WHERE playlistid = ?");
             pStatement.setInt(1, playlist.getId());
             ResultSet rs = pStatement.executeQuery();
             
