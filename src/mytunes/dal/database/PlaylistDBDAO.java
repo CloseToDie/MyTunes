@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import mytunes.be.Playlist;
+import mytunes.be.Song;
 import mytunes.dal.PlaylistFacade;
 
 /**
@@ -92,6 +93,25 @@ public class PlaylistDBDAO implements PlaylistFacade{
         }
         
         return null;
+    }
+    
+    public boolean addToPlaylist(Playlist playlist, Song song, int position) {
+        try(Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO song_playlist "
+                    + "(songid, playlistid, position) VALUES (?,?,?)");
+            ps.setInt(1, song.getId());
+            ps.setInt(2, playlist.getId());
+            ps.setInt(3, position);
+            
+            return ps.executeUpdate() > 0;
+            
+        } catch(SQLServerException ex) {
+            ex.printStackTrace();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
     }
     
     public boolean updatePlaylist(Playlist playlist) {
