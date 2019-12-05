@@ -13,7 +13,7 @@ import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
 import mytunes.bll.SongManager;
-import mytunes.bll.playListManager;
+import mytunes.bll.PlayListManager;
 
 /**
  *
@@ -34,7 +34,7 @@ public class AppModel {
     private final ObservableList<Song> allSongs;
     private ObservableList<Playlist> allPlaylist;
     private SongManager songManager; 
-    private playListManager pm;
+    private PlayListManager pm;
     private AppController controler;
 
     public AppModel() throws Exception {
@@ -44,7 +44,7 @@ public class AppModel {
         allSongs.addAll(songManager.getAllSongs());
         
         
-        pm = new playListManager();
+        pm = new PlayListManager();
         allPlaylist = FXCollections.observableArrayList();
         allPlaylist.addAll(pm.getAllPlaylists());
     }
