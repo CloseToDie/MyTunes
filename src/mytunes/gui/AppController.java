@@ -262,7 +262,7 @@ public class AppController implements Initializable
     {
        Playlist currentlySelectedPlaylist = playlist.getSelectionModel().getSelectedItem();
        Song currentlyselectedsong = Songs.getSelectionModel().getSelectedItem();
-       int position = appmodel.getSongsInPlaylist(currentlySelectedPlaylist).size();
+       int position = appmodel.getSongsInPlaylist(currentlySelectedPlaylist).size() +1;
        appmodel.addToPlaylist(currentlySelectedPlaylist, currentlyselectedsong, position);
        
     }
@@ -329,7 +329,7 @@ public class AppController implements Initializable
     }
 
     /**
-     * Moves a song up in a playlist
+     * Moves a song up in a playlist up
      * @param event 
      */
     @FXML
@@ -338,7 +338,7 @@ public class AppController implements Initializable
     }
 
     /**
-     * Moves a song down in a playlist
+     * Moves a song down in a playlist down
      * @param event 
      */
     @FXML

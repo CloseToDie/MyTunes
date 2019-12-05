@@ -33,12 +33,13 @@ public class PlaylistDBDAO implements PlaylistFacade{
        //dao.clearPlaylist(new Playlist(1, "stuf", 0, 0));
        //dao.addToPlaylist( new Playlist(1, "name", 0, 0), new Song(42, "title", "album", "artist", "category", 0, "path"), 2);
       // dao.deletePlaylist(new Playlist(1, "name", 0, 0));
-      dao.orderPlaylist(new Playlist(2, "acustic", 0, 0), new Song(43, "title", "album", "artist", "category", 0, "path"), 1, true);
+      //dao.orderPlaylist(new Playlist(2, "acustic", 0, 0), new Song(43, "title", "album", "artist", "category", 0, "path"), 2, true);
         
-        for (Song song : dao.getAllSongsInPlaylist(new Playlist(2, "acustic", 0, 0))) {
+   // System.out.println(  dao.clearSongFromPlaylist(new Playlist(5, "name", 0, 0), new Song(55, "title", "album", "artist", "category", 0, "path"), 1));
+        for (Song song : dao.getAllSongsInPlaylist(new Playlist(5, "acustic", 0, 0))) {
             
-            System.out.println(song);
-            
+            System.out.println( "" + song.getId() + "   "+ song);
+            System.out.println("");
         }
     }
     
@@ -176,7 +177,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
      * @param song
      * @param position
      * @param direction
-     * @return 
+     * @return bolean indicating if the operation was successfull
      */
     public boolean orderPlaylist(Playlist playlist, Song song, int position, boolean direction) {
         try(Connection con = dbCon.getConnection()) {
@@ -210,7 +211,11 @@ public class PlaylistDBDAO implements PlaylistFacade{
         
         return false;
     }
-    
+    /**
+     * deletes all the songs in a playlist.
+     * @param playlist
+     * @return 
+     */
     public boolean clearPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM song_playlist WHERE playlistid = ?");
@@ -236,7 +241,51 @@ public class PlaylistDBDAO implements PlaylistFacade{
         
         return false;
     }
-    
+    /**
+     * deletes a single somg from a playlist. it also adjusts the positions after the deletion so they align with the new positions.
+     * @param playlist
+     * @param song
+     * @param position
+     * @return bolean indicating if the deletion was successfull
+     */
+    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position) {
+        try(Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("DELETE FROM song_playlist WHERE playlistid = ? "
+                                                      + "AND songid = ? "
+                                                      + "AND song_playlist.position = ?");
+            ps.setInt(1, playlist.getId());
+            ps.setInt(2, song.getId());
+            ps.setInt(3, position);
+           
+          
+            int updatedRows = ps.executeUpdate();
+           
+            if(updatedRows > 0) {
+            
+            PreparedStatement ps2 = con.prepareStatement("UPDATE song_playlist SET Position = Position - 1 WHERE Position > ?" );
+            
+             ps2.setInt(1, position);
+             
+             int updatedRows2 = ps2.executeUpdate();
+             
+             return updatedRows2 > 0;
+             
+            
+            }
+            
+        } catch(SQLServerException ex) {
+            ex.printStackTrace();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
+    }
+    /**
+     * deletes a playlist from the list of playlists
+     * @param playlist
+     * @return bolean indicating if the operation was successfull
+     */
     public boolean deletePlaylist(Playlist playlist) {
         if(clearPlaylist(playlist)) {
             try(Connection con = dbCon.getConnection()) {
