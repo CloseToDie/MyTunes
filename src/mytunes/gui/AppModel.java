@@ -6,6 +6,7 @@
 package mytunes.gui;
 
 import java.util.ArrayList;
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -33,6 +34,7 @@ public class AppModel {
     
     private final ObservableList<Song> allSongs;
     private ObservableList<Playlist> allPlaylist;
+    private ObservableList<Song> songsInPlaylist;
     private SongManager songManager; 
     private PlayListManager pm;
     private AppController controler;
@@ -47,6 +49,9 @@ public class AppModel {
         pm = new PlayListManager();
         allPlaylist = FXCollections.observableArrayList();
         allPlaylist.addAll(pm.getAllPlaylists());
+        
+        songsInPlaylist = FXCollections.observableArrayList();
+        songsInPlaylist.addAll(pm.getAllSongsInPlaylist(pm.getAllPlaylists().get(0)));
     }
     /**
      * returns all songs in the database
@@ -59,11 +64,18 @@ public class AppModel {
         return allSongs;
     }
      
-     ObservableList<Playlist> getAllPlaylist() {
+     public ObservableList<Playlist> getAllPlaylist() {
         allPlaylist.clear();
         allPlaylist.addAll(pm.getAllPlaylists());
         return allPlaylist;
     }
+     
+     public ObservableList<Song> getSongsInPlaylist(Playlist playlist)
+             {
+                 songsInPlaylist.clear();
+                 songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
+                 return songsInPlaylist;
+             }
      
      
      public void fetchData() {
@@ -154,6 +166,16 @@ public class AppModel {
         playlistClearAdd();
     }
     
+    public void addToPlaylist(Playlist playlist, Song song, int position)
+    {
+        pm.addToPlaylist(playlist, song, position);
+        songInPlaylistClearAdd(playlist);
+    }
+    
+    public void clearPlaylist(Playlist playlist)
+    {
+        pm.clearPlaylist(playlist);
+    }
     
     
     public void playlistClearAdd()
@@ -167,5 +189,12 @@ public class AppModel {
         allSongs.clear();
         allSongs.addAll(songManager.getAllSongs());
     }
+    
+    public void songInPlaylistClearAdd(Playlist playlist)
+    {
+        songsInPlaylist.clear();
+        songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
+    }
+    
     
 }
