@@ -7,6 +7,7 @@ package mytunes.bll;
 
 import java.util.List;
 import mytunes.be.Playlist;
+import mytunes.be.Song;
 import mytunes.dal.PlaylistFacade;
 import mytunes.dal.database.PlaylistDBDAO;
 
@@ -41,6 +42,21 @@ public class PlayListManager {
     public void updatePlaylist(Playlist playlistToUpdate)
     {
         pD.updatePlaylist(playlistToUpdate);
+    }
+    
+    public List<Song> getAllSongsInPlaylist(Playlist playlist)
+    {
+        return pD.getAllSongsInPlaylist(playlist);
+    }
+    
+    public void addToPlaylist(Playlist playlist, Song song, int position)
+    {
+        pD.addToPlaylist(playlist, song, position);
+    }
+    
+    public void clearPlaylist(Playlist playlist)
+    {
+        pD.clearPlaylist(playlist);
     }
  
 }
