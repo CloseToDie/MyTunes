@@ -32,9 +32,9 @@ public class PlaylistDBDAO implements PlaylistFacade{
         
        
         
-        for (Playlist allPlaylist : dao.getAllPlaylists()) {
+        for (Song song : dao.getAllSongsInPlaylist(new Playlist(1, "acustic", 0, 0))) {
             
-            System.out.println(allPlaylist);
+            System.out.println(song);
             
         }
     }
@@ -76,7 +76,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
             PreparedStatement ps = con.prepareStatement("SELECT "
                     + "song_playlist.playlistid, song_playlist.position, "
                     + "song_playlist.songid,song.id,song.title,song.artist,"
-                    + "song.category,song.time,song.path " 
+                    + "song.category,song.time,song.path,song.album " 
                     + "FROM song_playlist " 
                     + "INNER JOIN song ON song_playlist.songid = song.id " 
                     + "WHERE song_playlist.playlistid = ? " 
