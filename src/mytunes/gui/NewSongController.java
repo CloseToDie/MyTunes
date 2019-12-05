@@ -40,7 +40,7 @@ public class NewSongController implements Initializable
     private int duration = 0;
     private String filename = "";
     private String directory = "";
-    private AppModel appmodel;
+    private AppModel appModel;
 
     @FXML
     private TextField Title;
@@ -85,6 +85,7 @@ public class NewSongController implements Initializable
          list.add("punk");
           list.add("jazz");
             list.add("pop");
+               list.add("rap");
         
          for (String string : list) {
             
@@ -96,9 +97,9 @@ public class NewSongController implements Initializable
        
     } 
     
-    public void setappmodel(AppModel app){
+    public void setAppModel(AppModel app){
     
-    appmodel = app;
+    appModel = app;
     
     }
 
@@ -145,7 +146,7 @@ public class NewSongController implements Initializable
         }
         else
         {
-            title = Title.getText();; 
+            title = Title.getText(); 
         }
           
         if(artist == "")
@@ -181,7 +182,7 @@ public class NewSongController implements Initializable
         
         
         Song songToAdd = new Song(1, title,"",artist, genre, duration, songPath);
-        appmodel.createSong(songToAdd);
+        appModel.createSong(songToAdd);
          System.out.print(directory+"dræb mig");
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();

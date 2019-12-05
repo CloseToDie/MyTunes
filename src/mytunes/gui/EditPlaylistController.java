@@ -21,7 +21,7 @@ import mytunes.be.Playlist;
  *
  * @author lumby
  */
-public class PlaylistController implements Initializable
+public class EditPlaylistController implements Initializable
 {
 
     @FXML
@@ -81,8 +81,8 @@ public class PlaylistController implements Initializable
             playlistName = Name.getText(); 
         }
         
-        Playlist Playlist = new Playlist(0, playlistName, 0, 0);
-        appModel.createPlaylist(Playlist);
+        Playlist Playlist = new Playlist(playlist.getId(), playlistName.trim(), 0, 0);
+        appModel.updatePlaylist(Playlist);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
     }
@@ -91,7 +91,7 @@ public class PlaylistController implements Initializable
     {
         this.playlist = playlist;
         
-        Name.setText(playlist.getName());              
+        Name.setText(playlist.getName().trim());              
         
     }
     

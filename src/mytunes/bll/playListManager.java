@@ -33,4 +33,15 @@ private PlaylistFacade pD;
     {
         pD.createPlaylist(playlistToAdd);
     }
+ 
+ public void deletePlaylist(Playlist playlistToDelete)
+ {
+     pD.deletePlaylist(playlistToDelete);
+ }
+ 
+ public void updatePlaylist(Playlist playlistToUpdate)
+ {
+     pD.updatePlaylist(playlistToUpdate);
+ }
+ 
 }
