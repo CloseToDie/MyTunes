@@ -7,6 +7,7 @@ package mytunes.dal;
 
 import java.util.List;
 import mytunes.be.Playlist;
+import mytunes.be.Song;
 
 /**
  *
@@ -22,5 +23,10 @@ public interface PlaylistFacade {
     
     public boolean deletePlaylist(Playlist playlist);
     
+    public List<Song> getAllSongsInPlaylist(Playlist playlist);
+    
+    public boolean clearPlaylist(Playlist playlist);
+    
+    public boolean addToPlaylist(Playlist playlist, Song song, int position);
     
 }
