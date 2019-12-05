@@ -72,6 +72,7 @@ public class EditSongController implements Initializable
     private Song song;
     /**
      * Initializes the controller class.
+     * Creats a list of categories and sets it to the choiceBox.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
