@@ -32,9 +32,10 @@ public class PlaylistDBDAO implements PlaylistFacade{
         
        //dao.clearPlaylist(new Playlist(1, "stuf", 0, 0));
        //dao.addToPlaylist( new Playlist(1, "name", 0, 0), new Song(42, "title", "album", "artist", "category", 0, "path"), 2);
-       dao.deletePlaylist(new Playlist(1, "name", 0, 0));
+      // dao.deletePlaylist(new Playlist(1, "name", 0, 0));
+      dao.orderPlaylist(new Playlist(2, "acustic", 0, 0), new Song(43, "title", "album", "artist", "category", 0, "path"), 1, true);
         
-        for (Song song : dao.getAllSongsInPlaylist(new Playlist(1, "acustic", 0, 0))) {
+        for (Song song : dao.getAllSongsInPlaylist(new Playlist(2, "acustic", 0, 0))) {
             
             System.out.println(song);
             
@@ -169,18 +170,23 @@ public class PlaylistDBDAO implements PlaylistFacade{
         
         return false;
     }
-    
+    /**
+     * it changes the order in the plalist songlist. 
+     * @param playlist
+     * @param song
+     * @param position
+     * @param direction
+     * @return 
+     */
     public boolean orderPlaylist(Playlist playlist, Song song, int position, boolean direction) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND position = ?");
-            
+            ps.setInt(1, position);
             ps.setInt(2, playlist.getId());
-            ps.setInt(3, song.getId());
-            ps.setInt(4, position);
             if(direction) {
-                ps.setInt(1, position--);
+                ps.setInt(3, position + 1);
             } else {
-                ps.setInt(1, position++);
+                ps.setInt(3, position - 1);
             }
             ps.executeUpdate();
             
@@ -190,9 +196,9 @@ public class PlaylistDBDAO implements PlaylistFacade{
             ps2.setInt(3, song.getId());
             ps2.setInt(4, position);
             if(direction) {
-                ps2.setInt(1, position++);
+                ps2.setInt(1, position + 1);
             } else {
-                ps2.setInt(1, position--);
+                ps2.setInt(1, position - 1);
             }
             return ps2.executeUpdate() > 0;
             
