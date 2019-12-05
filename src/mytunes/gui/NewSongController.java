@@ -69,14 +69,16 @@ public class NewSongController implements Initializable
     private Button songChoiceButton;
     @FXML
     private TextField FileTextField;
+    
     /**
      * Initializes the controller class.
+     * Creats a list of categories and sets it to the choiceBox.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
        
-        // TODO
+        
         ArrayList<String> categories = new ArrayList<>();
         
         list = FXCollections.observableArrayList(categories);

@@ -65,6 +65,11 @@ public class AppModel {
         return allPlaylist;
     }
      
+     public ObservableList<Song> getAllSongsInPlaylist()
+     {
+         return null;
+     }
+     
      
      public void fetchData() {
          

@@ -27,6 +27,10 @@ public SongModel() throws Exception
         allSongs.addAll(songManager.getAllSongs());
     }
 
+    /**
+    * returns all songs in list.
+    * @return allSongs
+    */
     public ObservableList<Song> getAllSongs()
     {
         return allSongs;
