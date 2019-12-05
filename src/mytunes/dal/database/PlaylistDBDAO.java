@@ -170,6 +170,41 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     
+    public boolean orderPlaylist(Playlist playlist, Song song, int position, boolean direction) {
+        try(Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND position = ?");
+            
+            ps.setInt(2, playlist.getId());
+            ps.setInt(3, song.getId());
+            ps.setInt(4, position);
+            if(direction) {
+                ps.setInt(1, position--);
+            } else {
+                ps.setInt(1, position++);
+            }
+            ps.executeUpdate();
+            
+            PreparedStatement ps2 = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND songid = ? AND position = ?");
+            
+            ps2.setInt(2, playlist.getId());
+            ps2.setInt(3, song.getId());
+            ps2.setInt(4, position);
+            if(direction) {
+                ps2.setInt(1, position++);
+            } else {
+                ps2.setInt(1, position--);
+            }
+            return ps2.executeUpdate() > 0;
+            
+        } catch(SQLServerException ex) {
+            ex.printStackTrace();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
+    }
+    
     public boolean clearPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("DELETE FROM song_playlist WHERE playlistid = ?");
