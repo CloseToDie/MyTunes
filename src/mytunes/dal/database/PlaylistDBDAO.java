@@ -168,18 +168,45 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     
-    public boolean deletePlaylist(Playlist playlist) {
-        
+    public boolean clearPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM playlist WHERE id = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM song_playlist WHERE playlistid = ?");
             ps.setInt(1, playlist.getId());
-            int updatedRows = ps.executeUpdate();
-            return updatedRows > 0;
+            ps.executeUpdate();
+            
+            PreparedStatement pStatement = con.prepareStatement("SELECT * song_playlist WHERE playlistid = ?");
+            pStatement.setInt(1, playlist.getId());
+            ResultSet rs = pStatement.executeQuery();
+            
+            while(rs.next())
+            {
+                return false;
+            }
+            
+            return true;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
         } catch(SQLException ex) {
             ex.printStackTrace();
+        }
+        
+        return false;
+    }
+    
+    public boolean deletePlaylist(Playlist playlist) {
+        if(clearPlaylist(playlist)) {
+            try(Connection con = dbCon.getConnection()) {
+                PreparedStatement ps = con.prepareStatement("DELETE FROM playlist WHERE id = ?");
+                ps.setInt(1, playlist.getId());
+                int updatedRows = ps.executeUpdate();
+                return updatedRows > 0;
+
+            } catch(SQLServerException ex) {
+                ex.printStackTrace();
+            } catch(SQLException ex) {
+                ex.printStackTrace();
+            }
         }
         
         return false;
