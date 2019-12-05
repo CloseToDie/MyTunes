@@ -291,10 +291,10 @@ public class AppController implements Initializable
     {
         FXMLLoader fxmlLoader = new FXMLLoader();
             
-            Parent root = (Parent) fxmlLoader.load(getClass().getResource("Playlist.fxml").openStream());
-            //PlaylistController cont = (PlaylistController) fxmlLoader.getController();
-            //cont.setappmodel(appmodel);
-            //cont.setSong(Songs.getSelectionModel().getSelectedItem());
+            Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditPlaylist.fxml").openStream());
+            EditPlaylistController cont = (EditPlaylistController) fxmlLoader.getController();
+            cont.setAppModel(appmodel);
+            cont.setPlaylist(playlist.getSelectionModel().getSelectedItem());
             Stage stage = new Stage();
             stage.setTitle("New/Edit Playlist");
             stage.setScene(new Scene(root));

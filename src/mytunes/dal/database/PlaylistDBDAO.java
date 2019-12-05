@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import mytunes.be.Playlist;
+import mytunes.be.Song;
 import mytunes.dal.PlaylistFacade;
 
 /**
@@ -68,6 +69,42 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return null;
     }
     
+    public List<Song> getAllSongsInPlaylist(Playlist playlist) {
+        ArrayList<Song> songs = new ArrayList<>();
+        
+        try(Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("SELECT "
+                    + "song_playlist.playlistid, song_playlist.position, "
+                    + "song_playlist.songid,song.id,song.title,song.artist,"
+                    + "song.category,song.time,song.path " 
+                    + "FROM song_playlist " 
+                    + "INNER JOIN song ON song_playlist.songid = song.id " 
+                    + "WHERE song_playlist.playlistid = ? " 
+                    + "ORDER BY song_playlist.position ASC");
+            ps.setInt(1, playlist.getId());
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next())
+            {
+                int id = rs.getInt("id");
+                String title = rs.getString("title");
+                String album = rs.getString("album");
+                String artist = rs.getString("artist");
+                String category = rs.getString("category");
+                int time = rs.getInt("time");
+                String path = rs.getString("path");
+                songs.add(new Song(id, title, album, artist, category, time, path));
+            }
+            return songs;
+            
+        } catch(SQLServerException ex) {
+            ex.printStackTrace();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return null;
+    }
     
     public Playlist createPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
@@ -93,6 +130,25 @@ public class PlaylistDBDAO implements PlaylistFacade{
         }
         
         return null;
+    }
+    
+    public boolean addToPlaylist(Playlist playlist, Song song, int position) {
+        try(Connection con = dbCon.getConnection()) {
+            PreparedStatement ps = con.prepareStatement("INSERT INTO song_playlist "
+                    + "(songid, playlistid, position) VALUES (?,?,?)");
+            ps.setInt(1, song.getId());
+            ps.setInt(2, playlist.getId());
+            ps.setInt(3, position);
+            
+            return ps.executeUpdate() > 0;
+            
+        } catch(SQLServerException ex) {
+            ex.printStackTrace();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return false;
     }
     
     public boolean updatePlaylist(Playlist playlist) {
