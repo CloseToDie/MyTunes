@@ -26,7 +26,17 @@ public class PlayListManager {
  
     public List<Playlist> getAllPlaylists()
     {
-       return pD.getAllPlaylists();
+       List<Playlist> result = pD.getAllPlaylists();
+        
+        for (Playlist playlist : result) {
+            
+            playlist.setTime(playlistTotalTime(getAllSongsInPlaylist(playlist)));
+            
+        }
+        
+        
+        return pD.getAllPlaylists();
+       
     }
 
     public void createPlaylist(Playlist playlistToAdd)
