@@ -58,5 +58,10 @@ public class PlayListManager {
     {
         pD.clearPlaylist(playlist);
     }
+    
+    public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
+    {
+        pD.orderPlaylist(playlist, song, position, direction);
+    }
  
 }
