@@ -145,7 +145,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return "Song{" + "id=" + getId() + ", title=" + getTitle() + ", album=" + getAlbum() + ", artist=" + getArtist() + ", category=" + getCategory() + ", time=" + getTime() + ", path=" + path + '}';
+        return getTitle()  + "  "+  getArtist() +"  "+  getCategory() + "  "+ getTime();
     }
     
     

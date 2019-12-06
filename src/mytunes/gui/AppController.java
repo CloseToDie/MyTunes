@@ -210,6 +210,7 @@ public class AppController implements Initializable
            
            Songs.setItems(appmodel.getAllSongs());
            playlist.setItems(appmodel.getAllPlaylist());
+           SongsInPlaylist.setItems(appmodel.getSongsInPlaylist(appmodel.getAllPlaylist().get(0)));
            //Songs.getColumns().addAll(songTitelCol,songArtistCol,songCategoryCol, songTimeCol);
             
         } catch (Exception ex)
@@ -259,6 +260,11 @@ public class AppController implements Initializable
     @FXML
     private void ToPlaylist(ActionEvent event)
     {
+       Playlist currentlySelectedPlaylist = playlist.getSelectionModel().getSelectedItem();
+       Song currentlyselectedsong = Songs.getSelectionModel().getSelectedItem();
+       int position = appmodel.getSongsInPlaylist(currentlySelectedPlaylist).size() +1;
+       appmodel.addToPlaylist(currentlySelectedPlaylist, currentlyselectedsong, position);
+       
     }
 
     /**
@@ -323,7 +329,7 @@ public class AppController implements Initializable
     }
 
     /**
-     * Moves a song up in a playlist
+     * Moves a song up in a playlist up
      * @param event 
      */
     @FXML
@@ -332,7 +338,7 @@ public class AppController implements Initializable
     }
 
     /**
-     * Moves a song down in a playlist
+     * Moves a song down in a playlist down
      * @param event 
      */
     @FXML
@@ -654,6 +660,16 @@ public class AppController implements Initializable
    
         return isPlaying;
     }    
+
+    @FXML
+    private void updatePlaylistview(MouseEvent event)
+    {
+        if (playlist.getSelectionModel().getSelectedItem() != null)
+        { 
+          SongsInPlaylist.setItems(appmodel.getSongsInPlaylist(playlist.getSelectionModel().getSelectedItem()));
+        }
+        
+    }
  
     
 }
