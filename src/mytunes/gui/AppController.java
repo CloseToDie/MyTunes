@@ -368,14 +368,20 @@ public class AppController implements Initializable
         Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
         SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
         
-       /*if(SelectedIndex > selectedPlaylist.getSongslist().size())
+        System.out.println(selectedPlaylist);
+        System.out.println(SelectedIndex);
+        System.out.println(SongsInPlaylist.getItems().size());
+        
+       if(SelectedIndex == SongsInPlaylist.getItems().size())
         {
             System.out.println("Can't move this song down");
-        }else */
-        //{
+        }else 
+        {
+        
         appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, true);
         SongsInPlaylist.refresh();
-        //}
+        }
+       
     }
 
     /**
