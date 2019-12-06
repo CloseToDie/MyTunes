@@ -487,6 +487,8 @@ public class AppController implements Initializable
     }
     private void previous()
     {
+        if(listSelection == ListSelection.SONGS )
+        {
         System.out.println();
       System.out.println();
       System.out.println();
@@ -526,7 +528,46 @@ public class AppController implements Initializable
     
     
     
-    
+        }
+        
+        if(listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
+         {
+             System.out.println();
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex();
+      
+      System.out.println(SongsInPlaylist.getItems().size() +"    storlse");
+      
+      System.out.println(SelectedIndex +"       SelectedIndex");
+      System.out.println(SelectedIndex +1 +"       SelectedIndex ++");
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      System.out.println();
+      
+      if( SelectedIndex -1 <= -1)
+      {
+      
+            SongsInPlaylist.getSelectionModel().selectLast();
+            System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            Play();
+            
+      
+      }
+      else{
+           SongsInPlaylist.getSelectionModel().select(SelectedIndex -1);
+           Play();
+           
+      }
+     
+      
+      
+        
+        System.out.println(Songs.getSelectionModel().getSelectedIndex());
+             
+         }
     }
 
     /**
