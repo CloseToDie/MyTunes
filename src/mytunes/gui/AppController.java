@@ -333,15 +333,22 @@ public class AppController implements Initializable
      * @param event 
      */
     
-    /*@FXML
+    @FXML
     private void goUp(ActionEvent event)
     {
-        Playlist selctedPlaylist = playlist.getSelectionModel().getSelectedItem();
+        Playlist selectedPlaylist = playlist.getSelectionModel().getSelectedItem();
         Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
-        SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
-                
-        appmodel.orderPlaylist(selctedPlaylist, songToMove, SelectedIndex, false);
-    }*/
+        SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
+        
+        if(SelectedIndex == 1)
+        {
+            System.out.println("can't move this song up");
+        }else
+        {        
+        appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, false);
+        SongsInPlaylist.refresh();
+        }
+    }
 
     /**
      * Moves a song down in a playlist down
@@ -351,7 +358,18 @@ public class AppController implements Initializable
     @FXML
     private void GoDown(ActionEvent event)
     {
+        Playlist selectedPlaylist = playlist.getSelectionModel().getSelectedItem();
+        Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
+        SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
         
+       /*if(SelectedIndex > selectedPlaylist.getSongslist().size())
+        {
+            System.out.println("Can't move this song down");
+        }else */
+        //{
+        appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, true);
+        SongsInPlaylist.refresh();
+        //}
     }
 
     /**

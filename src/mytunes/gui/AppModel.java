@@ -199,6 +199,7 @@ public class AppModel {
     public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
     {
         pm.orderPlaylist(playlist, song, position, direction);
+        songInPlaylistClearAdd(playlist);
     }
     
 }
