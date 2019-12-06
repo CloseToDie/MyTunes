@@ -31,11 +31,11 @@ public class PlayListManager {
         for (Playlist playlist : result) {
             
             playlist.setTime(playlistTotalTime(getAllSongsInPlaylist(playlist)));
-            
+            playlist.setSongs(pD.getAllSongsInPlaylist(playlist).size());
         }
         
         
-        return pD.getAllPlaylists();
+        return result;
        
     }
 
@@ -62,6 +62,7 @@ public class PlayListManager {
     public void addToPlaylist(Playlist playlist, Song song, int position)
     {
         pD.addToPlaylist(playlist, song, position);
+        
     }
     
     public void clearPlaylist(Playlist playlist)

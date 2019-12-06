@@ -170,6 +170,8 @@ public class AppModel {
     {
         pm.addToPlaylist(playlist, song, position);
         songInPlaylistClearAdd(playlist);
+        allPlaylist.clear();
+        allPlaylist.addAll(pm.getAllPlaylists());
     }
     
     public void clearPlaylist(Playlist playlist)
@@ -207,6 +209,8 @@ public class AppModel {
         boolean result = pm.clearSongFromPlaylist(playlist,song,position);
          songsInPlaylist.clear();
         songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
+        allPlaylist.clear();
+        allPlaylist.addAll(pm.getAllPlaylists());
         return result;
     }
     

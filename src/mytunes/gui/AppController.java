@@ -271,6 +271,7 @@ public class AppController implements Initializable
        int position = appmodel.getSongsInPlaylist(currentlySelectedPlaylist).size() +1;
        appmodel.addToPlaylist(currentlySelectedPlaylist, currentlyselectedsong, position);
        
+       
     }
 
     /**
