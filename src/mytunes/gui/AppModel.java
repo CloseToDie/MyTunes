@@ -202,4 +202,13 @@ public class AppModel {
         songInPlaylistClearAdd(playlist);
     }
     
+    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
+    {
+        boolean result = pm.clearSongFromPlaylist(playlist,song,position);
+         songsInPlaylist.clear();
+        songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
+        return result;
+    }
+    
+    
 }

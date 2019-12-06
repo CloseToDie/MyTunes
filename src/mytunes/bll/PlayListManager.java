@@ -63,6 +63,10 @@ public class PlayListManager {
     {
         pD.orderPlaylist(playlist, song, position, direction);
     }
+    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
+    {
+        return pD.clearSongFromPlaylist(playlist,song,position);
+    }
     
     public int playlistTotalTime(List<Song> songs) {
         int totalTime = 0;

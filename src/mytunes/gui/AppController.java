@@ -38,6 +38,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javax.swing.text.View;
 import mytunes.be.Playlist;
 import mytunes.be.Song;
 import mytunes.bll.MusicPlayer;
@@ -48,6 +49,8 @@ import mytunes.bll.SongManager;
  *
  * @author andreasvillumsen
  */
+
+ 
 public class AppController implements Initializable
 {
     private Song currentlyPlayingSong = null;
@@ -63,6 +66,7 @@ public class AppController implements Initializable
     private TableView<Song> Songs;
     @FXML
     private ListView<Song> SongsInPlaylist;
+  
     @FXML
     private TextField Search;
     @FXML
@@ -113,6 +117,7 @@ public class AppController implements Initializable
     private TableColumn<Playlist, Integer> playlistTimeCol;
     private int SelectedIndex;
 
+   
 
     /**
      * 
@@ -122,6 +127,7 @@ public class AppController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
         /*try
         {
             songModel = new SongModel();
@@ -379,6 +385,22 @@ public class AppController implements Initializable
     @FXML
     private void RemoveSongFromPlaylist(ActionEvent event)
     {
+        RemoveSongFromPlaylist();
+    }
+    private void RemoveSongFromPlaylist(){
+    
+    if(SongsInPlaylist.getSelectionModel().getSelectedItem() != null){    
+        
+       Playlist currentlySelectedPlaylist = playlist.getSelectionModel().getSelectedItem();
+       Song currentlyselectedsong = SongsInPlaylist.getSelectionModel().getSelectedItem();
+       int position = SongsInPlaylist.getSelectionModel().getSelectedIndex() +1;
+       
+        System.out.println(currentlySelectedPlaylist);
+        System.out.println(currentlyselectedsong);
+        System.out.println(position);
+        
+        appmodel.clearSongFromPlaylist(currentlySelectedPlaylist, currentlyselectedsong, position);
+    }
     }
 
     /**
