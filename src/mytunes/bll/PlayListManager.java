@@ -26,7 +26,17 @@ public class PlayListManager {
  
     public List<Playlist> getAllPlaylists()
     {
-       return pD.getAllPlaylists();
+       List<Playlist> result = pD.getAllPlaylists();
+        
+        for (Playlist playlist : result) {
+            
+            playlist.setTime(playlistTotalTime(getAllSongsInPlaylist(playlist)));
+            
+        }
+        
+        
+        return pD.getAllPlaylists();
+       
     }
 
     public void createPlaylist(Playlist playlistToAdd)
@@ -57,6 +67,21 @@ public class PlayListManager {
     public void clearPlaylist(Playlist playlist)
     {
         pD.clearPlaylist(playlist);
+    }
+    
+    public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
+    {
+        pD.orderPlaylist(playlist, song, position, direction);
+    }
+    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
+    {
+        return pD.clearSongFromPlaylist(playlist,song,position);
+    }
+    
+    public int playlistTotalTime(List<Song> songs) {
+        int totalTime = 0;
+        totalTime = songs.stream().map((song) -> song.getTime()).reduce(totalTime, Integer::sum);
+        return totalTime;
     }
  
 }
