@@ -19,6 +19,7 @@ public class Playlist {
     private final SimpleStringProperty name;
     private final SimpleIntegerProperty songs;
     private final SimpleIntegerProperty time;
+    private final SimpleStringProperty timetext;
     private ArrayList<Song> songslist;
     
     
@@ -29,6 +30,7 @@ public class Playlist {
         this.name = new SimpleStringProperty(name);
         this.songs = new SimpleIntegerProperty(songs);
         this.time = new SimpleIntegerProperty(time);
+        this.timetext = new SimpleStringProperty();
         songslist = new ArrayList<>();
     }
 
@@ -48,6 +50,13 @@ public class Playlist {
         this.id = id;
     }
     
+    public String getTimeText(){
+        return  timetext.get();
+    }
+    
+    public void setTimeText(String timetext) {
+        this.timetext.set(timetext);
+    }
     
 
     /**
