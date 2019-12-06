@@ -53,6 +53,12 @@ import mytunes.bll.SongManager;
  
 public class AppController implements Initializable
 {
+    enum ListSelection
+    {
+        SONGS, SONGSINPLAYLIST, PLAYLIST,
+    }
+    private int playlistCounter = 0;
+    ListSelection listSelection = ListSelection.SONGS;
     private Song currentlyPlayingSong = null;
     private boolean tock = false;
     private boolean tick = false;
@@ -530,63 +536,67 @@ public class AppController implements Initializable
     @FXML
     private void Play(ActionEvent event)
     {
-
-      if(appmodel.getmusicPlayer() != null)  {
         
-       if(!Songs.getSelectionModel().getSelectedItem().equals(null))  { 
-          if(Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
-          {
-              appmodel.getmusicPlayer().PauseSound();
-              System.out.println("changing song");
-              tock = false;
-          }
-          else
-          {
-             System.out.println("still playing current song");
-          }
-       }
-          
-        if(appmodel.getmusicPlayer().isDone()){
-        
-            System.out.println("done");
-            tock = false;
-        
-        }    
-        else{
-        System.out.println("not done");
-        } 
-            
-      }
-        
-        if (tock == false)
+      if(listSelection == ListSelection.SONGS )
+      {
+        if(appmodel.getmusicPlayer() != null) 
         {
-            
-             /*d = new MusicPlayer("music/test.mp3");*/
-            
-            if(appmodel.getmusicPlayer() != null) {
-          
-          
-          //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
-          appmodel.getmusicPlayer().getMP().dispose();
+        
+        
+            if(!Songs.getSelectionModel().getSelectedItem().equals(null))  
+            { 
+                if(Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
+                {
+                    appmodel.getmusicPlayer().PauseSound();
+                    System.out.println("changing song");
+                    tock = false;
+                }
+                else
+                {
+                    System.out.println("still playing current song");
+                }
             }
+          
+            if(appmodel.getmusicPlayer().isDone())
+            {
+        
+                System.out.println("done");
+                tock = false;
+        
+            }    
+            else
+            {
+                System.out.println("not done");
+            } 
+        }
+        
+            if (tock == false)
+            {
             
-            appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
-          currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
-            tock = true;
-            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
-            appmodel.getmusicPlayer().playSound();
+                /*d = new MusicPlayer("music/test.mp3");*/
             
-              appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+                if(appmodel.getmusicPlayer() != null) 
+                {
+                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                     appmodel.getmusicPlayer().getMP().dispose();
+                }
+            
+                appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
+                currentlyPlayingSong = Songs.getSelectionModel().getSelectedItem();
+                tock = true;
+                isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+                appmodel.getmusicPlayer().playSound();
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() 
+                {
                   
-       public void run() {
+                    public void run()
+                    {
            
-            System.out.println("end of media");
-            skip();
-            
-         
-       }
-   });
-        } 
+                    System.out.println("end of media");
+                    skip();
+                    }
+                });
+            } 
        
     
         if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
@@ -606,9 +616,178 @@ public class AppController implements Initializable
         
 
     }
+      
+      if(listSelection == ListSelection.SONGSINPLAYLIST)
+      {
+          if(appmodel.getmusicPlayer() != null) 
+        {
+        
+        
+            if(!SongsInPlaylist.getSelectionModel().getSelectedItem().equals(null))  
+            { 
+                if(SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
+                {
+                    appmodel.getmusicPlayer().PauseSound();
+                    System.out.println("changing song");
+                    tock = false;
+                }
+                else
+                {
+                    System.out.println("still playing current song");
+                }
+            }
+          
+            if(appmodel.getmusicPlayer().isDone())
+            {
+        
+                System.out.println("done");
+                tock = false;
+        
+            }    
+            else
+            {
+                System.out.println("not done");
+            } 
+        }
+        
+            if (tock == false)
+            {
+            
+                /*d = new MusicPlayer("music/test.mp3");*/
+            
+                if(appmodel.getmusicPlayer() != null) 
+                {
+                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                     appmodel.getmusicPlayer().getMP().dispose();
+                }
+            
+                appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());
+                currentlyPlayingSong = SongsInPlaylist.getSelectionModel().getSelectedItem();
+                tock = true;
+                isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+                appmodel.getmusicPlayer().playSound();
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() 
+                {
+                  
+                    public void run()
+                    {
+           
+                    System.out.println("end of media");
+                    skip();
+                    }
+                });
+            } 
+       
+    
+        if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
+        {
+            tick = true;
+            appmodel.getmusicPlayer().playSound();
+            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+            
+        }
+        else if(tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
+        {
+            tick = false;
+            isPlaying.setText("(None)... is playing");
+            appmodel.getmusicPlayer().PauseSound();
+        }
+          
+      }
+      
+      if( listSelection == ListSelection.PLAYLIST)
+      {
+           if(appmodel.getmusicPlayer() != null) 
+        {
+        
+           playlistCounter = 0;
+           while( SongsInPlaylist.getItems().get(playlistCounter).equals(null))
+         
+           {
+                 playlistCounter =  playlistCounter+1;
+           }
+          
+            if(!SongsInPlaylist.getItems().get(playlistCounter).equals(null))  
+            { 
+                listSelection = ListSelection.SONGSINPLAYLIST;
+                SongsInPlaylist.getSelectionModel().select(playlistCounter);
+                if(SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
+                {
+                    appmodel.getmusicPlayer().PauseSound();
+                    System.out.println("changing song");
+                    tock = false;
+                }
+                else
+                {
+                    System.out.println("still playing current song");
+                }
+            }
+          
+            if(appmodel.getmusicPlayer().isDone())
+            {
+        
+                System.out.println("done");
+                tock = false;
+        
+            }    
+            else
+            {
+                System.out.println("not done");
+            } 
+        }
+        
+            if (tock == false)
+            {
+            
+                /*d = new MusicPlayer("music/test.mp3");*/
+            
+                if(appmodel.getmusicPlayer() != null) 
+                {
+                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                     appmodel.getmusicPlayer().getMP().dispose();
+                }
+            
+                appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());
+                currentlyPlayingSong = SongsInPlaylist.getSelectionModel().getSelectedItem();
+                tock = true;
+                isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+                appmodel.getmusicPlayer().playSound();
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() 
+                {
+                  
+                    public void run()
+                    {
+           
+                    System.out.println("end of media");
+                    skip();
+                    }
+                });
+            } 
+       
+    
+        if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
+        {
+            tick = true;
+            appmodel.getmusicPlayer().playSound();
+            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+            
+        }
+        else if(tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
+        {
+            tick = false;
+            isPlaying.setText("(None)... is playing");
+            appmodel.getmusicPlayer().PauseSound();
+        }
+          
+          
+      }
+    }
     
      private void Play(){
       if(appmodel.getmusicPlayer() != null) {
+          
+          if(listSelection == ListSelection.SONGS )
+      {
           
           
           //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
@@ -634,6 +813,35 @@ public class AppController implements Initializable
      
      
       }
+          if(listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
+      {
+           //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+          appmodel.getmusicPlayer().getMP().dispose();
+          
+          
+          
+      appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());
+      
+          currentlyPlayingSong = SongsInPlaylist.getSelectionModel().getSelectedItem();
+            isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
+            appmodel.getmusicPlayer().playSound();
+            
+        appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+            
+       public void run() {
+           
+            System.out.println("end of media");
+            skip();
+         
+       }
+   });
+          
+      }
+      
+          
+          
+     }
+
      }
     
 
@@ -643,7 +851,8 @@ public class AppController implements Initializable
         skip();
     }
     public void skip(){
-        
+        if(listSelection == ListSelection.SONGS )
+        {
    //  System.out.println();
     //  System.out.println();
      // System.out.println();
@@ -683,6 +892,55 @@ public class AppController implements Initializable
     
     
     }
+        
+         if(listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
+         {
+             //  System.out.println();
+    //  System.out.println();
+     // System.out.println();
+     // System.out.println();
+      SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex();
+      
+    //  System.out.println(Songs.getItems().size() +"    storlse");
+      
+    //  System.out.println(SelectedIndex +"       SelectedIndex");
+    //  System.out.println(SelectedIndex +1 +"       SelectedIndex ++");
+   //   System.out.println();
+    //  System.out.println();
+     // System.out.println();
+      //System.out.println();
+      
+      if( SelectedIndex +1 == SongsInPlaylist.getItems().size())
+      {
+      
+            SongsInPlaylist.getSelectionModel().selectFirst();
+            System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+            Play();
+            
+      
+      }
+      else{
+           SongsInPlaylist.getSelectionModel().select(SelectedIndex +1);
+           Play();
+           
+      }
+     
+      
+      
+        
+        System.out.println(SongsInPlaylist.getSelectionModel().getSelectedIndex());
+        
+    
+    
+    
+         }
+         
+         if( listSelection == ListSelection.PLAYLIST)
+         {
+             
+             
+         }
+    }
 
     @FXML
     private void changeVolume(MouseEvent event)
@@ -721,9 +979,22 @@ public class AppController implements Initializable
     {
         if (playlist.getSelectionModel().getSelectedItem() != null)
         { 
+            listSelection = ListSelection.PLAYLIST;
           SongsInPlaylist.setItems(appmodel.getSongsInPlaylist(playlist.getSelectionModel().getSelectedItem()));
         }
         
+    }
+
+    @FXML
+    private void clickedOnSongInPlaylist(MouseEvent event)
+    {
+        listSelection = ListSelection.SONGSINPLAYLIST;
+    }
+
+    @FXML
+    private void clickedOnSongs(MouseEvent event)
+    {
+        listSelection = ListSelection.SONGS;
     }
  
     
