@@ -62,6 +62,10 @@ public class PlayListManager {
     public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
     {
         pD.orderPlaylist(playlist, song, position, direction);
+    public int playlistTotalTime(List<Song> songs) {
+        int totalTime = 0;
+        totalTime = songs.stream().map((song) -> song.getTime()).reduce(totalTime, Integer::sum);
+        return totalTime;
     }
  
 }
