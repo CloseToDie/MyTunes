@@ -29,4 +29,6 @@ public interface PlaylistFacade {
     
     public boolean addToPlaylist(Playlist playlist, Song song, int position);
     
+     public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position);
+    
 }

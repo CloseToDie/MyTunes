@@ -58,5 +58,10 @@ public class PlayListManager {
     {
         pD.clearPlaylist(playlist);
     }
+    
+    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
+    {
+        return pD.clearSongFromPlaylist(playlist,song,position);
+    }
  
 }
