@@ -338,18 +338,44 @@ public class AppController implements Initializable
      * Moves a song up in a playlist up
      * @param event 
      */
+    
     @FXML
     private void goUp(ActionEvent event)
     {
+        Playlist selectedPlaylist = playlist.getSelectionModel().getSelectedItem();
+        Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
+        SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
+        
+        if(SelectedIndex == 1)
+        {
+            System.out.println("can't move this song up");
+        }else
+        {        
+        appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, false);
+        SongsInPlaylist.refresh();
+        }
     }
 
     /**
      * Moves a song down in a playlist down
      * @param event 
      */
+    
     @FXML
     private void GoDown(ActionEvent event)
     {
+        Playlist selectedPlaylist = playlist.getSelectionModel().getSelectedItem();
+        Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
+        SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
+        
+       /*if(SelectedIndex > selectedPlaylist.getSongslist().size())
+        {
+            System.out.println("Can't move this song down");
+        }else */
+        //{
+        appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, true);
+        SongsInPlaylist.refresh();
+        //}
     }
 
     /**
