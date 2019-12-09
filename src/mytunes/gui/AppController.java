@@ -477,7 +477,7 @@ public class AppController implements Initializable
     }
 
     /**
-     * ´Plays the previous song from the song list or playlist
+     * Plays the previous song from the song list or playlist
      * @param event 
      */
     @FXML
@@ -887,6 +887,10 @@ public class AppController implements Initializable
      }
     
 
+     /***
+      * playes the next song in the song list or playlist
+      * @param event 
+      */
     @FXML
     private void Skip(ActionEvent event)
     {
@@ -1016,6 +1020,10 @@ public class AppController implements Initializable
         return isPlaying;
     }    
 
+    /**
+     * updates the playlist view
+     * @param event 
+     */
     @FXML
     private void updatePlaylistview(MouseEvent event)
     {
@@ -1027,12 +1035,20 @@ public class AppController implements Initializable
         
     }
 
+    /**
+     * detects if a song in a playlist is selected
+     * @param event 
+     */
     @FXML
     private void clickedOnSongInPlaylist(MouseEvent event)
     {
         listSelection = ListSelection.SONGSINPLAYLIST;
     }
 
+    /**
+     * detects if a song in the song list is selected
+     * @param event 
+     */
     @FXML
     private void clickedOnSongs(MouseEvent event)
     {

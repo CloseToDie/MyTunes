@@ -27,7 +27,8 @@ public class MyTunes extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("gui/App.fxml"));
         
         Scene scene = new Scene(root);
-         
+        
+        stage.setTitle("Mytunes");
         stage.setScene(scene);
         stage.show();
         /*Media pick = new Media(Paths.get("music/3amWestEnd.mp3").toUri().toString()); // replace this with your own audio file
