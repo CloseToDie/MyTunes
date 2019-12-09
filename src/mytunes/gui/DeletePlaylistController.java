@@ -11,13 +11,13 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import mytunes.be.Playlist;
 
-
 /**
  *
  * @author kacpe
  */
 public class DeletePlaylistController
 {
+
     private AppModel appModel;
     private Playlist playlist;
 
@@ -26,22 +26,33 @@ public class DeletePlaylistController
     @FXML
     private Button No;
 
-    
+    /**
+     * Sets the appModel object
+     *
+     * @param app
+     */
+    public void setAppModel(AppModel app)
+    {
 
-    public void setAppModel(AppModel app){
-    
-    appModel = app;
-    
-    
+        appModel = app;
+
     }
-    
+
+    /**
+     * Gets the selected playlist
+     *
+     * @param playlist
+     */
     public void setPlaylist(Playlist playlist)
     {
         this.playlist = playlist;
-        
-     
     }
 
+    /**
+     * deletes the chosen playlist
+     *
+     * @param event
+     */
     @FXML
     private void Yes(ActionEvent event)
     {
@@ -50,11 +61,16 @@ public class DeletePlaylistController
         stage.close();
     }
 
+    /**
+     * Cloeses the window without doing anything else
+     *
+     * @param event
+     */
     @FXML
     private void No(ActionEvent event)
     {
         Stage stage = (Stage) No.getScene().getWindow();
         stage.close();
     }
-    
+
 }

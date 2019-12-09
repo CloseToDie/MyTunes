@@ -45,7 +45,7 @@ public class EditPlaylistController implements Initializable
     }    
 
     /**
-     * closes the window without aplaying changes
+     * Closes the window without aplaying changes
      * @param event 
      */
     @FXML
@@ -63,7 +63,7 @@ public class EditPlaylistController implements Initializable
     }
 
     /**
-     * adds a new playlist or applyes the changes
+     * Adds a new playlist or applyes the changes
      * to an already existing playlist
      * @param event 
      */
@@ -87,6 +87,10 @@ public class EditPlaylistController implements Initializable
         stage.close();
     }
     
+    /**
+     * Sets the playlist name in the textfield
+     * @param playlist 
+     */
     public void setPlaylist(Playlist playlist)
     {
         this.playlist = playlist;
