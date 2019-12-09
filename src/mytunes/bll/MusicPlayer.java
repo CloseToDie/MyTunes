@@ -21,80 +21,58 @@ public class MusicPlayer
     private static Media m; 
     private static MediaPlayer player;
     private String title;
-   
     
-    
-    public MusicPlayer(String filename)
-    {
+    /**
+     * MusicPlayer constructor
+     * @param filename 
+     */
+    public MusicPlayer(String filename) {
         m = new Media(Paths.get(filename).toUri().toString());
-        
+
         m.getMetadata().addListener((MapChangeListener<String, Object>) change -> {
-            
-             title = (String)m.getMetadata().get("title");
-             
-             //System.out.println(title);
-   });
-        
-        
+            title = (String) m.getMetadata().get("title");
+        });
         
         player = new MediaPlayer(m);
     }
-
-    public MusicPlayer() {
-        
-        
-        
-    }
     
-    public static void playSound(){
-
+    /**
+     * Start playing a song
+     */
+    public static void playSound() {
         player.play();
-        
-        
     }
     
-    public static void PauseSound()
-    {
+    /**
+     * Pause the song
+     */
+    public static void PauseSound() {
         player.pause();
     }
     
-    public static boolean isPlaying(){
+    /**
+     * Check if the song is done playing
+     * @return boolean
+     */
+    public static boolean isDone() {
+        if(!player.getCurrentTime().lessThan(player.getStopTime())) return true;
+        return false; 
+    }
     
-    boolean playing = player.getStatus().equals(Status.PLAYING);
-    return playing;
-    
-    
-    
+    /**
+     * Get the MediaPlayer
+     * @return MediaPlayer
+     */
+    public  MediaPlayer getMP() {
+        return player; 
     }
 
-    
-    public static boolean isDone(){
-    
-        if(!player.getCurrentTime().lessThan(player.getStopTime())){
-        
-            System.out.println("fffffffffffffffffffffffffffffffffffff");
-        return true; 
-        
-        
-        }
-        System.out.println(player.getCurrentTime());
-        System.out.println(player.getStopTime());
-        
-   return false; 
-    
-    }
-    
-    public  MediaPlayer getMP(){
-    
-    return player; 
-    
-    }
-
+    /**
+     * Get the title
+     * @return title
+     */
     public String getTitle() {
         return title;
     }
-    
-    
-    
 
 }

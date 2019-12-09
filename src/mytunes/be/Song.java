@@ -24,8 +24,18 @@ public class Song {
     private int minutes; 
     private String path;
 
+    /**
+     * Song constructor
+     * @param id
+     * @param title
+     * @param album
+     * @param artist
+     * @param category
+     * @param time
+     * @param path
+     * @param timetext 
+     */
     public Song(int id, String title, String album, String artist, String category, int time, String path, String timetext) {
-        
         this.id = id;
         this.timetext = new SimpleStringProperty(timetext);
         this.title = new SimpleStringProperty(title);
@@ -38,8 +48,6 @@ public class Song {
         minutes = (int) Math.floor(time / 60);
         seconds = time % 60;
         setTimetext(minutes +" : "+ seconds);
-        
-        
     }
 
     /**
@@ -168,11 +176,13 @@ public class Song {
         this.path = path;
     }
 
+    /**
+     * Java override toString
+     * @return String
+     */
     @Override
     public String toString() {
         return getTitle()  + "  "+  getArtist() +"  "+  getCategory() + "  "+ getTimetext();
     }
-    
-    
     
 }
