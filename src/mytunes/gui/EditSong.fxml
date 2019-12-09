@@ -38,7 +38,6 @@
       <TextField fx:id="Artist" layoutX="151.0" layoutY="70.0" />
       <TextField fx:id="Time_textField" layoutX="151.0" layoutY="147.0" />
       <ChoiceBox fx:id="CategoryChoiceBox" layoutX="150.0" layoutY="112.0" prefHeight="26.0" prefWidth="76.0" />
-      <Button fx:id="MoreCategories" layoutX="239.0" layoutY="112.0" mnemonicParsing="false" onAction="#MoreCategories" text="More.." />
       <Button fx:id="Cancel" layoutX="162.0" layoutY="246.0" mnemonicParsing="false" onAction="#Cancel" text="Cancel" />
       <Button fx:id="Save" layoutX="238.0" layoutY="246.0" mnemonicParsing="false" onAction="#Save" text="Save" />
       <Button fx:id="songChoiceButton" layoutX="151.0" layoutY="207.0" mnemonicParsing="false" onAction="#songChoiceButton" prefHeight="26.0" prefWidth="87.0" text="Choose Song" />

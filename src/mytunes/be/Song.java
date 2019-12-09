@@ -13,6 +13,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author andreasvillumsen
  */
 public class Song {
+
     private int id;
     private final SimpleStringProperty title;
     private final SimpleStringProperty album;
@@ -21,7 +22,7 @@ public class Song {
     private final SimpleIntegerProperty time;
     private final SimpleStringProperty timetext;
     private int seconds;
-    private int minutes; 
+    private int minutes;
     private String path;
 
     /**
@@ -44,7 +45,7 @@ public class Song {
         this.category = new SimpleStringProperty(category);
         this.time = new SimpleIntegerProperty(time);
         this.path = path;
-        
+
         minutes = (int) Math.floor(time / 60);
         seconds = time % 60;
         setTimetext(minutes +" : "+ seconds);
@@ -52,6 +53,7 @@ public class Song {
 
     /**
      * Get the id of the song
+     *
      * @return id
      */
     public int getId() {
@@ -60,21 +62,26 @@ public class Song {
 
     /**
      * Set the id of the song
-     * @param id 
+     *
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
     }
+
     /**
-     * 
+     * get the text displaying the time in minutes and seconds
+     *
      * @return timetext
      */
-    public String getTimetext(){
-        return  timetext.get();
+    public String getTimetext() {
+        return timetext.get();
     }
+
     /**
-     * 
-     * @param timetext 
+     * set the text displaying the time in minutes and seconds
+     *
+     * @param timetext
      */
     public void setTimetext(String timetext) {
         this.timetext.set(timetext);
@@ -82,6 +89,7 @@ public class Song {
 
     /**
      * Get the title of the song
+     *
      * @return title
      */
     public String getTitle() {
@@ -90,7 +98,8 @@ public class Song {
 
     /**
      * Set the title of the song
-     * @param title 
+     *
+     * @param title
      */
     public void setTitle(String title) {
         this.title.set(title);
@@ -98,6 +107,7 @@ public class Song {
 
     /**
      * Get the album of the song
+     *
      * @return album
      */
     public String getAlbum() {
@@ -106,7 +116,8 @@ public class Song {
 
     /**
      * Set the album of the song
-     * @param album 
+     *
+     * @param album
      */
     public void setAlbum(String album) {
         this.album.set(album);
@@ -114,6 +125,7 @@ public class Song {
 
     /**
      * Get the artist of the song
+     *
      * @return artist
      */
     public String getArtist() {
@@ -122,7 +134,8 @@ public class Song {
 
     /**
      * Set the artist of the song
-     * @param artist 
+     *
+     * @param artist
      */
     public void setArtist(String artist) {
         this.artist.set(artist);
@@ -130,6 +143,7 @@ public class Song {
 
     /**
      * Get the category of the song
+     *
      * @return category
      */
     public String getCategory() {
@@ -138,14 +152,16 @@ public class Song {
 
     /**
      * Set the category of the song
-     * @param category 
+     *
+     * @param category
      */
     public void setCategory(String category) {
         this.category.set(category);
     }
 
     /**
-     * Get the time length of the song
+     * Get the time length of the song in ms
+     *
      * @return time
      */
     public int getTime() {
@@ -153,15 +169,17 @@ public class Song {
     }
 
     /**
-     * Set the time length of the song
-     * @param time 
+     * Set the time length of the song in ms
+     *
+     * @param time
      */
     public void setTime(int time) {
         this.time.set(time);
     }
-    
+
     /**
      * Get the path of the song
+     *
      * @return path
      */
     public String getPath() {
@@ -170,7 +188,8 @@ public class Song {
 
     /**
      * Set the path of the song
-     * @param path 
+     *
+     * @param path
      */
     public void setPath(String path) {
         this.path = path;
@@ -181,8 +200,11 @@ public class Song {
      * @return String
      */
     @Override
+    /**
+     * Convert the object into a string representation
+     */
     public String toString() {
-        return getTitle()  + "  "+  getArtist() +"  "+  getCategory() + "  "+ getTimetext();
+        return getTitle() + "  " + getArtist() + "  " + getCategory() + "  " + getTimetext();
     }
     
 }

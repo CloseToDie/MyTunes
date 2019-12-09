@@ -35,8 +35,10 @@ import org.jaudiotagger.audio.AudioFileIO;
  *
  * @author lumby
  */
+/* This class controls the fxml that lets the user edit songs*/
 public class EditSongController implements Initializable
 {
+   
     private int duration = 0;
     private String filename = "";
     private String directory = "";
@@ -46,8 +48,6 @@ public class EditSongController implements Initializable
     private TextField Title;
     @FXML
     private TextField Artist;
-    @FXML
-    private Button MoreCategories;
     @FXML
     private Button Cancel;
     @FXML
@@ -97,7 +97,9 @@ public class EditSongController implements Initializable
         
        
     } 
-    
+     /*we need to make sure that the controller uses the same appmodel as the rest of the program
+    otherwise it would be wotking with diferent datasets. We therefore have a method that we call when the fxml stage is set
+    where the correct appmodel is passed to the controller.*/
     public void setAppModel(AppModel app){
     
     appModel = app;
@@ -105,14 +107,6 @@ public class EditSongController implements Initializable
     
     }
 
-    /**
-     * let's the user add another categorie to a song
-     * @param event 
-     */
-    @FXML
-    private void MoreCategories(ActionEvent event)
-    {
-    }
 
     /**
      * closes the window without applying any changes
@@ -121,9 +115,8 @@ public class EditSongController implements Initializable
     @FXML
     private void Cancel(ActionEvent event)
     {
-           // get a handle to the stage
+   
     Stage stage = (Stage) Cancel.getScene().getWindow();
-    // do what you have to do
     stage.close();
     }
 
@@ -134,60 +127,17 @@ public class EditSongController implements Initializable
     @FXML
     private void Save(ActionEvent event)
     {
-        //SongDBDAO addSong = new SongDBDAO();
         
         String title = Title.getText();
         String artist = Artist.getText();
         String genre = CategoryChoiceBox.getSelectionModel().getSelectedItem();
         String songPath = FileTextField.getText();
-        //duration = song.getTime();
-        if(title == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song title can not be blank!");
-            title = "EDIT ME"; 
-        }
-        else
-        {
-            title = Title.getText();; 
-        }
-          
-        if(artist == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song artist can not be blank!");
-            artist = "EDIT ME"; 
-        }
-        else
-        {
-            artist = Artist.getText(); 
-        }
-        
-        if(genre == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song genre can not be blank!");
-            genre = "EDIT ME"; 
-        }
-        else
-        {
-           genre = CategoryChoiceBox.getSelectionModel().getSelectedItem(); 
-        }
-        
-        if(songPath == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song path can not be blank!");
-            songPath = "EDIT ME"; 
-        }
-        else
-        {
-           songPath = FileTextField.getText(); 
-        }
+  
         
         if(duration == 0)
         {
             duration = song.getTime();
         }
-        
-        
-        
         
         Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath,"");
         appModel.updateSong(songToUpdate);
@@ -235,6 +185,8 @@ public class EditSongController implements Initializable
         
     }
     
+    /*This method is used to pass the data concerning the song being edited to the class. 
+    It is called when the fxml stage is set*/
     public void setSong(Song song)
     {
         this.song = song;
