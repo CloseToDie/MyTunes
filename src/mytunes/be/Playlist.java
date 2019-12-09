@@ -21,17 +21,24 @@ public class Playlist {
     private final SimpleIntegerProperty time;
     private final SimpleStringProperty timetext;
     private ArrayList<Song> songslist;
-    
+    private int minutes;
+    private int seconds;
     
     
 
-    public Playlist(int id, String name, int songs, int time) {
+    public Playlist(int id, String name, int songs, int time , String timetext) {
         this.id = id;
+        this.timetext = new SimpleStringProperty(timetext);
         this.name = new SimpleStringProperty(name);
         this.songs = new SimpleIntegerProperty(songs);
         this.time = new SimpleIntegerProperty(time);
-        this.timetext = new SimpleStringProperty();
+        
         songslist = new ArrayList<>();
+        
+        
+        minutes = (int) Math.floor(time / 60);
+        seconds = time % 60;
+        setTimetext(minutes +" : "+ seconds);
     }
 
     /**
@@ -50,11 +57,11 @@ public class Playlist {
         this.id = id;
     }
     
-    public String getTimeText(){
+    public String getTimetext(){
         return  timetext.get();
     }
     
-    public void setTimeText(String timetext) {
+    public void setTimetext(String timetext) {
         this.timetext.set(timetext);
     }
     
@@ -97,6 +104,11 @@ public class Playlist {
      */
     public void setTime(int time) {
         this.time.set(time);
+        
+        minutes = (int) Math.floor(time / 60);
+        seconds = time % 60;
+       setTimetext(minutes +" : "+ seconds);
+        
     }
 
     public ArrayList<Song> getSongslist() {

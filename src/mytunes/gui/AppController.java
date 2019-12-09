@@ -114,13 +114,13 @@ public class AppController implements Initializable
     @FXML
     private TableColumn<Song, String> songCategoryCol;
     @FXML
-    private TableColumn<Song, Integer> songTimeCol;
+    private TableColumn<Song, String> songTimeCol;
     @FXML
     private TableColumn<Playlist, String> playlistNameCol;
     @FXML
     private TableColumn<Playlist, Integer> playlistSongsCol;
     @FXML
-    private TableColumn<Playlist, Integer> playlistTimeCol;
+    private TableColumn<Playlist, String> playlistTimeCol;
     private int SelectedIndex;
 
    
@@ -155,7 +155,7 @@ public class AppController implements Initializable
             );
 
             songTimeCol.setCellValueFactory(
-                new PropertyValueFactory<Song,Integer>("time")
+                new PropertyValueFactory<Song,String>("timetext")
             );
             
            /* private TableColumn<Playlist, String> playlistNameCol;
@@ -172,7 +172,7 @@ public class AppController implements Initializable
                 new PropertyValueFactory<Playlist,Integer>("songs")
             );
             playlistTimeCol.setCellValueFactory(
-                new PropertyValueFactory<Playlist,Integer>("time")
+                new PropertyValueFactory<Playlist,String>("timetext")
             );
             
             
@@ -196,11 +196,12 @@ public class AppController implements Initializable
                
                
                if(appmodel.getmusicPlayer() != null) {
-          
+                   System.out.println("the musicplayer is not null");
           
           //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                     appmodel.getmusicPlayer().getMP().dispose();
             }
+               else{ System.out.println("the musicplayer is  null");}
                
                
                 appmodel.createMusicPlayer(file.getPath()); 

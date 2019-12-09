@@ -183,7 +183,7 @@ public class NewSongController implements Initializable
         
         
         
-        Song songToAdd = new Song(1, title,"",artist, genre, duration, songPath);
+        Song songToAdd = new Song(1, title,"",artist, genre, duration, songPath ,"");
         appModel.createSong(songToAdd);
          System.out.print(directory+"dræb mig");
         Stage stage = (Stage) Cancel.getScene().getWindow();

@@ -81,7 +81,7 @@ public class PlaylistController implements Initializable
             playlistName = Name.getText(); 
         }
         
-        Playlist Playlist = new Playlist(0, playlistName, 0, 0);
+        Playlist Playlist = new Playlist(0, playlistName, 0, 0 ,"timetext");
         appModel.createPlaylist(Playlist);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();

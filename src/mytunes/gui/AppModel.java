@@ -30,6 +30,11 @@ public class AppModel {
         songs.addAll(app.getAllSongs());
         System.out.println(songs.get(0).getTitle());
         
+        for (Song song : songs) {
+            
+            System.out.println(song.getPath());
+        }
+        
     }
     
     private final ObservableList<Song> allSongs;
@@ -51,7 +56,11 @@ public class AppModel {
         allPlaylist.addAll(pm.getAllPlaylists());
         
         songsInPlaylist = FXCollections.observableArrayList();
+        
+        //check if there are any playlists
+        if(pm.getAllPlaylists().size() != 0){
         songsInPlaylist.addAll(pm.getAllSongsInPlaylist(pm.getAllPlaylists().get(0)));
+        }
     }
     /**
      * returns all songs in the database
