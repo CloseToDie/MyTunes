@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+/*Here the package that this class is in i defined*/
 package mytunes.gui;
 
+/*All the imports are defined here,the class needs to know witch other classes, packages or libraries it has acces to,
+this also defines how the class fits into the programs design structure.*/
 import java.awt.Frame;
 import java.awt.FileDialog;
 import java.io.File;
@@ -35,19 +38,20 @@ import org.jaudiotagger.audio.AudioFileIO;
  *
  * @author lumby
  */
+/*NewSongController is the class that controls the fxml page where the user can create and add new songs to the app*/
 public class NewSongController implements Initializable
 {
+    /*The instance variables er defined and some given an initial value*/
     private int duration = 0;
     private String filename = "";
     private String directory = "";
     private AppModel appModel;
 
+    /* Here is where the program autogeneretes the definitions of all the elements of the fxml.*/
     @FXML
     private TextField Title;
     @FXML
     private TextField Artist;
-    @FXML
-    private Button MoreCategories;
     @FXML
     private Button Cancel;
     @FXML
@@ -99,20 +103,16 @@ public class NewSongController implements Initializable
        
     } 
     
+    /*we need to make sure that the controller uses the same appmodel as the rest of the program
+    otherwise it would be wotking with diferent datasets. We therefore have a method that we call when the fxml stage is set
+    where the correct appmodel is passed to the controller.*/
+    
     public void setAppModel(AppModel app){
     
     appModel = app;
     
     }
 
-    /**
-     * let's the user add another categorie to a song
-     * @param event 
-     */
-    @FXML
-    private void MoreCategories(ActionEvent event)
-    {
-    }
 
     /**
      * closes the window without applying any changes
@@ -121,9 +121,7 @@ public class NewSongController implements Initializable
     @FXML
     private void Cancel(ActionEvent event)
     {
-           // get a handle to the stage
     Stage stage = (Stage) Cancel.getScene().getWindow();
-    // do what you have to do
     stage.close();
     }
 
@@ -134,52 +132,11 @@ public class NewSongController implements Initializable
     @FXML
     private void Save(ActionEvent event)
     {
-        //SongDBDAO addSong = new SongDBDAO();
-        
         String title = Title.getText();
         String artist = Artist.getText();
         String genre = CategoryChoiceBox.getSelectionModel().getSelectedItem();
         String songPath = FileTextField.getText();
         
-        if(title == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song title can not be blank!");
-            title = "EDIT ME"; 
-        }
-        else
-        {
-            title = Title.getText(); 
-        }
-          
-        if(artist == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song artist can not be blank!");
-            artist = "EDIT ME"; 
-        }
-        else
-        {
-            artist = Artist.getText(); 
-        }
-        
-        if(genre == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song genre can not be blank!");
-            genre = "EDIT ME"; 
-        }
-        else
-        {
-           genre = CategoryChoiceBox.getSelectionModel().getSelectedItem(); 
-        }
-        
-        if(songPath == "")
-        {
-            JOptionPane.showMessageDialog(null, "Song path can not be blank!");
-            songPath = "EDIT ME"; 
-        }
-        else
-        {
-           songPath = FileTextField.getText(); 
-        }
         
         
         
