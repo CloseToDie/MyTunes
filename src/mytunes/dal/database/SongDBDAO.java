@@ -32,7 +32,12 @@ public class SongDBDAO implements SongFacade  {
         
         ArrayList<Song> songs = new ArrayList<>();
         songs.addAll(songDBDAO.getAllSongs());
-        System.out.println(songs.get(0).getTitle());
+        System.out.println(songs.get(0).getTimetext());
+        
+        for (Song song : songs) {
+            
+            System.out.println(song);
+        }
     }
     
     private final DatabaseConnector dbCon;
@@ -62,7 +67,8 @@ public class SongDBDAO implements SongFacade  {
                 String category = rs.getString("category");
                 int time = rs.getInt("time");
                 String path = rs.getString("path");
-                songs.add(new Song(id, title, album, artist, category, time, path));
+                String timetext = "antoni";
+                songs.add(new Song(id, title, album, artist, category, time, path ,timetext));
             }
             return songs;
             

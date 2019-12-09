@@ -189,7 +189,7 @@ public class EditSongController implements Initializable
         
         
         
-        Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath);
+        Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath,"");
         appModel.updateSong(songToUpdate);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();

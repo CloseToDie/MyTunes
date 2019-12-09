@@ -19,16 +19,27 @@ public class Song {
     private final SimpleStringProperty artist;
     private final SimpleStringProperty category;
     private final SimpleIntegerProperty time;
+    private final SimpleStringProperty timetext;
+    private int seconds;
+    private int minutes; 
     private String path;
 
-    public Song(int id, String title, String album, String artist, String category, int time, String path) {
+    public Song(int id, String title, String album, String artist, String category, int time, String path, String timetext) {
+        
         this.id = id;
+        this.timetext = new SimpleStringProperty(timetext);
         this.title = new SimpleStringProperty(title);
         this.album = new SimpleStringProperty(album);
         this.artist = new SimpleStringProperty(artist);
         this.category = new SimpleStringProperty(category);
         this.time = new SimpleIntegerProperty(time);
         this.path = path;
+        
+        minutes = (int) Math.floor(time / 60);
+        seconds = time % 60;
+        setTimetext(minutes +" : "+ seconds);
+        
+        
     }
 
     /**
@@ -45,6 +56,20 @@ public class Song {
      */
     public void setId(int id) {
         this.id = id;
+    }
+    /**
+     * 
+     * @return timetext
+     */
+    public String getTimetext(){
+        return  timetext.get();
+    }
+    /**
+     * 
+     * @param timetext 
+     */
+    public void setTimetext(String timetext) {
+        this.timetext.set(timetext);
     }
 
     /**
@@ -145,7 +170,7 @@ public class Song {
 
     @Override
     public String toString() {
-        return getTitle()  + "  "+  getArtist() +"  "+  getCategory() + "  "+ getTime();
+        return getTitle()  + "  "+  getArtist() +"  "+  getCategory() + "  "+ getTimetext();
     }
     
     

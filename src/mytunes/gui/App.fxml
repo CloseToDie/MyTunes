@@ -17,7 +17,7 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <ListView fx:id="SongsInPlaylist" layoutX="255.0" layoutY="169.0" prefHeight="402.0" prefWidth="134.0" />
+      <ListView fx:id="SongsInPlaylist" layoutX="255.0" layoutY="169.0" onMouseClicked="#clickedOnSongInPlaylist" prefHeight="402.0" prefWidth="134.0" />
       <TextField fx:id="Search" layoutX="628.0" layoutY="22.0" onKeyPressed="#Search" promptText="Search" />
       <Label layoutX="472.0" layoutY="149.0" text="Songs">
          <font>
@@ -61,7 +61,7 @@
       <Button fx:id="previous" layoutX="32.0" layoutY="35.0" mnemonicParsing="false" onAction="#previous" text="&lt;&lt;" />
       <Button fx:id="Skip" layoutX="119.0" layoutY="35.0" mnemonicParsing="false" onAction="#Skip" text="&gt;&gt;" />
       <Slider fx:id="volume" layoutX="20.0" layoutY="76.0" onDragDetected="#changeVolume" />
-      <TableView fx:id="Songs" layoutX="472.0" layoutY="173.0" prefHeight="402.0" prefWidth="347.0">
+      <TableView fx:id="Songs" layoutX="472.0" layoutY="173.0" onMouseClicked="#clickedOnSongs" prefHeight="402.0" prefWidth="347.0">
         <columns>
           <TableColumn fx:id="songTitelCol" prefWidth="148.0" text="Titel" />
           <TableColumn fx:id="songArtistCol" prefWidth="66.39996337890625" text="Artist" />

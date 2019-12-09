@@ -81,7 +81,7 @@ public class EditPlaylistController implements Initializable
             playlistName = Name.getText(); 
         }
         
-        Playlist Playlist = new Playlist(playlist.getId(), playlistName.trim(), 0, 0);
+        Playlist Playlist = new Playlist(playlist.getId(), playlistName.trim(), 0, 0,"antoni");
         appModel.updatePlaylist(Playlist);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();

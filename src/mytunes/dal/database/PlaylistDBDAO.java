@@ -36,7 +36,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
       //dao.orderPlaylist(new Playlist(2, "acustic", 0, 0), new Song(43, "title", "album", "artist", "category", 0, "path"), 2, true);
         
    // System.out.println(  dao.clearSongFromPlaylist(new Playlist(5, "name", 0, 0), new Song(55, "title", "album", "artist", "category", 0, "path"), 1));
-        for (Song song : dao.getAllSongsInPlaylist(new Playlist(5, "acustic", 0, 0))) {
+        for (Song song : dao.getAllSongsInPlaylist(new Playlist(5, "acustic", 0, 0,"antoni"))) {
             
             System.out.println( "" + song.getId() + "   "+ song);
             System.out.println("");
@@ -60,7 +60,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
             {
                 int id = rs.getInt("id");
                 String name = rs.getString("name");
-                playlists.add(new Playlist(id, name,1,1));
+                playlists.add(new Playlist(id, name,1,1,"antoni"));
             }
             return playlists;
             
@@ -97,7 +97,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
                 String category = rs.getString("category");
                 int time = rs.getInt("time");
                 String path = rs.getString("path");
-                songs.add(new Song(id, title, album, artist, category, time, path));
+                songs.add(new Song(id, title, album, artist, category, time, path, "dafwfawf"));
             }
             return songs;
             
@@ -201,6 +201,9 @@ public class PlaylistDBDAO implements PlaylistFacade{
             } else {
                 ps2.setInt(1, position - 1);
             }
+            
+            
+            
             return ps2.executeUpdate() > 0;
             
         } catch(SQLServerException ex) {

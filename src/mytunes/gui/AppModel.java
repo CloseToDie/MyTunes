@@ -30,6 +30,11 @@ public class AppModel {
         songs.addAll(app.getAllSongs());
         System.out.println(songs.get(0).getTitle());
         
+        for (Song song : songs) {
+            
+            System.out.println(song.getPath());
+        }
+        
     }
     
     private final ObservableList<Song> allSongs;
@@ -51,7 +56,11 @@ public class AppModel {
         allPlaylist.addAll(pm.getAllPlaylists());
         
         songsInPlaylist = FXCollections.observableArrayList();
+        
+        //check if there are any playlists
+        if(pm.getAllPlaylists().size() != 0){
         songsInPlaylist.addAll(pm.getAllSongsInPlaylist(pm.getAllPlaylists().get(0)));
+        }
     }
     /**
      * returns all songs in the database
@@ -170,6 +179,8 @@ public class AppModel {
     {
         pm.addToPlaylist(playlist, song, position);
         songInPlaylistClearAdd(playlist);
+        allPlaylist.clear();
+        allPlaylist.addAll(pm.getAllPlaylists());
     }
     
     public void clearPlaylist(Playlist playlist)
@@ -194,6 +205,22 @@ public class AppModel {
     {
         songsInPlaylist.clear();
         songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
+    }
+    
+    public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
+    {
+        pm.orderPlaylist(playlist, song, position, direction);
+        songInPlaylistClearAdd(playlist);
+    }
+    
+    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
+    {
+        boolean result = pm.clearSongFromPlaylist(playlist,song,position);
+         songsInPlaylist.clear();
+        songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
+        allPlaylist.clear();
+        allPlaylist.addAll(pm.getAllPlaylists());
+        return result;
     }
     
     

@@ -29,6 +29,11 @@ public class SongManager {
         songs.addAll(songm.getAllSongs());
         System.out.println(songs.get(0).getTitle());
         
+        for (Song song : songs) {
+            
+            System.out.println(song.getPath());
+        }
+        
     }
     
    
