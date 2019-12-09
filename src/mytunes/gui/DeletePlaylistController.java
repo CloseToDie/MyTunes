@@ -14,7 +14,7 @@ import mytunes.be.Playlist;
 
 /**
  *
- * @author kacpe
+ * @author kacper
  */
 public class DeletePlaylistController
 {
