@@ -158,6 +158,7 @@ public class AppModel {
     void createPlaylist(Playlist playlistToAdd)
     {
         pm.createPlaylist(playlistToAdd);
+        songInPlaylistClearAdd(playlistToAdd);
         playlistClearAdd();
     }
     
@@ -165,6 +166,7 @@ public class AppModel {
     public void deletePlaylist(Playlist playlistToDelete)
     {
         pm.deletePlaylist(playlistToDelete);
+        songInPlaylistClearAdd(playlistToDelete);
         playlistClearAdd();
     }
 
@@ -172,7 +174,9 @@ public class AppModel {
     public void updatePlaylist(Playlist PlaylistToUpdate)
     {
         pm.updatePlaylist(PlaylistToUpdate);
+        songInPlaylistClearAdd(PlaylistToUpdate);
         playlistClearAdd();
+        
     }
     
     public void addToPlaylist(Playlist playlist, Song song, int position)
@@ -185,6 +189,7 @@ public class AppModel {
     
     public void clearPlaylist(Playlist playlist)
     {
+        songInPlaylistClearAdd(playlist);
         pm.clearPlaylist(playlist);
     }
     
