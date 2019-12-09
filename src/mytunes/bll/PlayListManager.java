@@ -32,7 +32,7 @@ public class PlayListManager {
     public List<Playlist> getAllPlaylists() {
         List<Playlist> result = pD.getAllPlaylists();
         
-        for (Playlist playlist : result) {w
+        for (Playlist playlist : result) {
             playlist.setTime(playlistTotalTime(getAllSongsInPlaylist(playlist)));
             playlist.setSongs(pD.getAllSongsInPlaylist(playlist).size());
         }
