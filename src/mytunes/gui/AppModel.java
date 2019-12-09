@@ -62,6 +62,7 @@ public class AppModel {
         songsInPlaylist.addAll(pm.getAllSongsInPlaylist(pm.getAllPlaylists().get(0)));
         }
     }
+    
     /**
      * returns all songs in the database
      * @return 
@@ -73,34 +74,33 @@ public class AppModel {
         return allSongs;
     }
      
+     /**
+      * returns all playlists in the database
+      * @return 
+      */
      public ObservableList<Playlist> getAllPlaylist() {
         allPlaylist.clear();
         allPlaylist.addAll(pm.getAllPlaylists());
         return allPlaylist;
     }
      
+     /**
+      * returns all the songs in a given playlist
+      * @param playlist
+      * @return 
+      */
      public ObservableList<Song> getSongsInPlaylist(Playlist playlist)
              {
                  songsInPlaylist.clear();
                  songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
                  return songsInPlaylist;
              }
-     
-     
-     public void fetchData() {
-         
-    allSongs.clear();
-    allSongs.addAll(songManager.getAllSongs());
-    
-    
-    }
+ 
      
      
       /**
      * calls the search function of the songmanager.
-     *
      * @param query
-     * 
      */
      public void search(String query){     
              if (query.isEmpty())
@@ -116,6 +116,10 @@ public class AppModel {
      
      }
      
+     /**
+      * returning the isPlaying label
+      * @return 
+      */
      public Label getIsPlaying() {
         return controler.getIsPlaying();
     }
@@ -123,30 +127,48 @@ public class AppModel {
     
     
 
+     /**
+      * creates a new musicplayer
+      * @param path 
+      */
     void createMusicPlayer(String path)
     {
         musicPlayer = new MusicPlayer(path);
     }
 
+    /**
+     * returns the musicplayer
+     * @return 
+     */
     public MusicPlayer getmusicPlayer()
     {
         return musicPlayer;
     }
 
+    /**
+     * adds a new song to the database
+     * @param songToAdd 
+     */
     void createSong(Song songToAdd)
     {
         songManager.createSong(songToAdd);
         songClearAdd();
     }
     
-    
+    /**
+     * deletes a chosen song from the database
+     * @param songToDelete 
+     */
     public void deleteSong(Song songToDelete)
     {
         songManager.deleteSong(songToDelete);
         songClearAdd();
     }
 
-    
+    /**
+     * updates a songs data
+     * @param SongToUpdate 
+     */
     public void updateSong(Song SongToUpdate)
     {
         songManager.updateSong(SongToUpdate);
@@ -154,7 +176,10 @@ public class AppModel {
     }
     
     
-    
+    /**
+     * creates a new playlist in the database
+     * @param playlistToAdd 
+     */
     void createPlaylist(Playlist playlistToAdd)
     {
         pm.createPlaylist(playlistToAdd);
@@ -162,7 +187,10 @@ public class AppModel {
         playlistClearAdd();
     }
     
-    
+    /**
+     * deletes a playlist from the database
+     * @param playlistToDelete 
+     */
     public void deletePlaylist(Playlist playlistToDelete)
     {
         pm.deletePlaylist(playlistToDelete);
@@ -170,7 +198,10 @@ public class AppModel {
         playlistClearAdd();
     }
 
-    
+    /**
+     * updates a playlists data
+     * @param PlaylistToUpdate 
+     */
     public void updatePlaylist(Playlist PlaylistToUpdate)
     {
         pm.updatePlaylist(PlaylistToUpdate);
@@ -179,6 +210,12 @@ public class AppModel {
         
     }
     
+    /**
+     * adds a song to a given playlist
+     * @param playlist
+     * @param song
+     * @param position 
+     */
     public void addToPlaylist(Playlist playlist, Song song, int position)
     {
         pm.addToPlaylist(playlist, song, position);
@@ -187,37 +224,64 @@ public class AppModel {
         allPlaylist.addAll(pm.getAllPlaylists());
     }
     
+    /**
+     * updates the list of playlists
+     * @param playlist 
+     */
     public void clearPlaylist(Playlist playlist)
     {
         songInPlaylistClearAdd(playlist);
         pm.clearPlaylist(playlist);
     }
     
-    
+    /**
+     * Gets playlist data
+     */
     public void playlistClearAdd()
     {
         allPlaylist.clear();
         allPlaylist.addAll(pm.getAllPlaylists());
     }
     
+    /**
+     * Gets song data
+     */
     public void songClearAdd()
     {
         allSongs.clear();
         allSongs.addAll(songManager.getAllSongs());
     }
     
+    /**
+     * gets the data from the songs in a playlist
+     * @param playlist 
+     */
     public void songInPlaylistClearAdd(Playlist playlist)
     {
         songsInPlaylist.clear();
         songsInPlaylist.addAll(pm.getAllSongsInPlaylist(playlist));
     }
     
+    /**
+     * moves a songs postion in a playlist
+     * @param playlist
+     * @param song
+     * @param position
+     * @param direction 
+     */
     public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
     {
         pm.orderPlaylist(playlist, song, position, direction);
         songInPlaylistClearAdd(playlist);
     }
     
+    /**
+     * clears all songs form a playlist
+     * @param playlist
+     * @param song
+     * @param position
+     * @return 
+     */
     public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
     {
         boolean result = pm.clearSongFromPlaylist(playlist,song,position);
