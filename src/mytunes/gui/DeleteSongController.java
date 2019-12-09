@@ -27,20 +27,28 @@ public class DeleteSongController
 
     
 
+    /**
+     * Sets the appModel
+     * @param app 
+     */
     public void setappmodel(AppModel app){
     
     appmodel = app;
-    
-    
     }
     
+    /**
+     * sets the selected song
+     * @param song 
+     */
     public void setSong(Song song)
     {
         this.song = song;
-        
-     
     }
 
+    /**
+     * Deletes the selceted song
+     * @param event 
+     */
     @FXML
     private void Yes(ActionEvent event)
     {
@@ -49,6 +57,10 @@ public class DeleteSongController
         stage.close();
     }
 
+    /**
+     * Cloeses the window without doing anything else
+     * @param event 
+     */
     @FXML
     private void No(ActionEvent event)
     {

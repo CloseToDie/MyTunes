@@ -60,7 +60,6 @@ public class AppController implements Initializable
     private Song currentlyPlayingSong = null;
     private boolean tock = false;
     private boolean tick = false;
-    private SongModel songModel;
     private AppModel appmodel;
     private MusicPlayer d;
     private Label label;

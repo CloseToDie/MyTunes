@@ -45,7 +45,7 @@ public class PlaylistController implements Initializable
     }    
 
     /**
-     * closes the window without aplaying changes
+     * Closes the window without aplaying changes
      * @param event 
      */
     @FXML
@@ -57,13 +57,17 @@ public class PlaylistController implements Initializable
     stage.close();
     }
     
+    /**
+     * Sets the appModel for the class
+     * @param app 
+     */
     public void setAppModel(AppModel app)
     {
         appModel = app;
     }
 
     /**
-     * adds a new playlist or applyes the changes
+     * Adds a new playlist or applyes the changes
      * to an already existing playlist
      * @param event 
      */
@@ -88,7 +92,7 @@ public class PlaylistController implements Initializable
     }
     
     /**
-     * sets playlist name in the text field.
+     * Sets playlist name in the text field.
      * @param playlist 
      */
     public void setPlaylist(Playlist playlist)
