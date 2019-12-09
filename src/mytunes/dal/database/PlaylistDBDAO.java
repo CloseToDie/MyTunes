@@ -181,30 +181,41 @@ public class PlaylistDBDAO implements PlaylistFacade{
      */
     public boolean orderPlaylist(Playlist playlist, Song song, int position, boolean direction) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND position = ?");
-            ps.setInt(1, position);
-            ps.setInt(2, playlist.getId());
+            int id = 0;
+            
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM song_playlist WHERE playlistid = ? AND position = ?");
+            ps.setInt(1, playlist.getId());
             if(direction) {
-                ps.setInt(3, position + 1);
+                ps.setInt(2, position + 1);
             } else {
-                ps.setInt(3, position - 1);
+                ps.setInt(2, position - 1);
             }
-            ps.executeUpdate();
+            ResultSet rs = ps.executeQuery();
             
-            PreparedStatement ps2 = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND songid = ? AND position = ?");
-            
-            ps2.setInt(2, playlist.getId());
-            ps2.setInt(3, song.getId());
-            ps2.setInt(4, position);
-            if(direction) {
-                ps2.setInt(1, position + 1);
-            } else {
-                ps2.setInt(1, position - 1);
+            while(rs.next())
+            {
+                id = rs.getInt("id");
             }
             
+            PreparedStatement ps1 = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE id = ?");
+            ps1.setInt(1, position);
+            ps1.executeUpdate();
+            
+            PreparedStatement ps3 = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND songid = ? AND position = ? AND id != ?");
+            
+            ps3.setInt(2, playlist.getId());
+            ps3.setInt(3, song.getId());
+            ps3.setInt(4, position);
+            if(direction) {
+                ps3.setInt(1, position + 1);
+            } else {
+                ps3.setInt(1, position - 1);
+            }
+            ps3.setInt(5, id);
             
             
-            return ps2.executeUpdate() > 0;
+            
+            return ps3.executeUpdate() > 0;
             
         } catch(SQLServerException ex) {
             ex.printStackTrace();
