@@ -199,6 +199,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
             
             PreparedStatement ps1 = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE id = ?");
             ps1.setInt(1, position);
+            ps1.setInt(2, id);
             ps1.executeUpdate();
             
             PreparedStatement ps3 = con.prepareStatement("UPDATE song_playlist SET position = ? WHERE playlistid = ? AND songid = ? AND position = ? AND id != ?");
