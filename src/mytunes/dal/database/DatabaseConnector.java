@@ -22,6 +22,9 @@ import java.util.logging.Logger;
 public class DatabaseConnector {
     private SQLServerDataSource dataSource;
     
+    /**
+     * DatabaseConnector constructor
+     */
     public DatabaseConnector()  {
         Properties props = new Properties();
         try {
@@ -38,6 +41,10 @@ public class DatabaseConnector {
         dataSource.setServerName(props.getProperty("server"));
     }
     
+    /**
+     * Get the connection to the database
+     * @return Database connection
+     */
     public Connection getConnection() throws SQLServerException {
         return dataSource.getConnection();
     }

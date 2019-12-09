@@ -22,33 +22,18 @@ import mytunes.dal.SongFacade;
  * @author andreasvillumsen
  */
 public class SongDBDAO implements SongFacade  {
-    public static void main(String[] args) throws Exception {
-        SongDBDAO songDBDAO = new SongDBDAO();
-       /* 
-        Song song = new Song(3, "Køb apelsiner", "231045-0637", "Kim Larsen", "Rock", 202, "kimlarsen.mp3");
-        songDBDAO.updateSong(song);*/
-        
-        //songDBDAO.createSong(new Song(0, "stuuf", "album", "artist", "category", 202, "path"));
-        
-        ArrayList<Song> songs = new ArrayList<>();
-        songs.addAll(songDBDAO.getAllSongs());
-        System.out.println(songs.get(0).getTimetext());
-        
-        for (Song song : songs) {
-            
-            System.out.println(song);
-        }
-    }
-    
     private final DatabaseConnector dbCon;
     
+    /**
+     * SongDBDAO constructor
+     */
     public SongDBDAO() {
         dbCon = new DatabaseConnector();
     }
     
     /**
      * List over all songs in database
-     * @return 
+     * @return list of songs
      */
     @Override
     public List<Song> getAllSongs() {
@@ -82,9 +67,9 @@ public class SongDBDAO implements SongFacade  {
     }
     
     /**
-     * creats new song in the database
+     * Create a new song in the database
      * @param song
-     * @return 
+     * @return boolean
      */
     public Song createSong(Song song) {
         try(Connection con = dbCon.getConnection()) {
@@ -119,9 +104,9 @@ public class SongDBDAO implements SongFacade  {
         return null;
     }
     /**
-     * updates the database
+     * Updates the database
      * @param song
-     * @return 
+     * @return boolean
      */
     public boolean updateSong(Song song) {
         try(Connection con = dbCon.getConnection()) {
@@ -145,9 +130,9 @@ public class SongDBDAO implements SongFacade  {
         return false;
     }
     /**
-     * deletes a song from the database
+     * Deletes a song from the database
      * @param song
-     * @return 
+     * @return boolean
      */
     public boolean deleteSong(Song song) {
         

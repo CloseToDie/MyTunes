@@ -23,32 +23,19 @@ import mytunes.dal.PlaylistFacade;
  */
 public class PlaylistDBDAO implements PlaylistFacade{
     
-    public static void main(String[] args) throws Exception {
-        
-        PlaylistDBDAO dao;
-        dao = new PlaylistDBDAO();
-        
-       // dao.createPlaylist(new Playlist(0, "acustic depression"));
-        
-       //dao.clearPlaylist(new Playlist(1, "stuf", 0, 0));
-       //dao.addToPlaylist( new Playlist(1, "name", 0, 0), new Song(42, "title", "album", "artist", "category", 0, "path"), 2);
-      // dao.deletePlaylist(new Playlist(1, "name", 0, 0));
-      //dao.orderPlaylist(new Playlist(2, "acustic", 0, 0), new Song(43, "title", "album", "artist", "category", 0, "path"), 2, true);
-        
-   // System.out.println(  dao.clearSongFromPlaylist(new Playlist(5, "name", 0, 0), new Song(55, "title", "album", "artist", "category", 0, "path"), 1));
-        for (Song song : dao.getAllSongsInPlaylist(new Playlist(5, "acustic", 0, 0,"antoni"))) {
-            
-            System.out.println( "" + song.getId() + "   "+ song);
-            System.out.println("");
-        }
-    }
-    
     private final DatabaseConnector dbCon;
     
+    /**
+     * PlaylistDBDAO constructor
+     */
     public PlaylistDBDAO() throws Exception {
         dbCon = new DatabaseConnector();
     }
     
+    /**
+     * Get a list of all playlists from the database
+     * @return list of playlist or null
+     */
     public List<Playlist> getAllPlaylists() {
         ArrayList<Playlist> playlists = new ArrayList<>();
         
@@ -73,6 +60,11 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return null;
     }
     
+    /**
+     * Get all the songs in a playlist from the database
+     * @param playlist
+     * @return list of songs
+     */
     public List<Song> getAllSongsInPlaylist(Playlist playlist) {
         ArrayList<Song> songs = new ArrayList<>();
         
@@ -110,6 +102,11 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return null;
     }
     
+    /**
+     * Create a new playlist in the database
+     * @param playlist
+     * @return playlist or null
+     */
     public Playlist createPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO playlist "
@@ -136,6 +133,13 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return null;
     }
     
+    /**
+     * Add a song to a playlist in database
+     * @param playlist
+     * @param song
+     * @param position
+     * @return boolean
+     */
     public boolean addToPlaylist(Playlist playlist, Song song, int position) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("INSERT INTO song_playlist "
@@ -155,6 +159,11 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     
+    /**
+     * Update a playlist in the database
+     * @param playlist
+     * @return boolean
+     */
     public boolean updatePlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
             PreparedStatement ps = con.prepareStatement("UPDATE playlist SET name = ? WHERE id = ?");
@@ -172,7 +181,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     /**
-     * it changes the order in the plalist songlist. 
+     * Change the order of the songs in a playlist in the database
      * @param playlist
      * @param song
      * @param position
@@ -227,9 +236,9 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     /**
-     * deletes all the songs in a playlist.
+     * Deletes all the songs in a playlist from the database.
      * @param playlist
-     * @return 
+     * @return boolean
      */
     public boolean clearPlaylist(Playlist playlist) {
         try(Connection con = dbCon.getConnection()) {
@@ -257,17 +266,19 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     /**
-     * deletes a single somg from a playlist. it also adjusts the positions after the deletion so they align with the new positions.
+     * Deletes a single song from a playlist. It will also adjusts the positions 
+     * after the deletion so they align with the new positions.
      * @param playlist
      * @param song
      * @param position
-     * @return bolean indicating if the deletion was successfull
+     * @return boolean indicating if the deletion was successfull
      */
     public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position) {
         try(Connection con = dbCon.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM song_playlist WHERE playlistid = ? "
-                                                      + "AND songid = ? "
-                                                      + "AND song_playlist.position = ?");
+            PreparedStatement ps = con.prepareStatement(
+                    "DELETE FROM song_playlist WHERE playlistid = ? "
+                    + "AND songid = ? "
+                    + "AND song_playlist.position = ?");
             ps.setInt(1, playlist.getId());
             ps.setInt(2, song.getId());
             ps.setInt(3, position);
@@ -297,7 +308,7 @@ public class PlaylistDBDAO implements PlaylistFacade{
         return false;
     }
     /**
-     * deletes a playlist from the list of playlists
+     * Deletes a playlist from the database
      * @param playlist
      * @return bolean indicating if the operation was successfull
      */

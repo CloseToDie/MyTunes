@@ -16,69 +16,107 @@ import mytunes.dal.database.PlaylistDBDAO;
  * @author anton
  */
 public class PlayListManager {
-    
     private PlaylistFacade pD;
 
-    public PlayListManager() throws Exception 
-    {
+    /**
+     * PlaylistManager constructor
+     */
+    public PlayListManager() throws Exception {
        pD = new PlaylistDBDAO();
     }
  
-    public List<Playlist> getAllPlaylists()
-    {
-       List<Playlist> result = pD.getAllPlaylists();
+    /**
+     * List of playlists
+     * @return list of playlists
+     */
+    public List<Playlist> getAllPlaylists() {
+        List<Playlist> result = pD.getAllPlaylists();
         
-        for (Playlist playlist : result) {
-            
+        for (Playlist playlist : result) {w
             playlist.setTime(playlistTotalTime(getAllSongsInPlaylist(playlist)));
             playlist.setSongs(pD.getAllSongsInPlaylist(playlist).size());
         }
         
-        
         return result;
-       
     }
 
-    public void createPlaylist(Playlist playlistToAdd)
-    {
+    /**
+     * Create a playlist
+     * @param playlist
+     */
+    public void createPlaylist(Playlist playlistToAdd) {
         pD.createPlaylist(playlistToAdd);
     }
 
-    public void deletePlaylist(Playlist playlistToDelete)
-    {
+    /**
+     * Delete a playlist
+     * @param playlist
+     */
+    public void deletePlaylist(Playlist playlistToDelete) {
         pD.deletePlaylist(playlistToDelete);
     }
 
-    public void updatePlaylist(Playlist playlistToUpdate)
-    {
+    /**
+     * Update a playlist
+     * @param playlist
+     */
+    public void updatePlaylist(Playlist playlistToUpdate) {
         pD.updatePlaylist(playlistToUpdate);
     }
     
-    public List<Song> getAllSongsInPlaylist(Playlist playlist)
-    {
+    /**
+     * Get all songs in a playlist
+     * @return list of songs in playlist
+     */
+    public List<Song> getAllSongsInPlaylist(Playlist playlist) {
         return pD.getAllSongsInPlaylist(playlist);
     }
     
-    public void addToPlaylist(Playlist playlist, Song song, int position)
-    {
+    /**
+     * Add a song to a playlist
+     * @param playlist
+     * @param song
+     * @param position
+     */
+    public void addToPlaylist(Playlist playlist, Song song, int position) {
         pD.addToPlaylist(playlist, song, position);
-        
     }
     
-    public void clearPlaylist(Playlist playlist)
-    {
+    /**
+     * Clear songs in playlist
+     * @param playlist
+     */
+    public void clearPlaylist(Playlist playlist) {
         pD.clearPlaylist(playlist);
     }
     
-    public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction)
-    {
+    /**
+     * Change the order of the songs in a playlist
+     * @param playlist
+     * @param song
+     * @param position
+     * @param direction
+     */
+    public void orderPlaylist(Playlist playlist, Song song, int position, boolean direction) {
         pD.orderPlaylist(playlist, song, position, direction);
     }
-    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position)
-    {
-        return pD.clearSongFromPlaylist(playlist,song,position);
+    
+    /**
+     * Clear a song a playlist
+     * @param playlist
+     * @param song
+     * @param position
+     * @return boolean
+     */
+    public boolean clearSongFromPlaylist(Playlist playlist, Song song, int position) {
+        return pD.clearSongFromPlaylist(playlist, song, position);
     }
     
+    /**
+     * The total amount of playtime in the playlist
+     * @param songs
+     * @return totalTime
+     */
     public int playlistTotalTime(List<Song> songs) {
         int totalTime = 0;
         totalTime = songs.stream().map((song) -> song.getTime()).reduce(totalTime, Integer::sum);

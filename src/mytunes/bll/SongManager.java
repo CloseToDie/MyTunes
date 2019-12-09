@@ -20,72 +20,66 @@ import mytunes.dal.database.SongDBDAO;
  */
 
 public class SongManager {
-     private SongFacade songDBDAO;
-     
-    public static void main(String[] args) throws Exception {
-        SongManager songm = new SongManager();
-        
-        ArrayList<Song> songs = new ArrayList<>();
-        songs.addAll(songm.getAllSongs());
-        System.out.println(songs.get(0).getTitle());
-        
-        for (Song song : songs) {
-            
-            System.out.println(song.getPath());
-        }
-        
-    }
+    private SongFacade songDBDAO;
     
-   
-    
-    public SongManager() throws Exception
-    {
+    /**
+     * SongManager constructor
+     */
+    public SongManager() throws Exception {
         songDBDAO = new SongDBDAO();
-
     }
     
-     public List<Song> getAllSongs()
-     {
-        return songDBDAO.getAllSongs();
-     }
-        
-    
+    /**
+     * Get a list of all songs
+     * @return list of songs
+     */
+    public List<Song> getAllSongs() {
+       return songDBDAO.getAllSongs();
+    }
 
-
- public List<Song> search(String query) 
-    {
+    /**
+     * Search for a song
+     * @param query
+     * @return song results
+     */
+    public List<Song> search(String query) {
         List<Song> searchBase = songDBDAO.getAllSongs();
         List<Song> result = new ArrayList<>();
 
-        for (Song song : searchBase)
-        {
-            if (song.getTitle().toLowerCase().contains(query.toLowerCase()))
-            {
+        for (Song song : searchBase) {
+            if (song.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 result.add(song);
-            }
-            else if(song.getArtist().toLowerCase().contains(query.toLowerCase()))
-                    {
-                        result.add(song);
-                    }
-            else if(song.getCategory().toLowerCase().contains(query.toLowerCase()))
-            {
+            } else if(song.getArtist().toLowerCase().contains(query.toLowerCase())) {
+                result.add(song);
+            } else if(song.getCategory().toLowerCase().contains(query.toLowerCase())) {
                 result.add(song);
             }
         }
         return result;
     }
 
+    /**
+     * Create a new song
+     * @param song
+     */
     public void createSong(Song songToAdd)
     {
         songDBDAO.createSong(songToAdd);
     }
     
-    
+    /**
+     * Delete a song
+     * @param song
+     */
     public void deleteSong(Song songToDelete)
     {
         songDBDAO.deleteSong(songToDelete);
     }
     
+    /**
+     * Update a song
+     * @param song
+     */
     public void updateSong(Song SongToUpdate)
     {
         songDBDAO.updateSong(SongToUpdate);
