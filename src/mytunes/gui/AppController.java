@@ -486,7 +486,7 @@ public class AppController implements Initializable
             {
 
                 Songs.getSelectionModel().selectLast();
-                System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                System.out.println("selecting last song");
                 Play();
 
             } else
@@ -521,7 +521,7 @@ public class AppController implements Initializable
             {
 
                 SongsInPlaylist.getSelectionModel().selectLast();
-                System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+                System.out.println("selecting last");
                 Play();
 
             } else
@@ -803,7 +803,7 @@ public class AppController implements Initializable
             }
             if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
             {
-                //calls dispose to make sure only song plays at a time
+                //calls dispose to make sure only one song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());

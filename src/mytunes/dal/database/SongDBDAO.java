@@ -18,7 +18,7 @@ import mytunes.be.Song;
 import mytunes.dal.SongFacade;
 
 /**
- *
+ *DBDAO for songs. her we write at to and retrive songsfrom the databse.
  * @author andreasvillumsen
  */
 public class SongDBDAO implements SongFacade  {

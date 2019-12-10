@@ -18,7 +18,7 @@ import mytunes.be.Song;
 import mytunes.dal.PlaylistFacade;
 
 /**
- *
+ *DBDAO for playlists. her skriver vi playlists til og få playlists fra databasen.
  * @author andreasvillumsen
  */
 public class PlaylistDBDAO implements PlaylistFacade{

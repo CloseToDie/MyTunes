@@ -16,7 +16,7 @@ import mytunes.dal.database.SongDBDAO;
 
 /**
  *contains the business logic for the songs. it also connects the BLL and the DAL.
- * @author anton
+ * @author antoni
  */
 
 public class SongManager {
