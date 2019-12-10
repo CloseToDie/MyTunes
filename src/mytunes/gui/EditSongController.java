@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import mytunes.be.Song;
 import mytunes.dal.database.SongDBDAO;
-import org.jaudiotagger.audio.AudioFile; 
+import org.jaudiotagger.audio.AudioFile;
 import org.jaudiotagger.audio.AudioFileIO;
 
 /**
@@ -36,9 +36,8 @@ import org.jaudiotagger.audio.AudioFileIO;
  * @author lumby
  */
 /* This class controls the fxml that lets the user edit songs*/
-public class EditSongController implements Initializable
-{
-   
+public class EditSongController implements Initializable {
+
     private int duration = 0;
     private String filename = "";
     private String directory = "";
@@ -70,127 +69,125 @@ public class EditSongController implements Initializable
     @FXML
     private TextField FileTextField;
     private Song song;
+
     /**
-     * Initializes the controller class.
-     * Creats a list of categories and sets it to the choiceBox.
+     * Initializes the controller class. Creates a list of categories and sets
+     * it to the choiceBox.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-       
+    public void initialize(URL url, ResourceBundle rb) {
+
         // TODO
         ArrayList<String> categories = new ArrayList<>();
-        
+
         list = FXCollections.observableArrayList(categories);
-        
+
         list.add("rock");
-         list.add("punk");
-          list.add("jazz");
-            list.add("pop");
-        
-         for (String string : list) {
-            
-             System.out.println(string);
+        list.add("punk");
+        list.add("jazz");
+        list.add("pop");
+
+        for (String string : list) {
+
+            System.out.println(string);
         }
-        
+
         CategoryChoiceBox.setItems(list);
-        
-       
-    } 
-     /*we need to make sure that the controller uses the same appmodel as the rest of the program
-    otherwise it would be wotking with diferent datasets. We therefore have a method that we call when the fxml stage is set
-    where the correct appmodel is passed to the controller.*/
-    public void setAppModel(AppModel app){
-    
-    appModel = app;
-    
-    
-    }
 
-
-    /**
-     * closes the window without applying any changes
-     * @param event 
-     */
-    @FXML
-    private void Cancel(ActionEvent event)
-    {
-   
-    Stage stage = (Stage) Cancel.getScene().getWindow();
-    stage.close();
     }
 
     /**
-     * sends the changes to the database and closes the window
-     * @param event 
+     * Set the AppModel
+     *
+     * We need to make sure that the controller uses the same appmodel as the
+     * rest of the program otherwise it would be wotking with diferent datasets.
+     * We therefore have a method that we call when the fxml stage is set where
+     * the correct appmodel is passed to the controller.
+     *
+     * @param app
+     */
+    public void setAppModel(AppModel app) {
+        appModel = app;
+    }
+
+    /**
+     * Close the window without applying any changes
+     *
+     * @param event
      */
     @FXML
-    private void Save(ActionEvent event)
-    {
-        
+    private void Cancel(ActionEvent event) {
+        Stage stage = (Stage) Cancel.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Sends the changes to the database and closes the window
+     *
+     * @param event
+     */
+    @FXML
+    private void Save(ActionEvent event) {
         String title = Title.getText();
         String artist = Artist.getText();
         String genre = CategoryChoiceBox.getSelectionModel().getSelectedItem();
         String songPath = FileTextField.getText();
-  
-        
-        if(duration == 0)
-        {
+
+        if (duration == 0) {
             duration = song.getTime();
         }
-        
-        Song songToUpdate = new Song(song.getId(), title,"",artist, genre, duration, songPath,"");
+
+        Song songToUpdate = new Song(song.getId(), title, "", artist, genre, duration, songPath, "");
         appModel.updateSong(songToUpdate);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
-            
-        
-              
-          
     }
 
     /**
-     * opens a window to find the audio file for the song
-     * @param event 
+     * Opens a window to find the audio file for the song
+     *
+     * @param event
      */
-    @FXML    
-    private void songChoiceButton(ActionEvent event)
-    {
+    @FXML
+    private void songChoiceButton(ActionEvent event) {
         FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null);
-    fd.setDirectory("C:\\");
-    fd.setFile("*.wav;*.mp3");
-    fd.setVisible(true);
-    filename = fd.getFile();
-    directory = fd.getDirectory();
-    if (filename == null){
-    JOptionPane.showMessageDialog(null, "Add song canceled");}
-    else{
-        FileTextField.setText("music/" + filename);
-    }
-    
-    
+        fd.setDirectory("C:\\");
+        fd.setFile("*.wav;*.mp3");
+        fd.setVisible(true);
+        filename = fd.getFile();
+        directory = fd.getDirectory();
+        if (filename == null) {
+            JOptionPane.showMessageDialog(null, "Add song canceled");
+        } else {
+            FileTextField.setText("music/" + filename);
+        }
 
-    try {
-      AudioFile audioFile = AudioFileIO.read(new File(directory + filename));
-      duration = audioFile.getAudioHeader().getTrackLength();
-      /*int seconds = duration % 60;
-      int minutes = (int) Math.floor(duration / 60);*/
-      Time_textField.setText(duration+"");
+        try {
+            AudioFile audioFile = AudioFileIO.read(new File(directory + filename));
+            duration = audioFile.getAudioHeader().getTrackLength();
+            /*
+            int seconds = duration % 60;
+            int minutes = (int) Math.floor(duration / 60);
+             */
+            Time_textField.setText(duration + "");
 
-    } 
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
+        }
 
     }
-        
-    }
-    
-    /*This method is used to pass the data concerning the song being edited to the class. 
-    It is called when the fxml stage is set*/
-    public void setSong(Song song)
-    {
+
+    /**
+     * Set the song
+     *
+     * This method is used to pass the data concerning the song being edited to
+     * the class. It is called when the fxml stage is set
+     *
+     * @param song
+     */
+    public void setSong(Song song) {
         this.song = song;
-        
+
         Title.setText(song.getTitle());
         Artist.setText(song.getArtist());
         CategoryChoiceBox.setValue(song.getCategory());

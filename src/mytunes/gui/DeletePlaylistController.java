@@ -15,60 +15,54 @@ import mytunes.be.Playlist;
  *
  * @author kacper
  */
-public class DeletePlaylistController
-{
+public class DeletePlaylistController {
 
     private AppModel appModel;
     private Playlist playlist;
-
     @FXML
     private Button Yes;
     @FXML
     private Button No;
 
     /**
-     * Sets the appModel object
+     * Set the appModel object
      *
      * @param app
      */
-    public void setAppModel(AppModel app)
-    {
+    public void setAppModel(AppModel app) {
 
         appModel = app;
 
     }
 
     /**
-     * Gets the selected playlist
+     * Set the selected playlist
      *
      * @param playlist
      */
-    public void setPlaylist(Playlist playlist)
-    {
+    public void setPlaylist(Playlist playlist) {
         this.playlist = playlist;
     }
 
     /**
-     * deletes the chosen playlist
+     * Delete a chosen playlist
      *
      * @param event
      */
     @FXML
-    private void Yes(ActionEvent event)
-    {
+    private void Yes(ActionEvent event) {
         appModel.deletePlaylist(playlist);
         Stage stage = (Stage) No.getScene().getWindow();
         stage.close();
     }
 
     /**
-     * Cloeses the window without doing anything else
+     * Close the window without doing anything else
      *
      * @param event
      */
     @FXML
-    private void No(ActionEvent event)
-    {
+    private void No(ActionEvent event) {
         Stage stage = (Stage) No.getScene().getWindow();
         stage.close();
     }

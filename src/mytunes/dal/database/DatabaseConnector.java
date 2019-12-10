@@ -20,12 +20,13 @@ import java.util.logging.Logger;
  * @author andreasvillumsen
  */
 public class DatabaseConnector {
+
     private SQLServerDataSource dataSource;
-    
+
     /**
      * DatabaseConnector constructor
      */
-    public DatabaseConnector()  {
+    public DatabaseConnector() {
         Properties props = new Properties();
         try {
             props.load(new FileReader("DBSettings.txt"));
@@ -40,9 +41,10 @@ public class DatabaseConnector {
         dataSource.setPassword(props.getProperty("password"));
         dataSource.setServerName(props.getProperty("server"));
     }
-    
+
     /**
      * Get the connection to the database
+     *
      * @return Database connection
      */
     public Connection getConnection() throws SQLServerException {

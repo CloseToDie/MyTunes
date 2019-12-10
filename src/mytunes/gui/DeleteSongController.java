@@ -15,57 +15,54 @@ import mytunes.be.Song;
  *
  * @author kacpe
  */
-public class DeleteSongController
-{
+public class DeleteSongController {
+
     private AppModel appmodel;
     private Song song;
-
     @FXML
     private Button Yes;
     @FXML
     private Button No;
 
-    
-
     /**
      * Sets the appModel
-     * @param app 
+     *
+     * @param app
      */
-    public void setappmodel(AppModel app){
-    
-    appmodel = app;
+    public void setappmodel(AppModel app) {
+        appmodel = app;
     }
-    
+
     /**
-     * sets the selected song
-     * @param song 
+     * Set the selected song
+     *
+     * @param song
      */
-    public void setSong(Song song)
-    {
+    public void setSong(Song song) {
         this.song = song;
     }
 
     /**
-     * Deletes the selceted song
-     * @param event 
+     * Delete the selected song
+     *
+     * @param event
      */
     @FXML
-    private void Yes(ActionEvent event)
-    {
+    private void Yes(ActionEvent event) {
         appmodel.deleteSong(song);
         Stage stage = (Stage) No.getScene().getWindow();
         stage.close();
     }
 
     /**
-     * Cloeses the window without doing anything else
-     * @param event 
+     * Closes the window without doing anything else
+     *
+     * @param event
      */
     @FXML
-    private void No(ActionEvent event)
-    {
+    private void No(ActionEvent event) {
         Stage stage = (Stage) No.getScene().getWindow();
         stage.close();
     }
-    
+
 }

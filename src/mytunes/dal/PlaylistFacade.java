@@ -14,23 +14,23 @@ import mytunes.be.Song;
  * @author anton
  */
 public interface PlaylistFacade {
-    
+
     public List<Playlist> getAllPlaylists();
-    
+
     public Playlist createPlaylist(Playlist playlist);
-    
+
     public boolean updatePlaylist(Playlist playlist);
-    
+
     public boolean deletePlaylist(Playlist playlist);
-    
+
     public List<Song> getAllSongsInPlaylist(Playlist playlist);
-    
+
     public boolean clearPlaylist(Playlist playlist);
-    
+
     public boolean addToPlaylist(Playlist playlist, Song song, int position);
-    
+
     public boolean orderPlaylist(Playlist playlist, Song song, int position, boolean direction);
-     
-    public boolean clearSongFromPlaylist(Playlist playlist ,Song song ,int position);
-    
+
+    public boolean clearSongFromPlaylist(Playlist playlist, Song song, int position);
+
 }

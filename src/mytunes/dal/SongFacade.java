@@ -13,7 +13,6 @@ import mytunes.be.Song;
  * @author andreasvillumsen
  */
 public interface SongFacade {
-    
     /**
      * List over all songs in database
      * @return list of songs
@@ -39,5 +38,6 @@ public interface SongFacade {
      * @param song
      * @return boolean
      */
-    public boolean deleteSong(Song song);
+
+    
 }

@@ -27,6 +27,7 @@ public class Song {
 
     /**
      * Song constructor
+     *
      * @param id
      * @param title
      * @param album
@@ -34,7 +35,7 @@ public class Song {
      * @param category
      * @param time
      * @param path
-     * @param timetext 
+     * @param timetext
      */
     public Song(int id, String title, String album, String artist, String category, int time, String path, String timetext) {
         this.id = id;
@@ -48,7 +49,7 @@ public class Song {
 
         minutes = (int) Math.floor(time / 60);
         seconds = time % 60;
-        setTimetext(minutes +" : "+ seconds);
+        setTimetext(minutes + " : " + seconds);
     }
 
     /**
@@ -197,6 +198,7 @@ public class Song {
 
     /**
      * Java override toString
+     *
      * @return String
      */
     @Override
@@ -206,5 +208,5 @@ public class Song {
     public String toString() {
         return getTitle() + "  " + getArtist() + "  " + getCategory() + "  " + getTimetext();
     }
-    
+
 }
