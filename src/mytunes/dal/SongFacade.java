@@ -38,6 +38,6 @@ public interface SongFacade {
      * @param song
      * @return boolean
      */
-
+   public boolean deleteSong(Song song);
     
 }
