@@ -126,31 +126,31 @@ public class AppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         songTitelCol.setCellValueFactory(
-                new PropertyValueFactory<Song, String>("title")
+            new PropertyValueFactory<Song, String>("title")
         );
 
         songArtistCol.setCellValueFactory(
-                new PropertyValueFactory<Song, String>("artist")
+            new PropertyValueFactory<Song, String>("artist")
         );
 
         songCategoryCol.setCellValueFactory(
-                new PropertyValueFactory<Song, String>("category")
+            new PropertyValueFactory<Song, String>("category")
         );
 
         songTimeCol.setCellValueFactory(
-                new PropertyValueFactory<Song, String>("timetext")
+            new PropertyValueFactory<Song, String>("timetext")
         );
 
         playlistNameCol.setCellValueFactory(
-                new PropertyValueFactory<Playlist, String>("name")
+            new PropertyValueFactory<Playlist, String>("name")
         );
 
         playlistSongsCol.setCellValueFactory(
-                new PropertyValueFactory<Playlist, Integer>("songs")
+            new PropertyValueFactory<Playlist, Integer>("songs")
         );
 
         playlistTimeCol.setCellValueFactory(
-                new PropertyValueFactory<Playlist, String>("timetext")
+            new PropertyValueFactory<Playlist, String>("timetext")
         );
 
         try {
@@ -525,8 +525,9 @@ public class AppController implements Initializable {
 
             if (tock == false) {
 
-                if (appmodel.getmusicPlayer() != null) {
-                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                if (appmodel.getmusicPlayer() != null)
+                {
+                    //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -583,8 +584,9 @@ public class AppController implements Initializable {
 
             if (tock == false) {
 
-                if (appmodel.getmusicPlayer() != null) {
-                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                if (appmodel.getmusicPlayer() != null)
+                {
+                    //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -648,8 +650,9 @@ public class AppController implements Initializable {
 
             if (tock == false) {
 
-                if (appmodel.getmusicPlayer() != null) {
-                    //danger zone vi kalder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                if (appmodel.getmusicPlayer() != null)
+                {
+                    //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -682,12 +685,17 @@ public class AppController implements Initializable {
         }
     }
 
-    private void Play() {
-        if (appmodel.getmusicPlayer() != null) {
+    /**
+     * plays the selected song
+     */
+    private void Play()
+    {
+        if (appmodel.getmusicPlayer() != null)
+        {
 
             if (listSelection == ListSelection.SONGS) {
 
-                //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                //calls dispose to make sure only song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
@@ -707,8 +715,9 @@ public class AppController implements Initializable {
                 });
 
             }
-            if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
-                //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+            if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
+            {
+                //calls dispose to make sure only song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());
