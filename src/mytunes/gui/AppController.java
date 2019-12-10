@@ -580,7 +580,7 @@ public class AppController implements Initializable
 
                 if (appmodel.getmusicPlayer() != null)
                 {
-                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                    //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -651,7 +651,7 @@ public class AppController implements Initializable
 
                 if (appmodel.getmusicPlayer() != null)
                 {
-                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                    //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -731,7 +731,7 @@ public class AppController implements Initializable
 
                 if (appmodel.getmusicPlayer() != null)
                 {
-                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                    //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -768,6 +768,9 @@ public class AppController implements Initializable
         }
     }
 
+    /**
+     * plays the selected song
+     */
     private void Play()
     {
         if (appmodel.getmusicPlayer() != null)
@@ -776,7 +779,7 @@ public class AppController implements Initializable
             if (listSelection == ListSelection.SONGS)
             {
 
-                //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                //calls dispose to make sure only song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
@@ -800,7 +803,7 @@ public class AppController implements Initializable
             }
             if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
             {
-                //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                //calls dispose to make sure only song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());
