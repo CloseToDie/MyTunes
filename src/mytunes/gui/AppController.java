@@ -126,31 +126,31 @@ public class AppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         songTitelCol.setCellValueFactory(
-            new PropertyValueFactory<Song, String>("title")
+                new PropertyValueFactory<Song, String>("title")
         );
 
         songArtistCol.setCellValueFactory(
-            new PropertyValueFactory<Song, String>("artist")
+                new PropertyValueFactory<Song, String>("artist")
         );
 
         songCategoryCol.setCellValueFactory(
-            new PropertyValueFactory<Song, String>("category")
+                new PropertyValueFactory<Song, String>("category")
         );
 
         songTimeCol.setCellValueFactory(
-            new PropertyValueFactory<Song, String>("timetext")
+                new PropertyValueFactory<Song, String>("timetext")
         );
 
         playlistNameCol.setCellValueFactory(
-            new PropertyValueFactory<Playlist, String>("name")
+                new PropertyValueFactory<Playlist, String>("name")
         );
 
         playlistSongsCol.setCellValueFactory(
-            new PropertyValueFactory<Playlist, Integer>("songs")
+                new PropertyValueFactory<Playlist, Integer>("songs")
         );
 
         playlistTimeCol.setCellValueFactory(
-            new PropertyValueFactory<Playlist, String>("timetext")
+                new PropertyValueFactory<Playlist, String>("timetext")
         );
 
         try {
@@ -226,7 +226,6 @@ public class AppController implements Initializable {
         Song currentlyselectedsong = Songs.getSelectionModel().getSelectedItem();
         int position = appmodel.getSongsInPlaylist(currentlySelectedPlaylist).size() + 1;
         appmodel.addToPlaylist(currentlySelectedPlaylist, currentlyselectedsong, position);
-
     }
 
     /**
@@ -410,9 +409,7 @@ public class AppController implements Initializable {
      */
     @FXML
     private void Exit(ActionEvent event) {
-        // get a handle to the stage
         Stage stage = (Stage) Exit.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 
@@ -426,80 +423,46 @@ public class AppController implements Initializable {
         previous();
     }
 
+    /**
+     * Go back to previous song
+     */
     private void previous() {
         if (listSelection == ListSelection.SONGS) {
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
             SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
 
-            System.out.println(Songs.getItems().size() + "    storlse");
-
-            System.out.println(SelectedIndex + "       SelectedIndex");
-            System.out.println(SelectedIndex + 1 + "       SelectedIndex ++");
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-
             if (SelectedIndex - 1 <= -1) {
-
                 Songs.getSelectionModel().selectLast();
-                System.out.println("selecting last song");
                 Play();
-
             } else {
                 Songs.getSelectionModel().select(SelectedIndex - 1);
                 Play();
-
             }
 
             System.out.println(Songs.getSelectionModel().getSelectedIndex());
-
         }
 
         if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
             SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex();
 
-            System.out.println(SongsInPlaylist.getItems().size() + "    storlse");
-
-            System.out.println(SelectedIndex + "       SelectedIndex");
-            System.out.println(SelectedIndex + 1 + "       SelectedIndex ++");
-            System.out.println();
-            System.out.println();
-            System.out.println();
-            System.out.println();
-
             if (SelectedIndex - 1 <= -1) {
-
                 SongsInPlaylist.getSelectionModel().selectLast();
-                System.out.println("selecting last");
                 Play();
-
             } else {
                 SongsInPlaylist.getSelectionModel().select(SelectedIndex - 1);
                 Play();
-
             }
 
             System.out.println(Songs.getSelectionModel().getSelectedIndex());
-
         }
     }
 
     /**
-     * it plays the selcted song/playlist
+     * Plays the selcted song/playlist
      *
      * @param event
      */
     @FXML
     private void Play(ActionEvent event) {
-
         if (listSelection == ListSelection.SONGS) {
             if (appmodel.getmusicPlayer() != null) {
 
@@ -514,20 +477,16 @@ public class AppController implements Initializable {
                 }
 
                 if (appmodel.getmusicPlayer().isDone()) {
-
                     System.out.println("done");
                     tock = false;
-
                 } else {
                     System.out.println("not done");
                 }
             }
 
-            if (tock == false) {
-
-                if (appmodel.getmusicPlayer() != null)
-                {
-                    //calls dispose to make sure only song plays at a time
+            if (!tock) {
+                if (appmodel.getmusicPlayer() != null) {
+                    // Calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -537,21 +496,19 @@ public class AppController implements Initializable {
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
                 appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
-
                     public void run() {
-
                         System.out.println("end of media");
                         skip();
                     }
                 });
             }
 
-            if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
+            if (!tick && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = true;
                 appmodel.getmusicPlayer().playSound();
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
 
-            } else if (tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
+            } else if (tick && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = false;
                 isPlaying.setText("(None)... is playing");
                 appmodel.getmusicPlayer().PauseSound();
@@ -582,11 +539,9 @@ public class AppController implements Initializable {
                 }
             }
 
-            if (tock == false) {
-
-                if (appmodel.getmusicPlayer() != null)
-                {
-                    //calls dispose to make sure only song plays at a time
+            if (!tock) {
+                if (appmodel.getmusicPlayer() != null) {
+                    // Calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -596,21 +551,19 @@ public class AppController implements Initializable {
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
                 appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
-
                     public void run() {
-
                         System.out.println("end of media");
                         skip();
                     }
                 });
             }
 
-            if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
+            if (!tick && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = true;
                 appmodel.getmusicPlayer().playSound();
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
 
-            } else if (tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
+            } else if (tick && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = false;
                 isPlaying.setText("(None)... is playing");
                 appmodel.getmusicPlayer().PauseSound();
@@ -648,10 +601,9 @@ public class AppController implements Initializable {
                 }
             }
 
-            if (tock == false) {
+            if (!tock) {
 
-                if (appmodel.getmusicPlayer() != null)
-                {
+                if (appmodel.getmusicPlayer() != null) {
                     //calls dispose to make sure only song plays at a time
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
@@ -662,21 +614,19 @@ public class AppController implements Initializable {
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
                 appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
-
                     public void run() {
-
                         System.out.println("end of media");
                         skip();
                     }
                 });
             }
 
-            if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
+            if (!tick && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = true;
                 appmodel.getmusicPlayer().playSound();
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
 
-            } else if (tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
+            } else if (tick && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = false;
                 isPlaying.setText("(None)... is playing");
                 appmodel.getmusicPlayer().PauseSound();
@@ -688,14 +638,10 @@ public class AppController implements Initializable {
     /**
      * plays the selected song
      */
-    private void Play()
-    {
-        if (appmodel.getmusicPlayer() != null)
-        {
-
+    private void Play() {
+        if (appmodel.getmusicPlayer() != null) {
             if (listSelection == ListSelection.SONGS) {
-
-                //calls dispose to make sure only song plays at a time
+                // Calls dispose to make sure only song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(Songs.getSelectionModel().getSelectedItem().getPath());
@@ -705,19 +651,14 @@ public class AppController implements Initializable {
                 appmodel.getmusicPlayer().playSound();
 
                 appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
-
                     public void run() {
-
                         System.out.println("end of media");
                         skip();
-
                     }
                 });
-
             }
-            if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
-            {
-                //calls dispose to make sure only one song plays at a time
+            if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
+                // Calls dispose to make sure only song plays at a time
                 appmodel.getmusicPlayer().getMP().dispose();
 
                 appmodel.createMusicPlayer(SongsInPlaylist.getSelectionModel().getSelectedItem().getPath());
@@ -727,19 +668,13 @@ public class AppController implements Initializable {
                 appmodel.getmusicPlayer().playSound();
 
                 appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
-
                     public void run() {
-
                         System.out.println("end of media");
                         skip();
-
                     }
                 });
-
             }
-
         }
-
     }
 
     /**
@@ -758,42 +693,28 @@ public class AppController implements Initializable {
             SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
 
             if (SelectedIndex + 1 == Songs.getItems().size()) {
-
                 Songs.getSelectionModel().selectFirst();
-                System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Play();
-
             } else {
                 Songs.getSelectionModel().select(SelectedIndex + 1);
                 Play();
-
             }
 
             System.out.println(Songs.getSelectionModel().getSelectedIndex());
-
         }
 
         if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
             SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex();
 
             if (SelectedIndex + 1 == SongsInPlaylist.getItems().size()) {
-
                 SongsInPlaylist.getSelectionModel().selectFirst();
-                System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Play();
-
             } else {
                 SongsInPlaylist.getSelectionModel().select(SelectedIndex + 1);
                 Play();
-
             }
 
             System.out.println(SongsInPlaylist.getSelectionModel().getSelectedIndex());
-
-        }
-
-        if (listSelection == ListSelection.PLAYLIST) {
-
         }
     }
 
@@ -817,8 +738,12 @@ public class AppController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Get isPlaying
+     *
+     * @return isPlaying
+     */
     public Label getIsPlaying() {
-
         return isPlaying;
     }
 
@@ -833,7 +758,6 @@ public class AppController implements Initializable {
             listSelection = ListSelection.PLAYLIST;
             SongsInPlaylist.setItems(appmodel.getSongsInPlaylist(playlist.getSelectionModel().getSelectedItem()));
         }
-
     }
 
     /**
