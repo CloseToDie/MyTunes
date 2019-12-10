@@ -21,13 +21,13 @@ import javafx.scene.media.MediaView;
  * @author andreasvillumsen
  */
 public class MyTunes extends Application {
-    
+
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("gui/App.fxml"));
-        
+
         Scene scene = new Scene(root);
-        
+
         stage.setTitle("Mytunes");
         stage.setScene(scene);
         stage.show();
@@ -57,5 +57,5 @@ public class MyTunes extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

@@ -16,15 +16,16 @@ import javafx.util.Duration;
  *
  * @author kacpe
  */
-public class MusicPlayer
-{
-    private static Media m; 
+public class MusicPlayer {
+
+    private static Media m;
     private static MediaPlayer player;
     private String title;
-    
+
     /**
      * MusicPlayer constructor
-     * @param filename 
+     *
+     * @param filename
      */
     public MusicPlayer(String filename) {
         m = new Media(Paths.get(filename).toUri().toString());
@@ -32,43 +33,48 @@ public class MusicPlayer
         m.getMetadata().addListener((MapChangeListener<String, Object>) change -> {
             title = (String) m.getMetadata().get("title");
         });
-        
+
         player = new MediaPlayer(m);
     }
-    
+
     /**
      * Start playing a song
      */
     public static void playSound() {
         player.play();
     }
-    
+
     /**
      * Pause the song
      */
     public static void PauseSound() {
         player.pause();
     }
-    
+
     /**
      * Check if the song is done playing
+     *
      * @return boolean
      */
     public static boolean isDone() {
-        if(!player.getCurrentTime().lessThan(player.getStopTime())) return true;
-        return false; 
+        if (!player.getCurrentTime().lessThan(player.getStopTime())) {
+            return true;
+        }
+        return false;
     }
-    
+
     /**
      * Get the MediaPlayer
+     *
      * @return MediaPlayer
      */
-    public  MediaPlayer getMP() {
-        return player; 
+    public MediaPlayer getMP() {
+        return player;
     }
 
     /**
      * Get the title
+     *
      * @return title
      */
     public String getTitle() {

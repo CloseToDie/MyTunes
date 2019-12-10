@@ -21,8 +21,7 @@ import mytunes.be.Playlist;
  *
  * @author lumby
  */
-public class PlaylistController implements Initializable
-{
+public class PlaylistController implements Initializable {
 
     @FXML
     private TextField Name;
@@ -30,77 +29,68 @@ public class PlaylistController implements Initializable
     private Button Cancel;
     @FXML
     private Button Save;
-    
+
     private AppModel appModel;
-    
+
     private Playlist playlist;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-        // TODO
-    }    
+    public void initialize(URL url, ResourceBundle rb) {
+    }
 
     /**
-     * Closes the window without aplaying changes
-     * @param event 
+     * Close the window without aplaying changes
+     *
+     * @param event
      */
     @FXML
-    private void Cancel(ActionEvent event)
-    {
-        // get a handle to the stage
-    Stage stage = (Stage) Cancel.getScene().getWindow();
-    // do what you have to do
-    stage.close();
+    private void Cancel(ActionEvent event) {
+        Stage stage = (Stage) Cancel.getScene().getWindow();
+        stage.close();
     }
-    
+
     /**
      * Sets the appModel for the class
-     * @param app 
+     *
+     * @param app
      */
-    public void setAppModel(AppModel app)
-    {
+    public void setAppModel(AppModel app) {
         appModel = app;
     }
 
     /**
-     * Adds a new playlist or applyes the changes
-     * to an already existing playlist
-     * @param event 
+     * Adds a new playlist or applies the changes to an already existing
+     * playlist
+     *
+     * @param event
      */
     @FXML
-    private void Save(ActionEvent event)
-    {
+    private void Save(ActionEvent event) {
         String playlistName = Name.getText();
-        if(playlistName == "")
-        {
+        if (playlistName == "") {
             JOptionPane.showMessageDialog(null, "Song title can not be blank!");
-            playlistName = "EDIT ME"; 
+            playlistName = "EDIT ME";
+        } else {
+            playlistName = Name.getText();
         }
-        else
-        {
-            playlistName = Name.getText(); 
-        }
-        
-        Playlist Playlist = new Playlist(0, playlistName, 0, 0 ,"timetext");
+
+        Playlist Playlist = new Playlist(0, playlistName, 0, 0, "timetext");
         appModel.createPlaylist(Playlist);
         Stage stage = (Stage) Cancel.getScene().getWindow();
         stage.close();
     }
-    
+
     /**
      * Sets playlist name in the text field.
-     * @param playlist 
+     *
+     * @param playlist
      */
-    public void setPlaylist(Playlist playlist)
-    {
+    public void setPlaylist(Playlist playlist) {
         this.playlist = playlist;
-        
-        Name.setText(playlist.getName());              
-        
+        Name.setText(playlist.getName());
     }
-    
+
 }

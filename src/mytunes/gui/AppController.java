@@ -48,11 +48,9 @@ import mytunes.bll.SongManager;
  *
  * @author andreasvillumsen
  */
-public class AppController implements Initializable
-{
+public class AppController implements Initializable {
 
-    enum ListSelection
-    {
+    enum ListSelection {
         SONGS, SONGSINPLAYLIST, PLAYLIST,
     }
     private int playlistCounter = 0;
@@ -69,7 +67,6 @@ public class AppController implements Initializable
     private TableView<Song> Songs;
     @FXML
     private ListView<Song> SongsInPlaylist;
-
     @FXML
     private TextField Search;
     @FXML
@@ -121,20 +118,21 @@ public class AppController implements Initializable
     private int SelectedIndex;
 
     /**
+     * Initialize
      *
      * @param url
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-
+    public void initialize(URL url, ResourceBundle rb) {
         songTitelCol.setCellValueFactory(
                 new PropertyValueFactory<Song, String>("title")
         );
+
         songArtistCol.setCellValueFactory(
                 new PropertyValueFactory<Song, String>("artist")
         );
+
         songCategoryCol.setCellValueFactory(
                 new PropertyValueFactory<Song, String>("category")
         );
@@ -150,33 +148,26 @@ public class AppController implements Initializable
         playlistSongsCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist, Integer>("songs")
         );
+
         playlistTimeCol.setCellValueFactory(
                 new PropertyValueFactory<Playlist, String>("timetext")
         );
 
-        try
-        {
-
+        try {
             appmodel = new AppModel();
             File file = new File(appmodel.getAllSongs().get(0).getPath());
             int i = 0;
-            while (!appmodel.getAllSongs().isEmpty() && !file.exists() && i <= appmodel.getAllSongs().size() - 1)
-            {
+            while (!appmodel.getAllSongs().isEmpty() && !file.exists() && i <= appmodel.getAllSongs().size() - 1) {
 
                 file = new File(appmodel.getAllSongs().get(i).getPath());
                 i = i + 1;
             }
-            if (file.exists())
-            {
-
-                if (appmodel.getmusicPlayer() != null)
-                {
+            if (file.exists()) {
+                if (appmodel.getmusicPlayer() != null) {
                     System.out.println("the musicplayer is not null");
-
                     //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                     appmodel.getmusicPlayer().getMP().dispose();
-                } else
-                {
+                } else {
                     System.out.println("the musicplayer is  null");
                 }
 
@@ -184,11 +175,9 @@ public class AppController implements Initializable
                 currentlyPlayingSong = appmodel.getAllSongs().get(i);
 
                 volume.setValue(appmodel.getmusicPlayer().getMP().getVolume() * 100);
-                volume.valueProperty().addListener(new InvalidationListener()
-                {
+                volume.valueProperty().addListener(new InvalidationListener() {
                     @Override
-                    public void invalidated(Observable observable)
-                    {
+                    public void invalidated(Observable observable) {
 
                         appmodel.getmusicPlayer().getMP().setVolume(volume.getValue() / 100);
                     }
@@ -199,50 +188,40 @@ public class AppController implements Initializable
             playlist.setItems(appmodel.getAllPlaylist());
             SongsInPlaylist.setItems(appmodel.getSongsInPlaylist(appmodel.getAllPlaylist().get(0)));
 
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             Logger.getLogger(AppController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable()
-        {
-            public void run()
-            {
-
+        appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
+            public void run() {
                 System.out.println("end of media");
-
             }
         });
 
     }
 
     /**
-     * let's the user search from the different songs in the database
+     * Let the user search from the different songs in the database
      *
      * @param event
      */
     @FXML
-    private void Search(KeyEvent event)
-    {
-        try
-        {
+    private void Search(KeyEvent event) {
+        try {
             String query = Search.getText().trim();
             appmodel.search(query);
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
-
     }
 
     /**
-     * adds a song to a playlist
+     * Add a song to a playlist
      *
      * @param event
      */
     @FXML
-    private void ToPlaylist(ActionEvent event)
-    {
+    private void ToPlaylist(ActionEvent event) {
         Playlist currentlySelectedPlaylist = playlist.getSelectionModel().getSelectedItem();
         Song currentlyselectedsong = Songs.getSelectionModel().getSelectedItem();
         int position = appmodel.getSongsInPlaylist(currentlySelectedPlaylist).size() + 1;
@@ -257,8 +236,7 @@ public class AppController implements Initializable
      * @throws IOException
      */
     @FXML
-    private void NewPlaylist(ActionEvent event) throws IOException
-    {
+    private void NewPlaylist(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("Playlist.fxml").openStream());
@@ -278,8 +256,7 @@ public class AppController implements Initializable
      * @throws IOException
      */
     @FXML
-    private void EditPlaylist(ActionEvent event) throws IOException
-    {
+    private void EditPlaylist(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditPlaylist.fxml").openStream());
@@ -299,8 +276,7 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void deletePlaylist(ActionEvent event) throws IOException
-    {
+    private void deletePlaylist(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         Parent root2 = (Parent) fxmlLoader.load(getClass().getResource("DeletePlaylist.fxml").openStream());
@@ -320,30 +296,26 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void goUp(ActionEvent event)
-    {
+    private void goUp(ActionEvent event) {
         Playlist selectedPlaylist = playlist.getSelectionModel().getSelectedItem();
         Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
         SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
 
-        if (SelectedIndex == 1)
-        {
+        if (SelectedIndex == 1) {
             System.out.println("can't move this song up");
-        } else
-        {
+        } else {
             appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, false);
             SongsInPlaylist.refresh();
         }
     }
 
     /**
-     * Moves a song down in a playlist down
+     * Moves a song in a playlist down
      *
      * @param event
      */
     @FXML
-    private void GoDown(ActionEvent event)
-    {
+    private void GoDown(ActionEvent event) {
         Playlist selectedPlaylist = playlist.getSelectionModel().getSelectedItem();
         Song songToMove = SongsInPlaylist.getSelectionModel().getSelectedItem();
         SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex() + 1;
@@ -352,11 +324,9 @@ public class AppController implements Initializable
         System.out.println(SelectedIndex);
         System.out.println(SongsInPlaylist.getItems().size());
 
-        if (SelectedIndex == SongsInPlaylist.getItems().size())
-        {
+        if (SelectedIndex == SongsInPlaylist.getItems().size()) {
             System.out.println("Can't move this song down");
-        } else
-        {
+        } else {
 
             appmodel.orderPlaylist(selectedPlaylist, songToMove, SelectedIndex, true);
             SongsInPlaylist.refresh();
@@ -370,16 +340,13 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void RemoveSongFromPlaylist(ActionEvent event)
-    {
+    private void RemoveSongFromPlaylist(ActionEvent event) {
         RemoveSongFromPlaylist();
     }
 
-    private void RemoveSongFromPlaylist()
-    {
+    private void RemoveSongFromPlaylist() {
 
-        if (SongsInPlaylist.getSelectionModel().getSelectedItem() != null)
-        {
+        if (SongsInPlaylist.getSelectionModel().getSelectedItem() != null) {
 
             Playlist currentlySelectedPlaylist = playlist.getSelectionModel().getSelectedItem();
             Song currentlyselectedsong = SongsInPlaylist.getSelectionModel().getSelectedItem();
@@ -400,8 +367,7 @@ public class AppController implements Initializable
      * @throws IOException
      */
     @FXML
-    private void EditSong(ActionEvent event) throws IOException
-    {
+    private void EditSong(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("EditSong.fxml").openStream());
@@ -421,8 +387,7 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void DeleteSong(ActionEvent event) throws IOException
-    {
+    private void DeleteSong(ActionEvent event) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader();
 
@@ -444,8 +409,7 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void Exit(ActionEvent event)
-    {
+    private void Exit(ActionEvent event) {
         // get a handle to the stage
         Stage stage = (Stage) Exit.getScene().getWindow();
         // do what you have to do
@@ -458,15 +422,12 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void previous(ActionEvent event)
-    {
+    private void previous(ActionEvent event) {
         previous();
     }
 
-    private void previous()
-    {
-        if (listSelection == ListSelection.SONGS)
-        {
+    private void previous() {
+        if (listSelection == ListSelection.SONGS) {
             System.out.println();
             System.out.println();
             System.out.println();
@@ -482,15 +443,13 @@ public class AppController implements Initializable
             System.out.println();
             System.out.println();
 
-            if (SelectedIndex - 1 <= -1)
-            {
+            if (SelectedIndex - 1 <= -1) {
 
                 Songs.getSelectionModel().selectLast();
                 System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Play();
 
-            } else
-            {
+            } else {
                 Songs.getSelectionModel().select(SelectedIndex - 1);
                 Play();
 
@@ -500,8 +459,7 @@ public class AppController implements Initializable
 
         }
 
-        if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
-        {
+        if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
             System.out.println();
             System.out.println();
             System.out.println();
@@ -517,15 +475,13 @@ public class AppController implements Initializable
             System.out.println();
             System.out.println();
 
-            if (SelectedIndex - 1 <= -1)
-            {
+            if (SelectedIndex - 1 <= -1) {
 
                 SongsInPlaylist.getSelectionModel().selectLast();
                 System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Play();
 
-            } else
-            {
+            } else {
                 SongsInPlaylist.getSelectionModel().select(SelectedIndex - 1);
                 Play();
 
@@ -542,44 +498,34 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void Play(ActionEvent event)
-    {
+    private void Play(ActionEvent event) {
 
-        if (listSelection == ListSelection.SONGS)
-        {
-            if (appmodel.getmusicPlayer() != null)
-            {
+        if (listSelection == ListSelection.SONGS) {
+            if (appmodel.getmusicPlayer() != null) {
 
-                if (!Songs.getSelectionModel().getSelectedItem().equals(null))
-                {
-                    if (Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
-                    {
+                if (!Songs.getSelectionModel().getSelectedItem().equals(null)) {
+                    if (Songs.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle()) {
                         appmodel.getmusicPlayer().PauseSound();
                         System.out.println("changing song");
                         tock = false;
-                    } else
-                    {
+                    } else {
                         System.out.println("still playing current song");
                     }
                 }
 
-                if (appmodel.getmusicPlayer().isDone())
-                {
+                if (appmodel.getmusicPlayer().isDone()) {
 
                     System.out.println("done");
                     tock = false;
 
-                } else
-                {
+                } else {
                     System.out.println("not done");
                 }
             }
 
-            if (tock == false)
-            {
+            if (tock == false) {
 
-                if (appmodel.getmusicPlayer() != null)
-                {
+                if (appmodel.getmusicPlayer() != null) {
                     //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
@@ -589,11 +535,9 @@ public class AppController implements Initializable
                 tock = true;
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
-                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable()
-                {
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
 
-                    public void run()
-                    {
+                    public void run() {
 
                         System.out.println("end of media");
                         skip();
@@ -601,14 +545,12 @@ public class AppController implements Initializable
                 });
             }
 
-            if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
-            {
+            if (tick == false && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = true;
                 appmodel.getmusicPlayer().playSound();
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
 
-            } else if (tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
-            {
+            } else if (tick == true && Songs.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = false;
                 isPlaying.setText("(None)... is playing");
                 appmodel.getmusicPlayer().PauseSound();
@@ -616,41 +558,32 @@ public class AppController implements Initializable
 
         }
 
-        if (listSelection == ListSelection.SONGSINPLAYLIST)
-        {
-            if (appmodel.getmusicPlayer() != null)
-            {
+        if (listSelection == ListSelection.SONGSINPLAYLIST) {
+            if (appmodel.getmusicPlayer() != null) {
 
-                if (!SongsInPlaylist.getSelectionModel().getSelectedItem().equals(null))
-                {
-                    if (SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
-                    {
+                if (!SongsInPlaylist.getSelectionModel().getSelectedItem().equals(null)) {
+                    if (SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle()) {
                         appmodel.getmusicPlayer().PauseSound();
                         System.out.println("changing song");
                         tock = false;
-                    } else
-                    {
+                    } else {
                         System.out.println("still playing current song");
                     }
                 }
 
-                if (appmodel.getmusicPlayer().isDone())
-                {
+                if (appmodel.getmusicPlayer().isDone()) {
 
                     System.out.println("done");
                     tock = false;
 
-                } else
-                {
+                } else {
                     System.out.println("not done");
                 }
             }
 
-            if (tock == false)
-            {
+            if (tock == false) {
 
-                if (appmodel.getmusicPlayer() != null)
-                {
+                if (appmodel.getmusicPlayer() != null) {
                     //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
@@ -660,11 +593,9 @@ public class AppController implements Initializable
                 tock = true;
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
-                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable()
-                {
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
 
-                    public void run()
-                    {
+                    public void run() {
 
                         System.out.println("end of media");
                         skip();
@@ -672,14 +603,12 @@ public class AppController implements Initializable
                 });
             }
 
-            if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
-            {
+            if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = true;
                 appmodel.getmusicPlayer().playSound();
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
 
-            } else if (tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
-            {
+            } else if (tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = false;
                 isPlaying.setText("(None)... is playing");
                 appmodel.getmusicPlayer().PauseSound();
@@ -687,51 +616,40 @@ public class AppController implements Initializable
 
         }
 
-        if (listSelection == ListSelection.PLAYLIST)
-        {
-            if (appmodel.getmusicPlayer() != null)
-            {
+        if (listSelection == ListSelection.PLAYLIST) {
+            if (appmodel.getmusicPlayer() != null) {
 
                 playlistCounter = 0;
-                while (SongsInPlaylist.getItems().get(playlistCounter).equals(null))
-
-                {
+                while (SongsInPlaylist.getItems().get(playlistCounter).equals(null)) {
                     playlistCounter = playlistCounter + 1;
                 }
 
-                if (!SongsInPlaylist.getItems().get(playlistCounter).equals(null))
-                {
+                if (!SongsInPlaylist.getItems().get(playlistCounter).equals(null)) {
                     listSelection = ListSelection.SONGSINPLAYLIST;
                     SongsInPlaylist.getSelectionModel().select(playlistCounter);
-                    if (SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle())
-                    {
+                    if (SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() != currentlyPlayingSong.getTitle()) {
                         appmodel.getmusicPlayer().PauseSound();
                         System.out.println("changing song");
                         tock = false;
-                    } else
-                    {
+                    } else {
                         System.out.println("still playing current song");
                     }
                 }
 
-                if (appmodel.getmusicPlayer().isDone())
-                {
+                if (appmodel.getmusicPlayer().isDone()) {
 
                     System.out.println("done");
                     tock = false;
 
-                } else
-                {
+                } else {
                     System.out.println("not done");
                 }
             }
 
-            if (tock == false)
-            {
+            if (tock == false) {
 
-                if (appmodel.getmusicPlayer() != null)
-                {
-                    //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
+                if (appmodel.getmusicPlayer() != null) {
+                    //danger zone vi kalder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                     appmodel.getmusicPlayer().getMP().dispose();
                 }
 
@@ -740,11 +658,9 @@ public class AppController implements Initializable
                 tock = true;
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
-                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable()
-                {
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
 
-                    public void run()
-                    {
+                    public void run() {
 
                         System.out.println("end of media");
                         skip();
@@ -752,14 +668,12 @@ public class AppController implements Initializable
                 });
             }
 
-            if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
-            {
+            if (tick == false && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = true;
                 appmodel.getmusicPlayer().playSound();
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
 
-            } else if (tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle())
-            {
+            } else if (tick == true && SongsInPlaylist.getSelectionModel().getSelectedItem().getTitle() == currentlyPlayingSong.getTitle()) {
                 tick = false;
                 isPlaying.setText("(None)... is playing");
                 appmodel.getmusicPlayer().PauseSound();
@@ -768,13 +682,10 @@ public class AppController implements Initializable
         }
     }
 
-    private void Play()
-    {
-        if (appmodel.getmusicPlayer() != null)
-        {
+    private void Play() {
+        if (appmodel.getmusicPlayer() != null) {
 
-            if (listSelection == ListSelection.SONGS)
-            {
+            if (listSelection == ListSelection.SONGS) {
 
                 //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                 appmodel.getmusicPlayer().getMP().dispose();
@@ -785,11 +696,9 @@ public class AppController implements Initializable
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
 
-                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable()
-                {
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
 
-                    public void run()
-                    {
+                    public void run() {
 
                         System.out.println("end of media");
                         skip();
@@ -798,8 +707,7 @@ public class AppController implements Initializable
                 });
 
             }
-            if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
-            {
+            if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
                 //danger zone vi calder dispose på mediaplayer for at være sikker at der ikke kommer flære end en ad gangnen
                 appmodel.getmusicPlayer().getMP().dispose();
 
@@ -809,11 +717,9 @@ public class AppController implements Initializable
                 isPlaying.setText(currentlyPlayingSong.getTitle() + " is playing");
                 appmodel.getmusicPlayer().playSound();
 
-                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable()
-                {
+                appmodel.getmusicPlayer().getMP().setOnEndOfMedia(new Runnable() {
 
-                    public void run()
-                    {
+                    public void run() {
 
                         System.out.println("end of media");
                         skip();
@@ -829,31 +735,26 @@ public class AppController implements Initializable
 
     /**
      * *
-     * playes the next song in the song list or playlist
+     * Plays the next song in the song list or playlist
      *
      * @param event
      */
     @FXML
-    private void Skip(ActionEvent event)
-    {
+    private void Skip(ActionEvent event) {
         skip();
     }
 
-    public void skip()
-    {
-        if (listSelection == ListSelection.SONGS)
-        {
+    public void skip() {
+        if (listSelection == ListSelection.SONGS) {
             SelectedIndex = Songs.getSelectionModel().getSelectedIndex();
 
-            if (SelectedIndex + 1 == Songs.getItems().size())
-            {
+            if (SelectedIndex + 1 == Songs.getItems().size()) {
 
                 Songs.getSelectionModel().selectFirst();
                 System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Play();
 
-            } else
-            {
+            } else {
                 Songs.getSelectionModel().select(SelectedIndex + 1);
                 Play();
 
@@ -863,19 +764,16 @@ public class AppController implements Initializable
 
         }
 
-        if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST)
-        {
+        if (listSelection == ListSelection.SONGSINPLAYLIST || listSelection == ListSelection.PLAYLIST) {
             SelectedIndex = SongsInPlaylist.getSelectionModel().getSelectedIndex();
 
-            if (SelectedIndex + 1 == SongsInPlaylist.getItems().size())
-            {
+            if (SelectedIndex + 1 == SongsInPlaylist.getItems().size()) {
 
                 SongsInPlaylist.getSelectionModel().selectFirst();
                 System.out.println("neeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                 Play();
 
-            } else
-            {
+            } else {
                 SongsInPlaylist.getSelectionModel().select(SelectedIndex + 1);
                 Play();
 
@@ -885,8 +783,7 @@ public class AppController implements Initializable
 
         }
 
-        if (listSelection == ListSelection.PLAYLIST)
-        {
+        if (listSelection == ListSelection.PLAYLIST) {
 
         }
     }
@@ -898,8 +795,7 @@ public class AppController implements Initializable
      * @param event
      */
     @FXML
-    private void newSong(ActionEvent event) throws IOException
-    {
+    private void newSong(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
 
         Parent root = (Parent) fxmlLoader.load(getClass().getResource("NewSong.fxml").openStream());
@@ -912,22 +808,19 @@ public class AppController implements Initializable
         stage.show();
     }
 
-    public Label getIsPlaying()
-    {
+    public Label getIsPlaying() {
 
         return isPlaying;
     }
 
     /**
-     * updates the playlist view
+     * Updates the playlist view
      *
      * @param event
      */
     @FXML
-    private void updatePlaylistview(MouseEvent event)
-    {
-        if (playlist.getSelectionModel().getSelectedItem() != null)
-        {
+    private void updatePlaylistview(MouseEvent event) {
+        if (playlist.getSelectionModel().getSelectedItem() != null) {
             listSelection = ListSelection.PLAYLIST;
             SongsInPlaylist.setItems(appmodel.getSongsInPlaylist(playlist.getSelectionModel().getSelectedItem()));
         }
@@ -935,24 +828,22 @@ public class AppController implements Initializable
     }
 
     /**
-     * detects if a song in a playlist is selected
+     * Detects if a song in a playlist is selected
      *
      * @param event
      */
     @FXML
-    private void clickedOnSongInPlaylist(MouseEvent event)
-    {
+    private void clickedOnSongInPlaylist(MouseEvent event) {
         listSelection = ListSelection.SONGSINPLAYLIST;
     }
 
     /**
-     * detects if a song in the song list is selected
+     * Detects if a song in the song list is selected
      *
      * @param event
      */
     @FXML
-    private void clickedOnSongs(MouseEvent event)
-    {
+    private void clickedOnSongs(MouseEvent event) {
         listSelection = ListSelection.SONGS;
     }
 

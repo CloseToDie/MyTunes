@@ -13,11 +13,12 @@ import mytunes.be.Song;
  * @author andreasvillumsen
  */
 public interface SongFacade {
+
     public List<Song> getAllSongs();
-    
+
     public Song createSong(Song song);
-    
+
     public boolean updateSong(Song song);
-    
+
     public boolean deleteSong(Song song);
 }

@@ -18,27 +18,29 @@ import mytunes.dal.database.SongDBDAO;
  *
  * @author anton
  */
-
 public class SongManager {
+
     private SongFacade songDBDAO;
-    
+
     /**
      * SongManager constructor
      */
     public SongManager() throws Exception {
         songDBDAO = new SongDBDAO();
     }
-    
+
     /**
      * Get a list of all songs
+     *
      * @return list of songs
      */
     public List<Song> getAllSongs() {
-       return songDBDAO.getAllSongs();
+        return songDBDAO.getAllSongs();
     }
 
     /**
      * Search for a song
+     *
      * @param query
      * @return song results
      */
@@ -49,9 +51,9 @@ public class SongManager {
         for (Song song : searchBase) {
             if (song.getTitle().toLowerCase().contains(query.toLowerCase())) {
                 result.add(song);
-            } else if(song.getArtist().toLowerCase().contains(query.toLowerCase())) {
+            } else if (song.getArtist().toLowerCase().contains(query.toLowerCase())) {
                 result.add(song);
-            } else if(song.getCategory().toLowerCase().contains(query.toLowerCase())) {
+            } else if (song.getCategory().toLowerCase().contains(query.toLowerCase())) {
                 result.add(song);
             }
         }
@@ -60,28 +62,28 @@ public class SongManager {
 
     /**
      * Create a new song
+     *
      * @param song
      */
-    public void createSong(Song songToAdd)
-    {
+    public void createSong(Song songToAdd) {
         songDBDAO.createSong(songToAdd);
     }
-    
+
     /**
      * Delete a song
+     *
      * @param song
      */
-    public void deleteSong(Song songToDelete)
-    {
+    public void deleteSong(Song songToDelete) {
         songDBDAO.deleteSong(songToDelete);
     }
-    
+
     /**
      * Update a song
+     *
      * @param song
      */
-    public void updateSong(Song SongToUpdate)
-    {
+    public void updateSong(Song SongToUpdate) {
         songDBDAO.updateSong(SongToUpdate);
     }
 }
