@@ -9,7 +9,7 @@ import java.util.List;
 import mytunes.be.Song;
 
 /**
- *
+ *the interface connecting the songBLL to the songDAl
  * @author andreasvillumsen
  */
 public interface SongFacade {

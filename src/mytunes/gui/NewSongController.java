@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
- /*Here the package that this class is in i defined*/
+ /*Here the package that this class is in is defined*/
 package mytunes.gui;
 
 /*All the imports are defined here,the class needs to know witch other classes, packages or libraries it has acces to,
