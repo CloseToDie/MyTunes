@@ -40,7 +40,7 @@ public class DeletePlaylistController {
      *
      * @param playlist
      */
-    public void setPlaﬁylist(Playlist playlist) {
+    public void setPlaylist(Playlist playlist) {
         this.playlist = playlist;
     }
 
