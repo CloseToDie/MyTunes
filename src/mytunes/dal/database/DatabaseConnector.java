@@ -25,6 +25,7 @@ public class DatabaseConnector {
 
     /**
      * DatabaseConnector constructor
+     * the class takes the info from the DBSettings.txt file and establishes a connection to the database. 
      */
     public DatabaseConnector() {
         Properties props = new Properties();
