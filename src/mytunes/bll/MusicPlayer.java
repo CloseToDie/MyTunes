@@ -20,7 +20,6 @@ public class MusicPlayer {
 
     private static Media m;
     private static MediaPlayer player;
-    private String title;
 
     /**
      * MusicPlayer constructor
@@ -29,11 +28,6 @@ public class MusicPlayer {
      */
     public MusicPlayer(String filename) {
         m = new Media(Paths.get(filename).toUri().toString());
-
-        m.getMetadata().addListener((MapChangeListener<String, Object>) change -> {
-            title = (String) m.getMetadata().get("title");
-        });
-
         player = new MediaPlayer(m);
     }
 
@@ -72,13 +66,5 @@ public class MusicPlayer {
         return player;
     }
 
-    /**
-     * Get the title
-     *
-     * @return title
-     */
-    public String getTitle() {
-        return title;
-    }
 
 }
